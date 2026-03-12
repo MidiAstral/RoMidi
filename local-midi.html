@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Local MIDI Guide - RoMidi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --bg:         #0a0618;
+  --panel:      #140c2c;
+  --card:       #1e1238;
+  --border:     #5a37aa;
+  --neon:       #9b50ff;
+  --neonB:      #be6eff;
+  --purpleDeep: #2d0f64;
+  --purpleMid:  #5523af;
+  --accent:     #d7aaff;
+  --neonG:      #50dc96;
+  --neonY:      #ffc33c;
+  --neonR:      #f0466e;
+  --neonB2:     #55a5ff;
+  --txt:        #e6d7ff;
+  --txtDim:     #8269b4;
+  --radius-lg:  14px;
+  --radius-md:  10px;
+  --radius-sm:  7px;
+  --gutter: clamp(16px, 5vw, 60px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Exo 2', sans-serif; background: var(--bg); color: var(--txt); line-height: 1.7; overflow-x: hidden; }
+a { color: var(--neonB); text-decoration: none; }
+a:hover { color: var(--accent); }
+img { max-width: 100%; display: block; border-radius: var(--radius-md); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--panel); }
+::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 99px; }
+
+/* NOISE */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px; opacity: 0.35;
+}
+
+/* PARTICLES */
+#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.particle { position: absolute; border-radius: 50%; animation: floatUp linear infinite; opacity: 0; }
+@keyframes floatUp {
+  0%   { transform: translateY(110vh) scale(0); opacity: 0; }
+  10%  { opacity: 0.5; }
+  90%  { opacity: 0.25; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; gap: 16px;
+  padding: 0 var(--gutter); height: 58px;
+  background: rgba(10,6,24,0.9); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(155,80,255,0.2);
+}
+.nav-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 0.82rem; font-weight: 600; color: var(--txtDim);
+  letter-spacing: .05em; transition: color .2s;
+}
+.nav-back:hover { color: var(--accent); }
+.nav-sep { color: rgba(155,80,255,0.3); font-size: 1rem; }
+.nav-cur { font-size: 0.82rem; font-weight: 600; color: var(--accent); }
+.nav-logo-sm { margin-left: auto; font-weight: 900; font-size: 1.1rem; background: linear-gradient(90deg, var(--neon), var(--neonB)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* LAYOUT */
+.page-wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 90px var(--gutter) 80px; }
+
+/* HERO */
+.guide-hero {
+  text-align: center; padding: 60px 0 50px;
+  border-bottom: 1px solid rgba(155,80,255,0.15);
+  margin-bottom: 56px;
+}
+.guide-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(85,165,255,0.4); background: rgba(85,165,255,0.07);
+  padding: 5px 16px; border-radius: 99px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--neonB2); margin-bottom: 22px;
+}
+.guide-hero h1 { font-weight: 900; font-size: clamp(2rem, 6vw, 3.6rem); letter-spacing: -0.02em; color: var(--txt); margin-bottom: 14px; line-height: 1.05; }
+.guide-hero h1 span { background: linear-gradient(135deg, var(--neon), var(--neonB)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.guide-hero p { font-size: 1rem; color: var(--txtDim); max-width: 540px; margin: 0 auto; }
+
+/* TABLE OF CONTENTS */
+.toc {
+  background: var(--panel); border: 1px solid rgba(155,80,255,0.2);
+  border-radius: var(--radius-md); padding: 24px 28px; margin-bottom: 56px;
+}
+.toc-title { font-size: 0.72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--neon); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.toc-title::before { content: ''; display: block; width: 14px; height: 2px; background: var(--neon); border-radius: 2px; }
+.toc-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.toc-list li { display: flex; align-items: center; gap: 10px; }
+.toc-list li .toc-num { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--txtDim); width: 20px; flex-shrink: 0; }
+.toc-list a { font-size: 0.88rem; color: var(--txt); font-weight: 500; transition: color .18s; }
+.toc-list a:hover { color: var(--accent); }
+
+/* GUIDE SECTIONS */
+.guide-section { margin-bottom: 72px; scroll-margin-top: 80px; }
+.section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.section-num { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--purpleMid), var(--neon)); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; color: white; flex-shrink: 0; }
+.section-head h2 { font-weight: 800; font-size: clamp(1.2rem, 3vw, 1.65rem); color: var(--txt); letter-spacing: -0.01em; }
+.guide-section > p { color: var(--txtDim); font-size: 0.95rem; margin-bottom: 18px; line-height: 1.75; }
+
+/* CALLOUT BOXES */
+.callout {
+  border-radius: var(--radius-md); padding: 16px 20px; margin: 20px 0;
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 0.88rem; line-height: 1.65;
+}
+.callout-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 1px; }
+.callout-body { flex: 1; }
+.callout-body strong { display: block; font-weight: 700; margin-bottom: 4px; }
+.callout.info  { background: rgba(85,165,255,0.08); border: 1px solid rgba(85,165,255,0.25); color: var(--txt); }
+.callout.info .callout-icon { color: var(--neonB2); }
+.callout.tip   { background: rgba(80,220,150,0.07); border: 1px solid rgba(80,220,150,0.25); color: var(--txt); }
+.callout.tip .callout-icon { color: var(--neonG); }
+.callout.warn  { background: rgba(255,195,60,0.08); border: 1px solid rgba(255,195,60,0.25); color: var(--txt); }
+.callout.warn .callout-icon { color: var(--neonY); }
+.callout.rule  { background: rgba(155,80,255,0.08); border: 1px solid rgba(155,80,255,0.25); color: var(--txt); }
+.callout.rule .callout-icon { color: var(--neon); }
+
+/* CODE / PATH BLOCKS */
+.code-block {
+  background: rgba(0,0,0,0.55); border: 1px solid rgba(155,80,255,0.25);
+  border-radius: var(--radius-md); padding: 18px 20px; margin: 18px 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.83rem;
+  line-height: 1.9; overflow-x: auto;
+  position: relative;
+}
+.code-block .cb-label {
+  position: absolute; top: 10px; right: 12px;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--txtDim);
+}
+.code-block .folder { color: var(--neonB); }
+.code-block .subfolder { color: var(--neonG); }
+.code-block .file { color: var(--accent); }
+.code-block .comment { color: var(--txtDim); }
+.code-block .path-sep { color: rgba(155,80,255,0.5); }
+.code-block .highlight { color: var(--neonY); }
+
+/* INLINE CODE */
+code { font-family: 'JetBrains Mono', monospace; background: var(--card); color: var(--neonB); padding: 2px 7px; border-radius: 5px; font-size: 0.83rem; }
+
+/* STEP LIST */
+.step-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 20px 0; }
+.step-list li { display: flex; gap: 14px; align-items: flex-start; background: var(--panel); border: 1px solid rgba(155,80,255,0.15); border-radius: var(--radius-md); padding: 16px 18px; transition: border-color .2s; }
+.step-list li:hover { border-color: rgba(155,80,255,0.35); }
+.step-list .sl-num { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--purpleMid), var(--neon)); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.82rem; color: white; flex-shrink: 0; margin-top: 1px; }
+.step-list .sl-body { flex: 1; font-size: 0.88rem; line-height: 1.65; color: var(--txt); }
+.step-list .sl-body strong { display: block; color: var(--accent); font-weight: 700; margin-bottom: 4px; font-size: 0.92rem; }
+
+/* IMAGE PLACEHOLDERS */
+.img-frame {
+  background: var(--panel); border: 1.5px solid rgba(155,80,255,0.22);
+  border-radius: var(--radius-lg); overflow: hidden; margin: 22px 0;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.35), 0 0 30px rgba(155,80,255,0.06);
+}
+.img-frame img { width: 100%; display: block; border-radius: 0; }
+.img-ph {
+  aspect-ratio: 16/7; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  color: var(--txtDim); padding: 24px; text-align: center;
+  background: rgba(155,80,255,0.03);
+}
+.img-ph.tall { aspect-ratio: 4/3; }
+.img-ph .ph-icon { font-size: 1.8rem; opacity: .4; }
+.path-guide {
+  font-size: 0.7rem; color: var(--neon); background: rgba(155,80,255,0.1);
+  border: 1px solid rgba(155,80,255,0.25); border-radius: 5px;
+  padding: 3px 10px; margin-top: 4px; letter-spacing: .02em;
+}
+.img-caption { text-align: center; font-size: 0.78rem; color: var(--txtDim); margin-top: -10px; margin-bottom: 22px; font-style: italic; }
+
+/* EXAMPLE CARDS */
+.example-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 22px 0; }
+.example-card { background: var(--card); border: 1px solid rgba(155,80,255,0.18); border-radius: var(--radius-md); padding: 18px 16px; }
+.example-card .ec-label { font-size: 0.7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--txtDim); margin-bottom: 10px; }
+.example-card .ec-tree { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.9; }
+.example-card .ec-tree .f { color: var(--neonB); }
+.example-card .ec-tree .sf { color: var(--neonG); }
+.example-card .ec-tree .fi { color: var(--accent); }
+.example-card .ec-tree .dim { color: var(--txtDim); }
+
+/* RULE LIST */
+.rule-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.rule-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; color: var(--txt); line-height: 1.6; }
+.rule-list li .ri { flex-shrink: 0; font-size: 1rem; margin-top: 2px; }
+
+/* BROWSER FLOW */
+.browser-flow { display: flex; flex-direction: column; gap: 0; margin: 22px 0; }
+.bf-item { display: flex; gap: 16px; position: relative; }
+.bf-item:not(:last-child)::after { content: ''; position: absolute; left: 18px; top: 40px; bottom: -14px; width: 2px; background: linear-gradient(180deg, var(--neon), transparent); z-index: 0; }
+.bf-dot { width: 38px; height: 38px; border-radius: 50%; background: var(--card); border: 2px solid var(--neon); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; z-index: 1; }
+.bf-content { flex: 1; padding: 6px 0 28px; }
+.bf-content h4 { font-weight: 700; font-size: 0.92rem; color: var(--accent); margin-bottom: 4px; }
+.bf-content p  { font-size: 0.84rem; color: var(--txtDim); line-height: 1.6; }
+
+/* DIVIDER */
+.section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--neon), transparent); opacity: 0.18; margin: 52px 0; }
+
+/* YOUTUBE CARD */
+.yt-card {
+  background: linear-gradient(135deg, rgba(240,70,110,0.1), rgba(155,80,255,0.08));
+  border: 1.5px solid rgba(240,70,110,0.3);
+  border-radius: var(--radius-lg); padding: 32px 28px;
+  display: flex; align-items: center; gap: 22px;
+  text-decoration: none; transition: background .2s, border-color .2s, transform .15s;
+  margin-top: 32px;
+}
+.yt-card:hover { background: linear-gradient(135deg, rgba(240,70,110,0.16), rgba(155,80,255,0.12)); border-color: rgba(240,70,110,0.55); transform: translateY(-3px); }
+.yt-icon { font-size: 3rem; flex-shrink: 0; }
+.yt-text { flex: 1; }
+.yt-text .yt-pre { font-size: 0.7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(240,70,110,0.8); margin-bottom: 4px; }
+.yt-text h3 { font-weight: 800; font-size: 1.1rem; color: var(--txt); margin-bottom: 6px; }
+.yt-text p  { font-size: 0.83rem; color: var(--txtDim); line-height: 1.55; }
+.yt-arrow { font-size: 1.4rem; color: rgba(240,70,110,0.7); flex-shrink: 0; transition: transform .2s; }
+.yt-card:hover .yt-arrow { transform: translateX(5px); }
+
+/* BACK LINK */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(155,80,255,0.08); border: 1px solid rgba(155,80,255,0.25);
+  border-radius: var(--radius-md); padding: 10px 20px; margin-bottom: 40px;
+  font-size: 0.85rem; font-weight: 600; color: var(--accent);
+  transition: background .2s, border-color .2s;
+}
+.back-btn:hover { background: rgba(155,80,255,0.15); border-color: rgba(155,80,255,0.5); color: var(--accent); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .example-grid { grid-template-columns: 1fr; }
+  .yt-card { flex-direction: column; text-align: center; }
+  .yt-arrow { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<nav>
+  <a href="index.html" class="nav-back">&#8592; Back</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-cur">Local MIDI Guide</span>
+  <div class="nav-logo-sm">RoMidi</div>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="guide-hero reveal">
+    <div class="guide-badge">&#128193; Local MIDI</div>
+    <h1>How to Load <span>Your Own</span> MIDI Files</h1>
+    <p>A complete step-by-step guide to adding, organizing, and playing your own MIDI songs inside RoMidi using your executor's file system and Roblox Workspace.</p>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc reveal">
+    <div class="toc-title">Contents</div>
+    <ul class="toc-list">
+      <li><span class="toc-num">01</span><a href="#s1">How Local MIDI Works</a></li>
+      <li><span class="toc-num">02</span><a href="#s2">Step 1 — Find Your Executor Folder</a></li>
+      <li><span class="toc-num">03</span><a href="#s3">Step 2 — Understand the Folder Structure</a></li>
+      <li><span class="toc-num">04</span><a href="#s4">Step 3 — Add Your MIDI Files</a></li>
+      <li><span class="toc-num">05</span><a href="#s5">Naming Rules and Tips</a></li>
+      <li><span class="toc-num">06</span><a href="#s6">How it Looks Inside RoMidi</a></li>
+      <li><span class="toc-num">07</span><a href="#s7">Multiple Categories Example</a></li>
+      <li><span class="toc-num">08</span><a href="#s8">Reloading the Library</a></li>
+      <li><span class="toc-num">09</span><a href="#s9">Supported File Types</a></li>
+      <li><span class="toc-num">10</span><a href="#s10">Video Tutorial</a></li>
+    </ul>
+  </div>
+
+  <!-- S1: HOW IT WORKS -->
+  <div class="guide-section reveal" id="s1">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <h2>How Local MIDI Works</h2>
+    </div>
+    <p>RoMidi can read MIDI files that you place inside your executor's <code>workspace</code> folder. When you run the script, it scans that folder for any subfolders and their contents, turning each subfolder into a browseable song category inside the in-game Song Browser.</p>
+    <p>You do not need any tools, converters, or special setup. Just copy your <code>.mid</code> files into the right folders and the script finds them automatically.</p>
+
+    <div class="callout info">
+      <span class="callout-icon">&#9432;</span>
+      <div class="callout-body">
+        <strong>How the scan path works</strong>
+        RoMidi looks inside your executor's <code>workspace/</code> folder. Everything is organized by a top-level folder you name yourself, with song files living inside subfolders of that folder. The subfolder names become the category names you see in the dropdown inside RoMidi.
+      </div>
+    </div>
+
+    <div class="browser-flow">
+      <div class="bf-item">
+        <div class="bf-dot">&#128193;</div>
+        <div class="bf-content">
+          <h4>Your top-level folder in workspace</h4>
+          <p>You can name this anything. For example <code>MyMidi</code> or <code>Piano Songs</code>. This is the root folder RoMidi scans inside.</p>
+        </div>
+      </div>
+      <div class="bf-item">
+        <div class="bf-dot">&#128448;</div>
+        <div class="bf-content">
+          <h4>Subfolders inside it become categories</h4>
+          <p>Each subfolder you create inside your top-level folder becomes one selectable category in the Local dropdown of the Song Browser. Name them anything — for example <code>Anime</code>, <code>Pop</code>, <code>Classical</code>.</p>
+        </div>
+      </div>
+      <div class="bf-item">
+        <div class="bf-dot">&#127925;</div>
+        <div class="bf-content">
+          <h4>MIDI files inside those subfolders are the songs</h4>
+          <p>Any <code>.mid</code> or <code>.smf</code> file you put inside a subfolder shows up as a playable song in that category inside RoMidi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S2: EXECUTOR FOLDER -->
+  <div class="guide-section reveal" id="s2">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <h2>Step 1 — Find Your Executor Folder</h2>
+    </div>
+    <p>Every script executor has a folder on your computer where it stores files. This is where you put your MIDI files so the script can read them. The location depends on which executor you use.</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="sl-num">1</div>
+        <div class="sl-body">
+          <strong>Open your executor</strong>
+          Launch your Roblox executor application on your PC.
+        </div>
+      </li>
+      <li>
+        <div class="sl-num">2</div>
+        <div class="sl-body">
+          <strong>Find the workspace folder</strong>
+          Look for a folder called <code>workspace</code> inside your executor's installation directory. Most executors place it at a path like <code>C:\Users\YourName\executor-name\workspace\</code>. Some have a button in the UI labeled "Open Workspace" or a folder icon.
+        </div>
+      </li>
+      <li>
+        <div class="sl-num">3</div>
+        <div class="sl-body">
+          <strong>Open it in File Explorer</strong>
+          Open that <code>workspace</code> folder in Windows File Explorer (or your file manager on other systems). This is where everything goes.
+        </div>
+      </li>
+    </ul>
+
+    <div class="callout tip">
+      <span class="callout-icon">&#128161;</span>
+      <div class="callout-body">
+        <strong>Quick tip</strong>
+        Many executors have a shortcut button to open the workspace folder directly. Check the executor's settings, file panel, or right-click menu for an "Open Folder" or "Workspace" option.
+      </div>
+    </div>
+
+    <div class="img-frame">
+      <!--
+        PUT YOUR IMAGE HERE:
+        1. Save your screenshot as:  images/local/executor-folder.png
+        2. Replace the div below with:
+           <img src="images/local/executor-folder.png" alt="Executor workspace folder in File Explorer" />
+      -->
+      <div class="img-ph">
+        <span class="ph-icon">&#128193;</span>
+        <span>Screenshot of executor workspace folder in File Explorer</span>
+        <span class="path-guide">images/local/executor-folder.png</span>
+      </div>
+    </div>
+    <p class="img-caption">Your executor's workspace folder open in File Explorer</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S3: FOLDER STRUCTURE -->
+  <div class="guide-section reveal" id="s3">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <h2>Step 2 — Understand the Folder Structure</h2>
+    </div>
+    <p>The key rule is simple: <strong style="color:var(--accent)">songs must always live inside a subfolder</strong>, never directly inside the root folder. That subfolder name is what becomes the category name in RoMidi.</p>
+
+    <div class="callout rule">
+      <span class="callout-icon">&#9654;</span>
+      <div class="callout-body">
+        <strong>The required structure</strong>
+        <code>workspace / YourFolderName / SubfolderName / song.mid</code><br/>
+        The top-level folder and all subfolder names can be anything you want. The only requirement is that your <code>.mid</code> files are inside a subfolder, not loose in the root.
+      </div>
+    </div>
+
+    <div class="code-block">
+      <span class="cb-label">structure</span>
+<span class="folder">workspace/</span>
+<span class="comment">  (your executor's workspace folder)</span>
+
+  <span class="folder">MyMidi/</span>                     <span class="comment">&lt;-- your top-level folder, any name</span>
+
+    <span class="subfolder">Anime/</span>                   <span class="comment">&lt;-- category: "Anime"</span>
+      <span class="file">unravel.mid</span>
+      <span class="file">silhouette.mid</span>
+      <span class="file">gurenge.mid</span>
+
+    <span class="subfolder">Pop/</span>                     <span class="comment">&lt;-- category: "Pop"</span>
+      <span class="file">shape-of-you.mid</span>
+      <span class="file">blinding-lights.mid</span>
+
+    <span class="subfolder">Classical/</span>              <span class="comment">&lt;-- category: "Classical"</span>
+      <span class="file">moonlight-sonata.mid</span>
+      <span class="file">fur-elise.mid</span>
+    </div>
+
+    <p>In the example above, pressing the <code>Local</code> dropdown inside RoMidi would show three categories: <strong style="color:var(--neonG)">Anime</strong>, <strong style="color:var(--neonG)">Pop</strong>, and <strong style="color:var(--neonG)">Classical</strong>. Selecting any of them shows the MIDI files inside.</p>
+
+    <div class="callout warn">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-body">
+        <strong>Do not put songs directly in the root folder</strong>
+        If you place a <code>.mid</code> file directly inside <code>MyMidi/</code> without a subfolder, RoMidi will not see it. Every song needs to be inside at least one subfolder.
+      </div>
+    </div>
+
+    <div class="img-frame">
+      <!--
+        PUT YOUR IMAGE HERE:
+        1. Save your screenshot as:  images/local/folder-structure.png
+        2. Replace the div below with:
+           <img src="images/local/folder-structure.png" alt="Correct folder structure" />
+      -->
+      <div class="img-ph">
+        <span class="ph-icon">&#128448;</span>
+        <span>Screenshot showing correct folder structure in File Explorer</span>
+        <span class="path-guide">images/local/folder-structure.png</span>
+      </div>
+    </div>
+    <p class="img-caption">Correct folder layout with subfolders acting as categories</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S4: ADD FILES -->
+  <div class="guide-section reveal" id="s4">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <h2>Step 3 — Add Your MIDI Files</h2>
+    </div>
+    <p>Once you understand the structure, adding songs is as simple as copying files into the right subfolder. Here is the full process from scratch.</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="sl-num">1</div>
+        <div class="sl-body">
+          <strong>Create your top-level folder</strong>
+          Inside your executor's <code>workspace</code> folder, create a new folder and name it anything you like. For example: <code>MyMidi</code>, <code>Piano</code>, or <code>Songs</code>.
+        </div>
+      </li>
+      <li>
+        <div class="sl-num">2</div>
+        <div class="sl-body">
+          <strong>Create one or more category subfolders</strong>
+          Inside that top-level folder, create subfolders for each category of songs you want. For example <code>Anime</code>, <code>Pop</code>, <code>OST</code>, <code>My Favorites</code>. Each one becomes a separate category tab inside RoMidi.
+        </div>
+      </li>
+      <li>
+        <div class="sl-num">3</div>
+        <div class="sl-body">
+          <strong>Copy your MIDI files into the subfolders</strong>
+          Drag and drop (or copy and paste) your <code>.mid</code> or <code>.smf</code> files into the correct subfolder. You can put as many files as you want in each category. File names become the song names shown in RoMidi.
+        </div>
+      </li>
+      <li>
+        <div class="sl-num">4</div>
+        <div class="sl-body">
+          <strong>Run RoMidi or press RELOAD</strong>
+          If RoMidi is already running, press the <code>RELOAD</code> button in the utility row. If you are starting fresh, just run the script and it will pick up all your files automatically.
+        </div>
+      </li>
+      <li>
+        <div class="sl-num">5</div>
+        <div class="sl-body">
+          <strong>Open the Song Browser and switch to Local</strong>
+          Click <code>LIST</code> in the RoMidi header, then click the <code>Local</code> dropdown. Your folder names appear as categories and your MIDI files appear as songs.
+        </div>
+      </li>
+    </ul>
+
+    <div class="img-frame">
+      <!--
+        PUT YOUR IMAGE HERE:
+        1. Save your screenshot as:  images/local/add-files.png
+        2. Replace the div below with:
+           <img src="images/local/add-files.png" alt="Copying MIDI files into subfolders" />
+      -->
+      <div class="img-ph tall">
+        <span class="ph-icon">&#128190;</span>
+        <span>Screenshot of MIDI files inside a subfolder in File Explorer</span>
+        <span class="path-guide">images/local/add-files.png</span>
+      </div>
+    </div>
+    <p class="img-caption">MIDI files copied into the Anime subfolder</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S5: NAMING RULES -->
+  <div class="guide-section reveal" id="s5">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <h2>Naming Rules and Tips</h2>
+    </div>
+    <p>You have a lot of freedom with names, but a few things are worth knowing to keep everything organized.</p>
+
+    <ul class="rule-list">
+      <li>
+        <span class="ri">&#10003;</span>
+        <span><strong style="color:var(--neonG)">Folder names can be anything</strong> — spaces, numbers, special characters all work. Whatever you name the subfolder is exactly what shows up as the category label in RoMidi.</span>
+      </li>
+      <li>
+        <span class="ri">&#10003;</span>
+        <span><strong style="color:var(--neonG)">Song file names can be anything</strong> — the file name (without the <code>.mid</code> extension) is used as the song title inside the browser list.</span>
+      </li>
+      <li>
+        <span class="ri">&#10003;</span>
+        <span><strong style="color:var(--neonG)">You can create as many subfolders as you want</strong> — there is no hard limit. If you have 20 categories, all 20 show up in the Local dropdown.</span>
+      </li>
+      <li>
+        <span class="ri">&#10003;</span>
+        <span><strong style="color:var(--neonG)">You can add or remove songs at any time</strong> — just copy new files in or delete old ones, then press RELOAD inside RoMidi to refresh the list.</span>
+      </li>
+      <li>
+        <span class="ri">&#9888;</span>
+        <span><strong style="color:var(--neonY)">Songs must be inside a subfolder</strong> — do not place <code>.mid</code> files directly in your top-level folder. RoMidi only reads files that are one level deeper inside a named subfolder.</span>
+      </li>
+      <li>
+        <span class="ri">&#9888;</span>
+        <span><strong style="color:var(--neonY)">Only .mid and .smf files are supported</strong> — other formats like .mp3, .wav, or .musicxml will not load. Convert them to MIDI first using a tool like MuseScore or GarageBand.</span>
+      </li>
+    </ul>
+
+    <div class="callout tip">
+      <span class="callout-icon">&#128161;</span>
+      <div class="callout-body">
+        <strong>Keep song file names clean</strong>
+        Since the file name becomes the title shown in RoMidi, try to use readable names like <code>Moon River.mid</code> instead of <code>mr_v2_final_FINAL.mid</code>. Short, clear names are easier to search and tap in-game.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S6: INSIDE ROMIDI -->
+  <div class="guide-section reveal" id="s6">
+    <div class="section-head">
+      <div class="section-num">6</div>
+      <h2>How it Looks Inside RoMidi</h2>
+    </div>
+    <p>Once your files are in place and the script is running, here is exactly what you see in the Song Browser when you switch to the Local tab.</p>
+
+    <div class="img-frame">
+      <!--
+        PUT YOUR IMAGE HERE:
+        1. Save your screenshot as:  images/local/browser-local-tab.png
+        2. Replace the div below with:
+           <img src="images/local/browser-local-tab.png" alt="Local tab in Song Browser" />
+      -->
+      <div class="img-ph">
+        <span class="ph-icon">&#128218;</span>
+        <span>Screenshot of Local dropdown showing your subfolder categories</span>
+        <span class="path-guide">images/local/browser-local-tab.png</span>
+      </div>
+    </div>
+    <p class="img-caption">The Local dropdown listing your subfolders as categories</p>
+
+    <div class="img-frame">
+      <!--
+        PUT YOUR IMAGE HERE:
+        1. Save your screenshot as:  images/local/browser-song-list.png
+        2. Replace the div below with:
+           <img src="images/local/browser-song-list.png" alt="Song list under a local category" />
+      -->
+      <div class="img-ph">
+        <span class="ph-icon">&#127925;</span>
+        <span>Screenshot of song list after selecting a local category</span>
+        <span class="path-guide">images/local/browser-song-list.png</span>
+      </div>
+    </div>
+    <p class="img-caption">Song list showing MIDI file names from the selected subfolder</p>
+
+    <p>Tapping any song row loads it immediately. A green toast notification confirms the song name and it is ready to play. You can then close the browser and hit PLAY.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S7: MULTIPLE CATEGORIES -->
+  <div class="guide-section reveal" id="s7">
+    <div class="section-head">
+      <div class="section-num">7</div>
+      <h2>Multiple Categories Example</h2>
+    </div>
+    <p>Here are some real-world examples of how you might organize a larger song collection across multiple categories.</p>
+
+    <div class="example-grid">
+      <div class="example-card">
+        <div class="ec-label">Example A — genre split</div>
+        <div class="ec-tree">
+<span class="f">MyMidi/</span>
+  <span class="sf">Anime/</span>
+    <span class="fi">gurenge.mid</span>
+    <span class="fi">unravel.mid</span>
+  <span class="sf">Pop/</span>
+    <span class="fi">blinding-lights.mid</span>
+    <span class="fi">levitating.mid</span>
+  <span class="sf">OST/</span>
+    <span class="fi">undertale.mid</span>
+    <span class="fi">zelda.mid</span>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="ec-label">Example B — mood split</div>
+        <div class="ec-tree">
+<span class="f">Piano/</span>
+  <span class="sf">Chill/</span>
+    <span class="fi">river-flows.mid</span>
+    <span class="fi">kiss-the-rain.mid</span>
+  <span class="sf">Hype/</span>
+    <span class="fi">god-eater.mid</span>
+    <span class="fi">red-like-roses.mid</span>
+  <span class="sf">Sad/</span>
+    <span class="fi">nandemonaiya.mid</span>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="ec-label">Example C — single category</div>
+        <div class="ec-tree">
+<span class="f">Songs/</span>
+  <span class="sf">Favorites/</span>
+    <span class="fi">your-name.mid</span>
+    <span class="fi">pretender.mid</span>
+    <span class="fi">shinzou.mid</span>
+    <span class="fi">homura.mid</span>
+    <span class="fi">lemon.mid</span>
+    <span class="dim">...</span>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="ec-label">Example D — many categories</div>
+        <div class="ec-tree">
+<span class="f">MyLib/</span>
+  <span class="sf">Anime 2024/</span>
+    <span class="fi">...</span>
+  <span class="sf">K-Pop/</span>
+    <span class="fi">...</span>
+  <span class="sf">Classical/</span>
+    <span class="fi">...</span>
+  <span class="sf">Game OST/</span>
+    <span class="fi">...</span>
+  <span class="sf">My Originals/</span>
+    <span class="fi">...</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">&#9432;</span>
+      <div class="callout-body">
+        <strong>No limit on categories or songs</strong>
+        You can have as many subfolders as you want and as many MIDI files inside each one as you need. RoMidi loads them all and lets you search across the full list with the search bar.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S8: RELOADING -->
+  <div class="guide-section reveal" id="s8">
+    <div class="section-head">
+      <div class="section-num">8</div>
+      <h2>Reloading the Library</h2>
+    </div>
+    <p>If you add, remove, or rename MIDI files while RoMidi is already running, you do not need to re-execute the script. Just press the <strong style="color:var(--btn-reload-a)">RELOAD</strong> button in the utility row at the bottom of the main panel.</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="sl-num">1</div>
+        <div class="sl-body">
+          <strong>Add or remove files in File Explorer</strong>
+          Copy new <code>.mid</code> files into a subfolder, delete old ones, or create entirely new category subfolders.
+        </div>
+      </li>
+      <li>
+        <div class="sl-num">2</div>
+        <div class="sl-body">
+          <strong>Press RELOAD inside RoMidi</strong>
+          The RELOAD button is in the bottom utility row of the main panel. Tapping it clears the current library cache and rescans your workspace folders from scratch.
+        </div>
+      </li>
+      <li>
+        <div class="sl-num">3</div>
+        <div class="sl-body">
+          <strong>A toast confirms the refresh</strong>
+          A green "Library reloaded!" toast appears when the scan is complete. Your new songs and categories are immediately visible in the Local dropdown.
+        </div>
+      </li>
+    </ul>
+
+    <div class="img-frame">
+      <!--
+        PUT YOUR IMAGE HERE:
+        1. Save your screenshot as:  images/local/reload-button.png
+        2. Replace the div below with:
+           <img src="images/local/reload-button.png" alt="RELOAD button location" />
+      -->
+      <div class="img-ph">
+        <span class="ph-icon">&#9881;</span>
+        <span>Screenshot highlighting the RELOAD button in the utility row</span>
+        <span class="path-guide">images/local/reload-button.png</span>
+      </div>
+    </div>
+    <p class="img-caption">The RELOAD button sits in the bottom utility row of the main panel</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S9: FILE TYPES -->
+  <div class="guide-section reveal" id="s9">
+    <div class="section-head">
+      <div class="section-num">9</div>
+      <h2>Supported File Types</h2>
+    </div>
+    <p>RoMidi's built-in MIDI parser supports the following file formats.</p>
+
+    <div class="code-block">
+      <span class="cb-label">accepted</span>
+<span class="file">.mid</span>    <span class="comment">Standard MIDI File — the most common format</span>
+<span class="file">.smf</span>    <span class="comment">Standard MIDI File — same format, different extension</span>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-body">
+        <strong>Other formats will not work</strong>
+        Files like <code>.mp3</code>, <code>.wav</code>, <code>.flac</code>, <code>.musicxml</code>, or <code>.mxl</code> are not MIDI files and cannot be read by RoMidi. You need to convert them to <code>.mid</code> format first. Free tools like <strong>MuseScore</strong>, <strong>GarageBand</strong>, or online converters can help.
+      </div>
+    </div>
+
+    <p>The parser supports:</p>
+    <ul class="rule-list">
+      <li><span class="ri">&#10003;</span><span>Multi-track MIDI files (Format 0 and Format 1)</span></li>
+      <li><span class="ri">&#10003;</span><span>Files with embedded tempo markers (used by Auto BPM)</span></li>
+      <li><span class="ri">&#10003;</span><span>Running status byte compression</span></li>
+      <li><span class="ri">&#10003;</span><span>Automatic cleanup of orphaned note-off events to prevent stuck notes</span></li>
+      <li><span class="ri">&#10003;</span><span>Standard division / ticks-per-quarter-note timing</span></li>
+    </ul>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- S10: VIDEO TUTORIAL -->
+  <div class="guide-section reveal" id="s10">
+    <div class="section-head">
+      <div class="section-num">10</div>
+      <h2>Video Tutorial</h2>
+    </div>
+    <p>Prefer to watch rather than read? The full video tutorial below walks through every step shown on this page, from opening your executor folder to playing your first local MIDI song inside Roblox.</p>
+
+    <!--
+      REPLACE THE HREF BELOW with your YouTube video link.
+      Example: href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID"
+    -->
+    <a href="#" class="yt-card">
+      <span class="yt-icon">&#9654;&#65039;</span>
+      <div class="yt-text">
+        <div class="yt-pre">YouTube Tutorial</div>
+        <h3>How to Load Local MIDI Files in RoMidi</h3>
+        <p>A full walkthrough: finding your executor folder, creating categories, adding songs, and reloading the library inside the game.</p>
+      </div>
+      <span class="yt-arrow">&#8594;</span>
+    </a>
+  </div>
+
+  <!-- BACK LINK -->
+  <a href="index.html" class="back-btn reveal">&#8592; Back to RoMidi Docs</a>
+
+</div><!-- /.page-wrap -->
+
+<script>
+/* Particles */
+(function(){
+  const c = document.getElementById('particles');
+  const cols = ['#9b50ff','#be6eff','#d7aaff','#50dc96'];
+  for(let i=0;i<22;i++){
+    const p=document.createElement('div'); p.className='particle';
+    const sz=Math.random()*3.5+1.5;
+    p.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;
+      background:${cols[Math.floor(Math.random()*cols.length)]};
+      animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*10}s;
+      filter:blur(${Math.random()*.7}px)`;
+    c.appendChild(p);
+  }
+})();
+
+/* Scroll reveal */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
