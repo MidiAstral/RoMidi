@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Local MIDI Files - RoMidi Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#07041a; --panel:#100927; --card:#180e34; --border:#4a2a90;
+  --neon:#9b50ff; --neon-b:#be6eff; --p-mid:#5523af; --p-deep:#2d0f64;
+  --accent:#d7aaff; --neon-g:#50dc96; --neon-y:#ffc33c; --neon-r:#f0466e;
+  --txt:#e6d7ff; --txt-dim:#7558a8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;overflow-x:hidden;min-height:100vh;}
+
+/* ---- BACKGROUND ---- */
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(100px);}
+.orb1{width:700px;height:700px;top:-150px;left:-150px;
+  background:radial-gradient(circle,rgba(155,80,255,.12) 0%,transparent 70%);
+  animation:orbFloat 20s ease-in-out infinite;}
+.orb2{width:600px;height:600px;bottom:-120px;right:-120px;
+  background:radial-gradient(circle,rgba(80,220,150,.09) 0%,transparent 70%);
+  animation:orbFloat 24s ease-in-out infinite reverse;}
+.orb3{width:400px;height:400px;top:40%;left:40%;
+  background:radial-gradient(circle,rgba(255,195,60,.06) 0%,transparent 70%);
+  animation:orbFloat 16s ease-in-out infinite 4s;}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0);}
+  25%{transform:translate(30px,-50px);}
+  50%{transform:translate(-20px,30px);}
+  75%{transform:translate(40px,20px);}
+}
+.grid-lines{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.04;
+  background-image:linear-gradient(rgba(155,80,255,.5) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(155,80,255,.5) 1px,transparent 1px);
+  background-size:60px 60px;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.3;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");}
+
+nav,section,div.sec,footer,.hero-wrap{position:relative;z-index:1;}
+::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-track{background:var(--panel);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* ---- NAV ---- */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 52px;position:sticky;top:0;z-index:200;
+  background:rgba(7,4,26,.85);backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(74,42,144,.3);
+}
+.nav-left{display:flex;align-items:center;gap:12px;}
+.back-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:.4px;
+  color:var(--txt-dim);text-decoration:none;padding:7px 16px;border-radius:9px;
+  border:1.5px solid rgba(74,42,144,.45);background:rgba(16,9,39,.6);
+  transition:all .18s;
+}
+.back-btn:hover{color:var(--accent);border-color:var(--neon);background:rgba(74,42,144,.25);
+  box-shadow:0 0 18px rgba(155,80,255,.2);}
+.back-arr{display:inline-block;transition:transform .18s;}
+.back-btn:hover .back-arr{transform:translateX(-3px);}
+.nav-mid{display:flex;align-items:center;gap:10px;}
+.nav-ico{width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(135deg,var(--p-deep),var(--neon));
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+  border:1.5px solid rgba(155,80,255,.45);box-shadow:0 0 12px rgba(155,80,255,.25);}
+.nav-nm{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;letter-spacing:-.3px;}
+.nav-nm span{color:var(--neon-b);}
+.guide-chip{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;
+  background:rgba(80,220,150,.12);color:var(--neon-g);
+  padding:4px 12px;border-radius:99px;border:1px solid rgba(80,220,150,.28);}
+
+/* ---- HERO ---- */
+.hero-wrap{
+  max-width:1080px;margin:0 auto;padding:90px 52px 70px;text-align:center;
+}
+.hero-eye{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:4px;
+  text-transform:uppercase;color:var(--neon-g);
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:20px;
+  opacity:0;animation:fadeSlideDown .7s .05s ease forwards;
+}
+.hero-eye::before,.hero-eye::after{content:'';width:30px;height:1px;background:var(--neon-g);}
+.hero-h1{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(42px,5.5vw,68px);line-height:1.03;letter-spacing:-2.5px;
+  margin-bottom:20px;
+  opacity:0;animation:fadeSlideDown .7s .12s ease forwards;
+}
+.hero-h1 .gr{
+  background:linear-gradient(95deg,var(--neon-b) 0%,var(--accent) 40%,var(--neon-g) 80%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:15.5px;color:var(--txt-dim);max-width:540px;margin:0 auto 40px;
+  line-height:1.74;opacity:0;animation:fadeSlideDown .7s .2s ease forwards;
+}
+.hero-sub strong{color:var(--accent);font-weight:500;}
+.compat-row{
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:fadeSlideDown .7s .28s ease forwards;margin-bottom:0;
+}
+.cpill{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.3px;
+  padding:9px 18px;border-radius:99px;
+  transition:transform .18s,box-shadow .18s;
+}
+.cpill:hover{transform:translateY(-2px);}
+.cpill-pc{background:rgba(155,80,255,.14);border:1.5px solid rgba(155,80,255,.35);
+  color:var(--neon-b);box-shadow:0 0 20px rgba(155,80,255,.1);}
+.cpill-pc:hover{box-shadow:0 4px 24px rgba(155,80,255,.25);}
+.cpill-mob{background:rgba(80,220,150,.11);border:1.5px solid rgba(80,220,150,.3);
+  color:var(--neon-g);box-shadow:0 0 20px rgba(80,220,150,.08);}
+.cpill-mob:hover{box-shadow:0 4px 24px rgba(80,220,150,.2);}
+
+@keyframes fadeSlideDown{
+  from{opacity:0;transform:translateY(-18px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ---- DIVIDER ---- */
+.div-wrap{max-width:1080px;margin:0 auto;padding:0 52px;}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,rgba(74,42,144,.5),transparent);}
+
+/* ---- SECTION SHELL ---- */
+.sec{max-width:1080px;margin:0 auto;padding:70px 52px;}
+.slbl{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:3.5px;text-transform:uppercase;color:var(--neon);
+  display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.slbl::before{content:'';width:18px;height:1px;background:var(--neon);}
+h2{font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(24px,3.2vw,40px);letter-spacing:-1.2px;line-height:1.08;margin-bottom:10px;}
+.ssub{font-size:14.5px;color:var(--txt-dim);max-width:520px;line-height:1.7;margin-bottom:46px;}
+
+/* ---- STEP CARDS ---- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.sc{
+  background:var(--panel);border-radius:18px;padding:26px 22px;
+  position:relative;overflow:hidden;cursor:default;
+  border:1.5px solid transparent;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.sc::after{content:'';position:absolute;inset:0;border-radius:18px;
+  background:linear-gradient(135deg,transparent,transparent);transition:.25s;}
+.sc:hover{transform:translateY(-4px);}
+.sc-1{border-color:rgba(155,80,255,.3);}
+.sc-1:hover{border-color:var(--neon);box-shadow:0 16px 48px rgba(155,80,255,.18);}
+.sc-2{border-color:rgba(80,220,150,.25);}
+.sc-2:hover{border-color:var(--neon-g);box-shadow:0 16px 48px rgba(80,220,150,.15);}
+.sc-3{border-color:rgba(255,195,60,.25);}
+.sc-3:hover{border-color:var(--neon-y);box-shadow:0 16px 48px rgba(255,195,60,.14);}
+.sc-4{border-color:rgba(240,70,110,.25);}
+.sc-4:hover{border-color:var(--neon-r);box-shadow:0 16px 48px rgba(240,70,110,.14);}
+.sc-num{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:44px;letter-spacing:-3px;
+  line-height:1;margin-bottom:16px;
+  background:linear-gradient(135deg,currentColor,rgba(255,255,255,.3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sc-1 .sc-num{color:var(--neon);}
+.sc-2 .sc-num{color:var(--neon-g);}
+.sc-3 .sc-num{color:var(--neon-y);}
+.sc-4 .sc-num{color:var(--neon-r);}
+.sc-glow{
+  position:absolute;top:-30px;right:-30px;width:100px;height:100px;
+  border-radius:50%;filter:blur(40px);opacity:.2;pointer-events:none;
+}
+.sc-1 .sc-glow{background:var(--neon);}
+.sc-2 .sc-glow{background:var(--neon-g);}
+.sc-3 .sc-glow{background:var(--neon-y);}
+.sc-4 .sc-glow{background:var(--neon-r);}
+.sc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:-.2px;margin-bottom:9px;}
+.sc-desc{font-size:13px;color:var(--txt-dim);line-height:1.65;}
+
+/* ---- FOLDER TREE ---- */
+.tree-box{
+  background:var(--panel);border:1.5px solid rgba(74,42,144,.45);border-radius:20px;
+  padding:30px 32px;position:relative;overflow:hidden;
+}
+.tree-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(190,110,255,.45),transparent);}
+.tree-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(80,220,150,.2),transparent);}
+.tree-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+.tree-hdr-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--accent);}
+.tree-hdr-note{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--txt-dim);}
+.tree-body{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1;margin-bottom:26px;}
+.tl{display:flex;align-items:center;gap:0;
+  opacity:0;transform:translateX(-12px);
+  transition:opacity .45s ease,transform .45s ease;}
+.tl.in{opacity:1;transform:translateX(0);}
+.ti{display:inline-block;flex-shrink:0;}
+.tc{color:var(--txt-dim);width:20px;flex-shrink:0;font-size:12px;}
+.tf{color:var(--neon-y);}
+.tm{color:var(--neon-b);}
+.ta{color:var(--neon-g);}
+.tr{color:var(--neon-r);}
+.tcom{color:var(--txt-dim);font-size:11px;margin-left:8px;opacity:.75;}
+.thi{
+  background:rgba(155,80,255,.14);border:1px solid rgba(155,80,255,.28);
+  border-radius:6px;padding:1px 8px;color:var(--accent);font-size:12px;
+}
+
+/* INTERACTIVE TREE */
+.itree-wrap{
+  background:rgba(26,14,56,.7);border:1.5px solid rgba(74,42,144,.35);
+  border-radius:14px;padding:20px 22px;
+}
+.itree-hdr{font-family:'Syne',sans-serif;font-weight:700;font-size:12.5px;
+  color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.itree-hdr::before{content:'';width:8px;height:8px;border-radius:50%;
+  background:var(--neon-g);box-shadow:0 0 10px var(--neon-g);flex-shrink:0;
+  animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 10px var(--neon-g);}50%{opacity:.5;box-shadow:0 0 4px var(--neon-g);}}
+.inode{
+  display:flex;align-items:center;gap:9px;padding:6px 10px;border-radius:9px;
+  cursor:pointer;transition:background .15s,transform .12s;user-select:none;
+}
+.inode:hover{background:rgba(74,42,144,.35);transform:translateX(2px);}
+.ico{font-size:14px;width:18px;text-align:center;flex-shrink:0;transition:transform .2s;}
+.inode-name{font-family:'JetBrains Mono',monospace;font-size:13px;}
+.inode-badge{
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+  padding:2px 8px;border-radius:99px;margin-left:auto;letter-spacing:.5px;
+}
+.inode-kids{display:none;margin-left:20px;
+  border-left:1.5px solid rgba(74,42,144,.4);padding-left:10px;margin-top:3px;}
+.inode-kids.open{display:block;}
+.desc-pop{
+  margin:5px 0 5px 28px;padding:11px 15px;
+  background:rgba(24,14,52,.9);border:1px solid rgba(155,80,255,.28);
+  border-radius:10px;font-size:12.5px;color:var(--txt-dim);line-height:1.65;
+  animation:descPop .22s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes descPop{from{opacity:0;transform:translateY(-8px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+
+/* ---- EXECUTOR CARDS ---- */
+.exec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.ecard{
+  background:var(--panel);border:1.5px solid rgba(74,42,144,.3);
+  border-radius:16px;padding:20px 22px;
+  transition:transform .22s,border-color .22s,box-shadow .22s;
+  position:relative;overflow:hidden;
+}
+.ecard::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;
+  border-radius:50%;filter:blur(40px);opacity:0;transition:opacity .3s;}
+.ecard:hover::before{opacity:.15;}
+.ecard:hover{transform:translateY(-3px);border-color:var(--neon);
+  box-shadow:0 14px 40px rgba(155,80,255,.15);}
+.ecard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.ecard-name{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
+.eplat{
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+  padding:3px 9px;border-radius:99px;letter-spacing:.5px;
+}
+.ep-both{background:rgba(80,220,150,.13);border:1px solid rgba(80,220,150,.28);color:var(--neon-g);}
+.ep-pc{background:rgba(155,80,255,.13);border:1px solid rgba(155,80,255,.28);color:var(--neon-b);}
+.ep-mob{background:rgba(255,195,60,.11);border:1px solid rgba(255,195,60,.26);color:var(--neon-y);}
+.epath{
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--neon-y);
+  background:rgba(24,14,52,.8);border:1px solid rgba(74,42,144,.35);
+  border-radius:9px;padding:8px 12px;margin-bottom:9px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  cursor:pointer;transition:border-color .15s,background .15s;
+}
+.epath:hover{border-color:var(--neon-y);background:rgba(255,195,60,.07);}
+.epath.copied{border-color:var(--neon-g);background:rgba(80,220,150,.07);}
+.epath.copied .cico{color:var(--neon-g);}
+.cico{color:var(--txt-dim);font-size:13px;flex-shrink:0;transition:all .15s;}
+.epath:hover .cico{color:var(--neon-y);}
+.enote{font-size:12.5px;color:var(--txt-dim);line-height:1.58;}
+
+/* ---- RULES ---- */
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.rcard{
+  background:var(--panel);border:1.5px solid rgba(74,42,144,.3);
+  border-radius:16px;padding:22px 24px;
+  transition:transform .22s,border-color .22s;
+}
+.rcard:hover{transform:translateY(-3px);}
+.rcard.ok{border-color:rgba(80,220,150,.22);}
+.rcard.ok:hover{border-color:var(--neon-g);}
+.rcard.no{border-color:rgba(240,70,110,.18);}
+.rcard.no:hover{border-color:var(--neon-r);}
+.rico{font-size:22px;margin-bottom:13px;}
+.rtitle{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:8px;}
+.rdesc{font-size:13px;color:var(--txt-dim);line-height:1.65;}
+.rtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.rtag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+  padding:3px 9px;border-radius:99px;}
+.rtag-ok{background:rgba(80,220,150,.13);border:1px solid rgba(80,220,150,.28);color:var(--neon-g);}
+.rtag-no{background:rgba(240,70,110,.11);border:1px solid rgba(240,70,110,.25);color:var(--neon-r);}
+
+/* ---- FAQ ---- */
+.faq{display:flex;flex-direction:column;gap:10px;}
+.fi{
+  background:var(--panel);border:1.5px solid rgba(74,42,144,.3);
+  border-radius:14px;overflow:hidden;transition:border-color .2s;
+}
+.fi:hover,.fi.open{border-color:rgba(155,80,255,.5);}
+.fq{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;cursor:pointer;user-select:none;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+  transition:color .15s;
+}
+.fq:hover,.fi.open .fq{color:var(--accent);}
+.farr{
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(74,42,144,.3);display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--txt-dim);flex-shrink:0;transition:transform .28s,background .18s;
+}
+.fi.open .farr{transform:rotate(180deg);background:rgba(155,80,255,.25);color:var(--accent);}
+.fa{
+  max-height:0;overflow:hidden;padding:0 20px;
+  font-size:13.5px;color:var(--txt-dim);line-height:1.72;
+  transition:max-height .35s ease,padding .28s;
+}
+.fi.open .fa{max-height:280px;padding:0 20px 18px;}
+
+/* ---- TIPS ---- */
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.tcard{
+  background:var(--panel);border:1.5px solid rgba(74,42,144,.28);
+  border-radius:16px;padding:22px 22px;transition:all .22s;
+  position:relative;overflow:hidden;
+}
+.tcard:hover{transform:translateY(-3px);border-color:var(--neon);
+  box-shadow:0 12px 36px rgba(155,80,255,.14);}
+.tcard-num{
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+  letter-spacing:2.5px;margin-bottom:10px;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.tcard-num::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;
+  box-shadow:0 0 8px currentColor;}
+.t1 .tcard-num{color:var(--neon-b);}
+.t2 .tcard-num{color:var(--neon-g);}
+.t3 .tcard-num{color:var(--neon-y);}
+.t4 .tcard-num{color:var(--neon-r);}
+.t5 .tcard-num{color:var(--neon-b);}
+.t6 .tcard-num{color:var(--neon-g);}
+.tcard-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:-.2px;margin-bottom:8px;}
+.tcard-desc{font-size:13px;color:var(--txt-dim);line-height:1.65;}
+
+/* ---- SCROLL REVEAL ---- */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.rv.vis{opacity:1;transform:translateY(0);}
+.rv-1{transition-delay:.05s;} .rv-2{transition-delay:.1s;}
+.rv-3{transition-delay:.15s;} .rv-4{transition-delay:.2s;}
+
+/* ---- FOOTER ---- */
+footer{
+  max-width:1080px;margin:0 auto;padding:32px 52px 52px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(74,42,144,.22);
+}
+.fl{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;
+  font-weight:800;font-size:14px;color:var(--txt-dim);}
+.fl span{color:var(--neon-b);}
+.fn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt-dim);}
+.fn .cr{color:var(--accent);}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .hero-wrap,.sec,.div-wrap{padding-left:20px;padding-right:20px;}
+  .hero-wrap{padding-top:56px;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .exec-grid{grid-template-columns:1fr 1fr;}
+  .rules-grid,.tips-grid{grid-template-columns:1fr 1fr;}
+  footer{padding:24px 20px;flex-direction:column;gap:8px;text-align:center;}
+}
+@media(max-width:560px){
+  .steps,.exec-grid,.rules-grid,.tips-grid{grid-template-columns:1fr;}
+  .hero-h1{font-size:36px;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+</div>
+<div class="grid-lines"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a class="back-btn" href="romidi-landing.html">
+      <span class="back-arr">&#8592;</span> Back to Main
+    </a>
+  </div>
+  <div class="nav-mid">
+    <div class="nav-ico">&#x1F43C;</div>
+    <div class="nav-nm">Ro<span>Midi</span></div>
+  </div>
+  <div class="guide-chip">Local MIDI Guide</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero-eye">Panda Hub - Creator</div>
+  <h1 class="hero-h1">Local <span class="gr">MIDI Files</span></h1>
+  <p class="hero-sub">
+    Play <strong>any MIDI file you own</strong> directly in Roblox.
+    Drop your songs into your executor workspace and RoMidi finds them automatically,
+    organized by category.
+  </p>
+  <div class="compat-row">
+    <div class="cpill cpill-pc">
+      &#x1F4BB; Works on PC
+    </div>
+    <div class="cpill cpill-mob">
+      &#x1F4F1; Works on Mobile
+    </div>
+  </div>
+</div>
+
+<div class="div-wrap"><div class="div-line"></div></div>
+
+<!-- STEPS -->
+<div class="sec" id="steps">
+  <div class="slbl rv">How it works</div>
+  <h2 class="rv">4 steps to play your own songs</h2>
+  <p class="ssub rv">RoMidi scans your executor workspace automatically every time you press RELOAD. No config files to edit, no code to write.</p>
+  <div class="steps">
+    <div class="sc sc-1 rv rv-1">
+      <div class="sc-glow"></div>
+      <div class="sc-num">01</div>
+      <div class="sc-title">Find your executor workspace</div>
+      <div class="sc-desc">Every executor stores a "workspace" folder on your device. The location is different for each executor. Delta, ArceusX, Fluxus and others each have their own path. See the full list in the section below.</div>
+    </div>
+    <div class="sc sc-2 rv rv-2">
+      <div class="sc-glow"></div>
+      <div class="sc-num">02</div>
+      <div class="sc-title">Create a top-level folder</div>
+      <div class="sc-desc">Inside the workspace, create a folder with any name you like - "MySongs", "RoMidi", "Piano", literally anything. This folder is just a container. RoMidi scans every folder in the workspace root automatically.</div>
+    </div>
+    <div class="sc sc-3 rv rv-3">
+      <div class="sc-glow"></div>
+      <div class="sc-num">03</div>
+      <div class="sc-title">Add subfolders as categories</div>
+      <div class="sc-desc">Inside your top-level folder, create subfolders. Each subfolder name becomes a category in the RoMidi library. A subfolder named "Anime" appears as the "Anime" category. You can create as many categories as you want.</div>
+    </div>
+    <div class="sc sc-4 rv rv-4">
+      <div class="sc-glow"></div>
+      <div class="sc-num">04</div>
+      <div class="sc-title">Put .mid files inside</div>
+      <div class="sc-desc">Drop your .mid or .smf files into the category subfolders. The file name without the extension becomes the song name in the library. Press RELOAD in RoMidi and all your songs appear instantly.</div>
+    </div>
+  </div>
+</div>
+
+<div class="div-wrap"><div class="div-line"></div></div>
+
+<!-- FOLDER STRUCTURE -->
+<div class="sec" id="structure">
+  <div class="slbl rv">Folder structure</div>
+  <h2 class="rv">Exactly how to organize your files</h2>
+  <p class="ssub rv">This is the precise layout RoMidi expects. Every level matters - files in the wrong place will not appear.</p>
+
+  <div class="tree-box rv">
+    <div class="tree-hdr">
+      <div class="tree-hdr-title">Workspace folder layout</div>
+      <div class="tree-hdr-note">.mid and .smf files accepted</div>
+    </div>
+    <div class="tree-body" id="treeBody">
+      <div class="tl" style="--d:.06s"><span class="tr">workspace/</span><span class="tcom">&lt;-- executor workspace root (DO NOT edit this)</span></div>
+      <div class="tl" style="--d:.13s"><span class="ti" style="width:24px"></span><span class="tc">+--</span><span class="tf">MySongs/</span><span class="tcom">&lt;-- top-level folder, any name you like</span></div>
+      <div class="tl" style="--d:.20s"><span class="ti" style="width:48px"></span><span class="tc">+--</span><span class="ta">Anime/</span><span class="tcom">&lt;-- subfolder = "Anime" category in library</span></div>
+      <div class="tl" style="--d:.27s"><span class="ti" style="width:72px"></span><span class="tc">+--</span><span class="tm">Sparkle.mid</span></div>
+      <div class="tl" style="--d:.34s"><span class="ti" style="width:72px"></span><span class="tc">+--</span><span class="tm">Gurenge.mid</span></div>
+      <div class="tl" style="--d:.41s"><span class="ti" style="width:72px"></span><span class="tc">+--</span><span class="tm">Unravel.mid</span></div>
+      <div class="tl" style="--d:.48s"><span class="ti" style="width:48px"></span><span class="tc">+--</span><span class="ta">Classical/</span><span class="tcom">&lt;-- subfolder = "Classical" category</span></div>
+      <div class="tl" style="--d:.55s"><span class="ti" style="width:72px"></span><span class="tc">+--</span><span class="tm">Moonlight Sonata.mid</span></div>
+      <div class="tl" style="--d:.62s"><span class="ti" style="width:72px"></span><span class="tc">+--</span><span class="tm">Clair de Lune.mid</span></div>
+      <div class="tl" style="--d:.69s"><span class="ti" style="width:48px"></span><span class="tc">+--</span><span class="ta">Pop/</span><span class="tcom">&lt;-- subfolder = "Pop" category</span></div>
+      <div class="tl" style="--d:.76s"><span class="ti" style="width:72px"></span><span class="tc">+--</span><span class="tm">Shape of You.mid</span></div>
+      <div class="tl" style="--d:.83s"><span class="ti" style="width:24px"></span><span class="tc">+--</span><span class="tf">AnotherPack/</span><span class="tcom">&lt;-- second top-level folder, also scanned</span></div>
+      <div class="tl" style="--d:.90s"><span class="ti" style="width:48px"></span><span class="tc">+--</span><span class="ta">Anime/</span><span class="tcom">&lt;-- merges with MySongs/Anime/ above</span></div>
+      <div class="tl" style="--d:.97s"><span class="ti" style="width:72px"></span><span class="tc">+--</span><span class="tm">Demon Slayer Theme.mid</span></div>
+    </div>
+
+    <!-- Interactive node explorer -->
+    <div class="itree-wrap">
+      <div class="itree-hdr">Click any item to learn what it does</div>
+      <div id="itree"></div>
+    </div>
+  </div>
+</div>
+
+<div class="div-wrap"><div class="div-line"></div></div>
+
+<!-- EXECUTORS -->
+<div class="sec" id="executors">
+  <div class="slbl rv">Executor Paths</div>
+  <h2 class="rv">Where is your workspace?</h2>
+  <p class="ssub rv">Each executor stores its workspace in a completely different location. Find yours below - click the path to copy it to your clipboard.</p>
+
+  <div class="exec-grid">
+
+    <div class="ecard rv rv-1" style="--glow:var(--neon-g)">
+      <div class="ecard::before" style="background:var(--neon-g)"></div>
+      <div class="ecard-top">
+        <div class="ecard-name">Delta</div>
+        <span class="eplat ep-both">PC + Mobile</span>
+      </div>
+      <div class="epath" onclick="cp(this,'Delta/workspace')">
+        <span>Delta/workspace</span><span class="cico">&#x2398;</span>
+      </div>
+      <div class="enote">One of the most widely used executors on both PC and mobile. The workspace folder is created automatically on first launch.</div>
+    </div>
+
+    <div class="ecard rv rv-2">
+      <div class="ecard-top">
+        <div class="ecard-name">ArceusX</div>
+        <span class="eplat ep-mob">Mobile</span>
+      </div>
+      <div class="epath" onclick="cp(this,'Arceus/workspace')">
+        <span>Arceus/workspace</span><span class="cico">&#x2398;</span>
+      </div>
+      <div class="enote">Popular Android executor. Note the folder is named "Arceus" not "ArceusX". Look in your device's internal storage root.</div>
+    </div>
+
+    <div class="ecard rv rv-3">
+      <div class="ecard-top">
+        <div class="ecard-name">Fluxus</div>
+        <span class="eplat ep-mob">Mobile</span>
+      </div>
+      <div class="epath" onclick="cp(this,'Fluxus/workspace')">
+        <span>Fluxus/workspace</span><span class="cico">&#x2398;</span>
+      </div>
+      <div class="enote">Android executor. Workspace is located inside the Fluxus root folder in your phone's internal storage.</div>
+    </div>
+
+    <div class="ecard rv rv-1">
+      <div class="ecard-top">
+        <div class="ecard-name">Hydrogen</div>
+        <span class="eplat ep-mob">Mobile</span>
+      </div>
+      <div class="epath" onclick="cp(this,'Hydrogen/workspace')">
+        <span>Hydrogen/workspace</span><span class="cico">&#x2398;</span>
+      </div>
+      <div class="enote">Android executor. Find the Hydrogen folder in your device file manager then open the workspace folder inside it.</div>
+    </div>
+
+    <div class="ecard rv rv-2">
+      <div class="ecard-top">
+        <div class="ecard-name">Codex</div>
+        <span class="eplat ep-mob">Mobile</span>
+      </div>
+      <div class="epath" onclick="cp(this,'Codex/workspace')">
+        <span>Codex/workspace</span><span class="cico">&#x2398;</span>
+      </div>
+      <div class="enote">Android executor. Create the workspace folder manually if it does not appear after your first script execution.</div>
+    </div>
+
+    <div class="ecard rv rv-3">
+      <div class="ecard-top">
+        <div class="ecard-name">Wave</div>
+        <span class="eplat ep-mob">Mobile</span>
+      </div>
+      <div class="epath" onclick="cp(this,'Wave/workspace')">
+        <span>Wave/workspace</span><span class="cico">&#x2398;</span>
+      </div>
+      <div class="enote">Mobile executor. Look for the Wave folder at the root of your internal storage and open the workspace folder inside.</div>
+    </div>
+
+    <div class="ecard rv rv-1">
+      <div class="ecard-top">
+        <div class="ecard-name">Synapse X</div>
+        <span class="eplat ep-pc">PC Only</span>
+      </div>
+      <div class="epath" onclick="cp(this,'Synapse X/workspace')">
+        <span>Synapse X/workspace</span><span class="cico">&#x2398;</span>
+      </div>
+      <div class="enote">Classic PC executor. Workspace is inside the Synapse X installation folder, typically at C:/Synapse X/workspace/ or wherever you installed it.</div>
+    </div>
+
+    <div class="ecard rv rv-2">
+      <div class="ecard-top">
+        <div class="ecard-name">KRNL</div>
+        <span class="eplat ep-pc">PC Only</span>
+      </div>
+      <div class="epath" onclick="cp(this,'KRNL/workspace')">
+        <span>KRNL/workspace</span><span class="cico">&#x2398;</span>
+      </div>
+      <div class="enote">Free PC executor. Workspace is in the KRNL folder - check your AppData folder or wherever you extracted the KRNL files.</div>
+    </div>
+
+    <div class="ecard rv rv-3">
+      <div class="ecard-top">
+        <div class="ecard-name">Other Executors</div>
+        <span class="eplat ep-both">Varies</span>
+      </div>
+      <div class="epath" style="cursor:default;opacity:.7">
+        <span>ExecutorName/workspace</span>
+      </div>
+      <div class="enote">Most executors follow the same pattern - a "workspace" subfolder inside the executor root folder. If unsure, check your executor's official documentation.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="div-wrap"><div class="div-line"></div></div>
+
+<!-- RULES -->
+<div class="sec" id="rules">
+  <div class="slbl rv">File Rules</div>
+  <h2 class="rv">What RoMidi accepts and rejects</h2>
+  <p class="ssub rv">A few strict rules that determine whether your songs show up or not.</p>
+
+  <div class="rules-grid">
+
+    <div class="rcard ok rv rv-1">
+      <div class="rico">&#x2705;</div>
+      <div class="rtitle">Accepted file formats</div>
+      <div class="rdesc">RoMidi only reads files with the extension <strong style="color:var(--neon-y)">.mid</strong> or <strong style="color:var(--neon-y)">.smf</strong>. Both are standard MIDI formats. Any other file type - .mp3, .wav, .txt - is completely ignored.</div>
+      <div class="rtags"><span class="rtag rtag-ok">song.mid</span><span class="rtag rtag-ok">song.smf</span></div>
+    </div>
+
+    <div class="rcard no rv rv-2">
+      <div class="rico">&#x274C;</div>
+      <div class="rtitle">Files in the wrong level</div>
+      <div class="rdesc">MIDI files placed directly in the workspace root or directly inside the top-level folder are <strong style="color:var(--neon-r)">ignored</strong>. They must be inside a category subfolder. The required depth is: workspace / folder / category / song.mid</div>
+      <div class="rtags"><span class="rtag rtag-no">workspace/song.mid</span><span class="rtag rtag-no">MySongs/song.mid</span></div>
+    </div>
+
+    <div class="rcard ok rv rv-3">
+      <div class="rico">&#x1F4C1;</div>
+      <div class="rtitle">Multiple top-level folders work</div>
+      <div class="rdesc">You can have more than one top-level folder in your workspace. RoMidi scans all of them and merges categories with the same name. Songs from "Pack1/Anime/" and "Pack2/Anime/" both appear together under the "Anime" category.</div>
+      <div class="rtags"><span class="rtag rtag-ok">Multiple root folders supported</span></div>
+    </div>
+
+    <div class="rcard ok rv rv-1">
+      <div class="rico">&#x1F4DD;</div>
+      <div class="rtitle">Song name = file name</div>
+      <div class="rdesc">The display name in the library is taken directly from the file name, with the extension removed. "Moonlight Sonata.mid" becomes "Moonlight Sonata". Rename the file to change how it appears in RoMidi.</div>
+      <div class="rtags"><span class="rtag rtag-ok">Rename file to rename song</span></div>
+    </div>
+
+    <div class="rcard no rv rv-2">
+      <div class="rico">&#x26A0;&#xFE0F;</div>
+      <div class="rtitle">Duplicate file names are deduplicated</div>
+      <div class="rdesc">If two files have the same name within the same category, only the first one found is kept. RoMidi deduplicates by file name per category to prevent confusion. Give your songs unique names to avoid this.</div>
+      <div class="rtags"><span class="rtag rtag-no">Two "Sparkle.mid" in same folder</span></div>
+    </div>
+
+    <div class="rcard ok rv rv-3">
+      <div class="rico">&#x1F504;</div>
+      <div class="rtitle">Add songs without rejoining</div>
+      <div class="rdesc">You do not need to leave or rejoin the Roblox game at all. Add or move files in the workspace folder on your device, go back to RoMidi inside the game, press RELOAD, and your new songs appear in the library immediately.</div>
+      <div class="rtags"><span class="rtag rtag-ok">Press RELOAD to refresh anytime</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="div-wrap"><div class="div-line"></div></div>
+
+<!-- FAQ -->
+<div class="sec" id="faq">
+  <div class="slbl rv">FAQ</div>
+  <h2 class="rv">Common questions</h2>
+  <p class="ssub rv">The most frequent problems and answers for local MIDI setup.</p>
+
+  <div class="faq rv">
+
+    <div class="fi">
+      <div class="fq" onclick="faq(this)">My songs are not showing up after pressing RELOAD. What is wrong?<div class="farr">&#8964;</div></div>
+      <div class="fa">Check the folder depth. MIDI files must be exactly three levels deep: workspace root, then a named folder, then a category subfolder, then the .mid file. If a file is at any other level it will not be detected. Also confirm the file ends in .mid or .smf - other extensions are rejected. After fixing the structure press RELOAD in RoMidi.</div>
+    </div>
+
+    <div class="fi">
+      <div class="fq" onclick="faq(this)">Where exactly do I find the workspace folder on my phone?<div class="farr">&#8964;</div></div>
+      <div class="fa">On Android, open your device file manager app and browse to your internal storage root. You should see a folder with the executor name such as "Delta", "Arceus", "Fluxus". Open that folder and you will find the "workspace" folder inside. On iOS with Delta, use the Delta app's built-in file browser or access it through the iOS Files app under the Delta section.</div>
+    </div>
+
+    <div class="fi">
+      <div class="fq" onclick="faq(this)">Can I have more than one category subfolder?<div class="farr">&#8964;</div></div>
+      <div class="fa">Yes, you can create as many category subfolders as you want. Each one becomes its own labeled category in the Local tab of the RoMidi library. Common examples are Anime, Classical, Pop, Game OST, Sad, and Vibes. There is no limit on how many categories you can have.</div>
+    </div>
+
+    <div class="fi">
+      <div class="fq" onclick="faq(this)">Does the name of the top-level folder matter?<div class="farr">&#8964;</div></div>
+      <div class="fa">No. The top-level folder can be named anything at all. "RoMidi", "MySongs", "Piano", "XYZABC" - it does not matter. RoMidi scans every single folder found in the workspace root without filtering by name. Only the subfolder names inside it matter because they become your category labels in the library.</div>
+    </div>
+
+    <div class="fi">
+      <div class="fq" onclick="faq(this)">Does Local MIDI work differently on mobile vs PC?<div class="farr">&#8964;</div></div>
+      <div class="fa">The only difference is where the workspace folder lives on your device. The folder structure inside is completely identical on both platforms. Once your files are in the correct subfolders, pressing RELOAD in RoMidi loads them exactly the same way on PC and mobile - no extra steps needed.</div>
+    </div>
+
+    <div class="fi">
+      <div class="fq" onclick="faq(this)">Where can I download MIDI files for my favorite songs?<div class="farr">&#8964;</div></div>
+      <div class="fa">Search for "[song name] MIDI download" on sites like MuseScore (musescore.com), Bitmidi (bitmidi.com), FreeMidi (freemidi.org), or Musescore's free sheet music section. Download the .mid file and place it inside the correct category subfolder in your executor workspace. Most piano sheet music sites also offer MIDI exports alongside the sheet music.</div>
+    </div>
+
+    <div class="fi">
+      <div class="fq" onclick="faq(this)">Can I favorite my local songs the same way as preset songs?<div class="farr">&#8964;</div></div>
+      <div class="fa">Yes. Once a local song is loaded in the library list, tap the heart icon on its row to add it to Favorites. Local favorites are saved alongside preset favorites and appear at the top of the library panel with a pink border so you can access them instantly without having to navigate back to the Local tab.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="div-wrap"><div class="div-line"></div></div>
+
+<!-- TIPS -->
+<div class="sec" id="tips">
+  <div class="slbl rv">Tips</div>
+  <h2 class="rv">Get the most out of local songs</h2>
+  <p class="ssub rv" style="margin-bottom:38px;">Small habits that make managing your collection much smoother.</p>
+
+  <div class="tips-grid">
+    <div class="tcard t1 rv rv-1">
+      <div class="tcard-num">TIP 01</div>
+      <div class="tcard-title">Use clean file names</div>
+      <div class="tcard-desc">The file name is exactly what appears in the library. Avoid symbols like slashes, colons, asterisks or question marks. Use spaces or hyphens instead - for example "River Flows in You.mid" works perfectly.</div>
+    </div>
+    <div class="tcard t2 rv rv-2">
+      <div class="tcard-num">TIP 02</div>
+      <div class="tcard-title">Organize by genre</div>
+      <div class="tcard-desc">Create separate subfolders for Anime, Classical, Pop, Game OST, etc. RoMidi displays each subfolder as its own dropdown category so you can find songs quickly instead of scrolling through one long list.</div>
+    </div>
+    <div class="tcard t3 rv rv-3">
+      <div class="tcard-num">TIP 03</div>
+      <div class="tcard-title">Combine with Favorites</div>
+      <div class="tcard-desc">Tap the heart on a local song row after loading it to favorite it. Local favorites are pinned at the top of the library together with preset favorites, so your go-to songs are always one tap away regardless of which tab you are on.</div>
+    </div>
+    <div class="tcard t4 rv rv-1">
+      <div class="tcard-num">TIP 04</div>
+      <div class="tcard-title">Turn Auto BPM on</div>
+      <div class="tcard-desc">Most MIDI files have tempo change markers built in. Enable Auto BPM before playing a local file and RoMidi follows those markers automatically, so the song plays at the correct original speed without any manual input from you.</div>
+    </div>
+    <div class="tcard t5 rv rv-2">
+      <div class="tcard-num">TIP 05</div>
+      <div class="tcard-title">Use multiple top folders</div>
+      <div class="tcard-desc">You can keep separate song packs in different top-level folders - "Pack1", "Pack2", "Favorites". RoMidi scans all of them and merges matching category names so everything appears in one unified library view.</div>
+    </div>
+    <div class="tcard t6 rv rv-3">
+      <div class="tcard-num">TIP 06</div>
+      <div class="tcard-title">RELOAD after every change</div>
+      <div class="tcard-desc">RoMidi caches the song list in memory after the first scan. Whenever you add, remove, or rename files in the workspace, press RELOAD in RoMidi to pick up all the changes without leaving Roblox.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fl">&#x1F43C; Ro<span>Midi</span> - Local MIDI Guide</div>
+  <div class="fn">Created by <span class="cr">Panda Hub</span></div>
+</footer>
+
+<script>
+/* ---- SCROLL REVEAL ---- */
+const rvObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
+
+/* ---- TREE LINE ANIMATION ---- */
+const treeLines = document.querySelectorAll('.tl');
+const treeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      treeLines.forEach((l, i) => {
+        setTimeout(() => l.classList.add('in'), i * 68);
+      });
+      treeObs.disconnect();
+    }
+  });
+}, { threshold: 0.2 });
+const tb = document.getElementById('treeBody');
+if (tb) treeObs.observe(tb);
+
+/* ---- INTERACTIVE TREE NODES ---- */
+const NODES = [
+  {
+    id:'ws', ico:'&#x1F4C2;', name:'workspace/', color:'#f0466e',
+    desc:'The executor workspace root. This is where RoMidi looks for everything. Do not rename or move this folder - its location depends entirely on which executor you use.',
+    kids:[
+      {
+        id:'root', ico:'&#x1F4C1;', name:'MySongs/', color:'#ffc33c',
+        badge:'Any name', bc:'#ffc33c',
+        desc:'Top-level folder - you create this and name it whatever you want. RoMidi scans every top-level folder in the workspace so the name is completely irrelevant to functionality.',
+        kids:[
+          {
+            id:'anime', ico:'&#x1F4C2;', name:'Anime/', color:'#50dc96',
+            badge:'Category', bc:'#50dc96',
+            desc:'This subfolder name becomes the category label in RoMidi\'s library. "Anime" appears as the "Anime" dropdown in the Local tab. Rename this folder to rename the category.',
+            kids:[
+              { id:'m1', ico:'&#x1F3B5;', name:'Sparkle.mid', color:'#be6eff',
+                desc:'A .mid file. The file name without the extension ("Sparkle") is the song name shown in the library. Rename the file to rename the song.' },
+              { id:'m2', ico:'&#x1F3B5;', name:'Gurenge.mid', color:'#be6eff',
+                desc:'Another .mid file in the same category. Both songs appear in the "Anime" category in the library.' },
+            ]
+          },
+          {
+            id:'classical', ico:'&#x1F4C2;', name:'Classical/', color:'#50dc96',
+            badge:'Category', bc:'#50dc96',
+            desc:'A second category subfolder. All .mid files inside appear under "Classical" in the RoMidi library.',
+            kids:[
+              { id:'m3', ico:'&#x1F3B5;', name:'Moonlight Sonata.mid', color:'#be6eff',
+                desc:'.mid file inside the Classical category. Displayed as "Moonlight Sonata" in the library.' },
+            ]
+          },
+        ]
+      },
+      {
+        id:'pack2', ico:'&#x1F4C1;', name:'AnotherPack/', color:'#ffc33c',
+        badge:'Any name', bc:'#ffc33c',
+        desc:'A second top-level folder, also scanned by RoMidi. You can have as many top-level folders as you want. Categories with the same name across folders are merged together.',
+        kids:[
+          {
+            id:'anime2', ico:'&#x1F4C2;', name:'Anime/', color:'#50dc96',
+            badge:'Merges with MySongs/Anime', bc:'#9b50ff',
+            desc:'This Anime folder and the Anime folder in MySongs are merged into one "Anime" category in the library. Songs from both folders appear together.',
+            kids:[
+              { id:'m4', ico:'&#x1F3B5;', name:'Demon Slayer Theme.mid', color:'#be6eff',
+                desc:'This song is in AnotherPack/Anime/ but appears in the same "Anime" category as songs from MySongs/Anime/.' },
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
+
+function buildNode(node, depth) {
+  const wrap = document.createElement('div');
+  const row = document.createElement('div');
+  row.className = 'inode';
+  row.style.paddingLeft = (depth * 18) + 'px';
+
+  const ico = document.createElement('span');
+  ico.className = 'ico';
+  ico.innerHTML = node.kids ? '&#9654;' : node.ico;
+  ico.style.color = node.color;
+
+  const nm = document.createElement('span');
+  nm.className = 'inode-name';
+  nm.textContent = node.name;
+  nm.style.color = node.color;
+
+  row.appendChild(ico);
+  row.appendChild(nm);
+
+  if (node.badge) {
+    const b = document.createElement('span');
+    b.className = 'inode-badge';
+    b.textContent = node.badge;
+    b.style.background = node.bc + '18';
+    b.style.border = '1px solid ' + node.bc + '44';
+    b.style.color = node.bc;
+    row.appendChild(b);
+  }
+
+  wrap.appendChild(row);
+
+  let descEl = null;
+
+  const showDesc = () => {
+    if (descEl) { descEl.remove(); descEl = null; return; }
+    descEl = document.createElement('div');
+    descEl.className = 'desc-pop';
+    descEl.textContent = node.desc;
+    wrap.insertBefore(descEl, kidsEl || null);
+  };
+
+  let kidsEl = null;
+  if (node.kids) {
+    kidsEl = document.createElement('div');
+    kidsEl.className = 'inode-kids';
+    node.kids.forEach(c => kidsEl.appendChild(buildNode(c, depth)));
+    wrap.appendChild(kidsEl);
+
+    row.addEventListener('click', () => {
+      const open = kidsEl.classList.toggle('open');
+      ico.style.transform = open ? 'rotate(90deg)' : '';
+      showDesc();
+    });
+  } else {
+    row.addEventListener('click', showDesc);
+  }
+
+  return wrap;
+}
+
+const it = document.getElementById('itree');
+NODES.forEach(n => it.appendChild(buildNode(n, 0)));
+// Auto open top level
+it.querySelector('.inode').click();
+
+/* ---- COPY PATH ---- */
+function cp(el, text) {
+  navigator.clipboard.writeText(text).catch(() => {});
+  el.classList.add('copied');
+  el.querySelector('.cico').innerHTML = '&#10003;';
+  setTimeout(() => {
+    el.classList.remove('copied');
+    el.querySelector('.cico').innerHTML = '&#x2398;';
+  }, 1800);
+}
+
+/* ---- FAQ ACCORDION ---- */
+function faq(btn) {
+  const item = btn.closest('.fi');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.fi').forEach(f => f.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
