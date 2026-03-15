@@ -1,0 +1,63 @@
+name: Sync uploaded.lua
+
+on:
+  push:
+    paths:
+      - 'UploadedMidi/**'
+      - '!UploadedMidi/uploadreturn/**'
+
+jobs:
+  update-lua:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate uploaded.lua
+        run: |
+          OUTPUT="UploadedMidi/uploadreturn/uploaded.lua"
+
+          # Collect all files directly inside UploadedMidi (non-recursive),
+          # excluding anything inside uploadreturn/ and any hidden files.
+          mapfile -t FILES < <(
+            find UploadedMidi -maxdepth 1 -type f \
+              ! -name '.*' \
+              | sed 's|UploadedMidi/||' \
+              | sed 's|\.[^.]*$||' \
+              | sort -u
+          )
+
+          # Build the Lua table
+          {
+            echo "return {"
+            for i in "${!FILES[@]}"; do
+              NAME="${FILES[$i]}"
+              if [ $((i + 1)) -lt ${#FILES[@]} ]; then
+                echo "    \"${NAME}\","
+              else
+                echo "    \"${NAME}\""
+              fi
+            done
+            echo "}"
+          } > "$OUTPUT"
+
+          echo "Generated $OUTPUT:"
+          cat "$OUTPUT"
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add UploadedMidi/uploadreturn/uploaded.lua
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: sync uploaded.lua [skip ci]"
+            git push
+          fi
