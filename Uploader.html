@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoMidi – MIDI Uploader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #07000F;
+      --surface: #110223;
+      --card:    #1A0535;
+      --border:  #3B1068;
+      --p1:      #7B2FBE;
+      --p2:      #A855F7;
+      --p3:      #D8A9FF;
+      --cyan:    #22D3EE;
+      --gold:    #F59E0B;
+      --green:   #34D399;
+      --red:     #F87171;
+      --text:    #EDE9F6;
+      --muted:   #8B78A8;
+      --glow-p:  rgba(168,85,247,0.35);
+      --glow-c:  rgba(34,211,238,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    .nebula {
+      position: fixed; border-radius: 50%; filter: blur(120px);
+      opacity: 0.17; pointer-events: none; z-index: 0;
+      animation: drift 20s ease-in-out infinite alternate;
+    }
+    .n1 { width:600px; height:600px; background:var(--p2);   top:-150px;    left:-150px;  animation-delay:0s;   }
+    .n2 { width:500px; height:500px; background:var(--cyan);  bottom:-100px; right:-100px; animation-delay:-7s;  }
+    .n3 { width:400px; height:400px; background:var(--p1);   bottom:30%;    left:40%;     animation-delay:-14s; }
+    @keyframes drift {
+      from { transform: translate(0,0)       scale(1);    }
+      to   { transform: translate(40px,30px) scale(1.08); }
+    }
+
+    .note {
+      position: fixed; font-size: 1.4rem; opacity: 0;
+      pointer-events: none; z-index: 1;
+      animation: floatNote linear infinite;
+    }
+    @keyframes floatNote {
+      0%   { transform: translateY(100vh) rotate(0deg);   opacity: 0;    }
+      10%  { opacity: 0.45; }
+      90%  { opacity: 0.3;  }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0;    }
+    }
+
+    .wrapper {
+      position: relative; z-index: 10;
+      max-width: 740px; margin: 0 auto; padding: 0 24px 80px;
+    }
+
+    .hero { text-align: center; padding: 90px 0 56px; }
+
+    .logo-ring {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 104px; height: 104px; border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--p2), var(--cyan), var(--gold), var(--p2));
+      animation: spinRing 8s linear infinite;
+      margin-bottom: 28px; position: relative;
+    }
+    .logo-ring::before {
+      content: ''; position: absolute; inset: 4px;
+      border-radius: 50%; background: var(--bg);
+    }
+    .logo-inner { position: relative; z-index: 1; font-size: 2.7rem; }
+    @keyframes spinRing { to { transform: rotate(360deg); } }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--cyan);
+      border: 1px solid rgba(34,211,238,0.35); padding: 5px 16px;
+      border-radius: 99px; margin-bottom: 18px;
+      background: rgba(34,211,238,0.06);
+    }
+
+    h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem,6vw,4rem); font-weight: 900;
+      background: linear-gradient(135deg, var(--p3) 0%, var(--cyan) 55%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.15; margin-bottom: 20px;
+      animation: shimmer 4s ease-in-out infinite; background-size: 200% 200%;
+    }
+    @keyframes shimmer {
+      0%,100% { background-position: 0%   50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    .tagline {
+      font-size: 1.04rem; color: var(--muted);
+      max-width: 520px; margin: 0 auto 12px; line-height: 1.75;
+    }
+    .tagline strong { color: var(--p3); }
+
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--p2), var(--border), transparent);
+      margin: 48px 0;
+    }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 40px;
+      box-shadow: 0 0 60px var(--glow-p), inset 0 1px 0 rgba(216,169,255,0.08);
+      transition: box-shadow 0.4s;
+    }
+    .card:hover {
+      box-shadow: 0 0 90px var(--glow-p), 0 0 40px var(--glow-c),
+                  inset 0 1px 0 rgba(216,169,255,0.08);
+    }
+
+    .card-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem; color: var(--p3); letter-spacing: 0.06em;
+      margin-bottom: 28px; display: flex; align-items: center; gap: 10px;
+    }
+    .card-title span { opacity: 0.45; font-size: 0.9em; }
+
+    label {
+      display: block; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 0.97rem; padding: 12px 16px; outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s; margin-bottom: 22px;
+    }
+    input:focus { border-color: var(--p2); box-shadow: 0 0 0 3px rgba(168,85,247,0.2); }
+    input::placeholder { color: var(--muted); opacity: 0.55; }
+
+    .dropzone {
+      border: 2px dashed var(--border); border-radius: 16px;
+      padding: 52px 24px; text-align: center; cursor: pointer;
+      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden; margin-bottom: 24px;
+    }
+    .dropzone:hover, .dropzone.drag-over {
+      border-color: var(--p2); background: rgba(168,85,247,0.05);
+      box-shadow: 0 0 30px rgba(168,85,247,0.15);
+    }
+    .dropzone.has-file {
+      border-color: var(--green); background: rgba(52,211,153,0.04);
+      box-shadow: 0 0 30px rgba(52,211,153,0.12);
+    }
+    .dropzone input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer;
+      width: 100%; height: 100%; margin: 0; padding: 0; border: none;
+    }
+    .drop-icon  { font-size: 3.2rem; margin-bottom: 14px; display: block; animation: bob 3s ease-in-out infinite; }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    .drop-label { font-size: 1.05rem; color: var(--p3); font-weight: 500; }
+    .drop-sub   { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+    .drop-fname { margin-top: 10px; font-size: 0.88rem; color: var(--green); font-weight: 600; }
+
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 15px 28px; border: none; border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--p1), var(--p2));
+      color: #fff; box-shadow: 0 4px 30px rgba(168,85,247,0.45);
+    }
+    .btn-primary:hover:not(:disabled)  { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(168,85,247,0.6); }
+    .btn-primary:active:not(:disabled) { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .btn:hover::after { opacity: 1; }
+
+    .progress-wrap { display: none; margin-top: 20px; }
+    .progress-wrap.show { display: block; }
+    .progress-label {
+      font-size: 0.82rem; color: var(--muted); margin-bottom: 8px;
+      display: flex; justify-content: space-between;
+    }
+    .progress-track { height: 6px; border-radius: 99px; background: rgba(255,255,255,0.07); overflow: hidden; }
+    .progress-bar {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, var(--p2), var(--cyan));
+      width: 0%; transition: width 0.4s ease;
+      box-shadow: 0 0 10px var(--glow-p);
+    }
+
+    .status-box {
+      display: none; margin-top: 24px; border-radius: 12px;
+      padding: 16px 20px; font-size: 0.9rem; border: 1px solid;
+      animation: fadeSlide 0.4s ease;
+    }
+    .status-box.show { display: block; }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
+    .status-box.success { background: rgba(52,211,153,0.07);  border-color: rgba(52,211,153,0.3);  color: var(--green); }
+    .status-box.error   { background: rgba(248,113,113,0.07); border-color: rgba(248,113,113,0.3); color: var(--red);   }
+    .status-link {
+      display: inline-block; margin-top: 10px; color: var(--cyan);
+      font-size: 0.84rem; text-decoration: none;
+      border-bottom: 1px solid rgba(34,211,238,0.4); word-break: break-all;
+    }
+    .status-link:hover { border-color: var(--cyan); }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 16px; margin-top: 40px;
+    }
+    .info-tile {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .info-tile:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(168,85,247,0.15); }
+    .info-tile-icon  { font-size: 1.9rem; margin-bottom: 10px; }
+    .info-tile-title { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--p2); margin-bottom: 6px; }
+    .info-tile-text  { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+
+    footer {
+      text-align: center; padding: 40px 0 20px;
+      font-size: 0.8rem; color: var(--muted);
+      position: relative; z-index: 10;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="nebula n1"></div>
+<div class="nebula n2"></div>
+<div class="nebula n3"></div>
+<div id="notes"></div>
+
+<div class="wrapper">
+
+  <section class="hero">
+    <div class="logo-ring"><span class="logo-inner">🎵</span></div>
+    <div class="badge">✦ Open MIDI Archive Platform ✦</div>
+    <h1>RoMidi</h1>
+    <p class="tagline">
+      Place your <strong>MIDI files</strong> here and they'll be archived instantly —
+      ready to be fetched inside the script by name, by anyone, anywhere.
+    </p>
+    <p class="tagline" style="font-size:0.93rem;">
+      Upload a <strong>.mid</strong> file below to have it appear inside the script.
+      Once submitted, your file is archived and instantly available for the script to fetch by name.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="card">
+    <div class="card-title">📤 Upload MIDI File <span>// Archive & Index</span></div>
+
+    <label for="file-name">
+      Custom Filename
+      <small style="color:var(--p2);font-size:0.78rem;">(optional — auto-filled from file)</small>
+    </label>
+    <input type="text" id="file-name" placeholder="e.g. epic-battle-theme.mid" />
+
+    <label>MIDI File</label>
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="file-input" accept=".mid,.midi" />
+      <span class="drop-icon"  id="drop-icon">🎹</span>
+      <div class="drop-label"  id="drop-label">Drop your .mid file here</div>
+      <div class="drop-sub">or click to browse — .mid / .midi only</div>
+      <div class="drop-fname"  id="drop-fname"></div>
+    </div>
+
+    <button class="btn btn-primary" id="upload-btn" disabled>
+      <span>🚀</span><span id="btn-text">Upload & Archive</span>
+    </button>
+
+    <div class="progress-wrap" id="prog-wrap">
+      <div class="progress-label">
+        <span>Archiving…</span><span id="pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-bar" id="prog-bar"></div>
+      </div>
+    </div>
+
+    <div class="status-box" id="status-box">
+      <div id="status-msg"></div>
+      <a id="gist-link" class="status-link" href="#" target="_blank" rel="noopener" style="display:none"></a>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-tile">
+      <div class="info-tile-icon">🌐</div>
+      <div class="info-tile-title">Global Access</div>
+      <div class="info-tile-text">Anyone worldwide can upload MIDI files and have them indexed for use inside the script.</div>
+    </div>
+    <div class="info-tile">
+      <div class="info-tile-icon">📦</div>
+      <div class="info-tile-title">Auto Encoded</div>
+      <div class="info-tile-text">Your MIDI binary is safely encoded and archived so the script can read and decode it on demand.</div>
+    </div>
+    <div class="info-tile">
+      <div class="info-tile-icon">⚡</div>
+      <div class="info-tile-title">Instant Archive</div>
+      <div class="info-tile-text">Files are archived immediately on upload and become available to the script right away.</div>
+    </div>
+    <div class="info-tile">
+      <div class="info-tile-icon">🎼</div>
+      <div class="info-tile-title">Name It Yours</div>
+      <div class="info-tile-text">Give your file a custom name before uploading — it'll be stored and retrievable by that exact name.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>RoMidi &mdash; MIDI Uploader &nbsp;·&nbsp; All files are processed and indexed automatically.</p>
+</footer>
+
+<script>
+  // ── Paste your Cloudflare Worker URL here after deploying worker.js ───────
+  // The GitHub token lives inside the Worker as an encrypted secret.
+  // This file contains zero credentials — safe to publish publicly.
+  const WORKER_URL = 'jolly-water-c7cc.pandamidi64.workers.dev';
+  // ─────────────────────────────────────────────────────────────────────────
+
+  /* ── Starfield ── */
+  (function () {
+    const c = document.getElementById('starfield'), ctx = c.getContext('2d');
+    let W, H, stars = [];
+    function resize() { W = c.width = innerWidth; H = c.height = innerHeight; }
+    function mk() {
+      return {
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.2, a: Math.random(),
+        da: (Math.random() - 0.5) * 0.006,
+        dx: (Math.random() - 0.5) * 0.08,
+        dy: (Math.random() - 0.5) * 0.08,
+      };
+    }
+    resize();
+    for (let i = 0; i < 200; i++) stars.push(mk());
+    addEventListener('resize', resize);
+    (function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (const s of stars) {
+        s.a += s.da; if (s.a > 1 || s.a < 0) s.da *= -1;
+        s.x = (s.x + s.dx + W) % W;
+        s.y = (s.y + s.dy + H) % H;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(216,169,255,${s.a})`; ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    })();
+  })();
+
+  /* ── Floating notes ── */
+  (function () {
+    const glyphs = ['♩', '♪', '♫', '♬', '𝄞', '𝄢'];
+    const wrap = document.getElementById('notes');
+    function spawn() {
+      const el = document.createElement('div'); el.className = 'note';
+      el.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      const d = 12 + Math.random() * 18;
+      el.style.animationDuration = d + 's';
+      el.style.animationDelay = Math.random() * 4 + 's';
+      el.style.color = Math.random() > 0.5 ? '#A855F7' : '#22D3EE';
+      el.style.fontSize = (1 + Math.random() * 1.4) + 'rem';
+      wrap.appendChild(el);
+      setTimeout(() => el.remove(), (d + 4) * 1000);
+    }
+    for (let i = 0; i < 14; i++) setTimeout(spawn, i * 500);
+    setInterval(spawn, 2600);
+  })();
+
+  /* ── Upload logic ── */
+  const nameEl    = document.getElementById('file-name');
+  const fileInput = document.getElementById('file-input');
+  const dropzone  = document.getElementById('dropzone');
+  const dropIcon  = document.getElementById('drop-icon');
+  const dropLabel = document.getElementById('drop-label');
+  const dropFname = document.getElementById('drop-fname');
+  const uploadBtn = document.getElementById('upload-btn');
+  const btnText   = document.getElementById('btn-text');
+  const progWrap  = document.getElementById('prog-wrap');
+  const progBar   = document.getElementById('prog-bar');
+  const pctEl     = document.getElementById('pct');
+  const statusBox = document.getElementById('status-box');
+  const statusMsg = document.getElementById('status-msg');
+  const gistLink  = document.getElementById('gist-link');
+
+  let selectedFile = null;
+
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault(); dropzone.classList.remove('drag-over');
+    const f = e.dataTransfer.files[0]; if (f) setFile(f);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) setFile(fileInput.files[0]); });
+
+  function setFile(f) {
+    if (!/\.(mid|midi)$/i.test(f.name)) {
+      showStatus('error', '⚠️ Only .mid / .midi files are accepted.');
+      return;
+    }
+    selectedFile = f;
+    dropzone.classList.add('has-file');
+    dropIcon.textContent  = '✅';
+    dropLabel.textContent = 'MIDI file ready!';
+    dropFname.textContent = f.name + ' (' + (f.size / 1024).toFixed(1) + ' KB)';
+    if (!nameEl.value.trim()) nameEl.value = f.name;
+    uploadBtn.disabled = false;
+  }
+
+  function animProg(target) {
+    return new Promise(res => {
+      let cur = parseFloat(progBar.style.width) || 0;
+      const step = () => {
+        cur = Math.min(cur + (target - cur) * 0.07 + 0.3, target);
+        progBar.style.width = cur + '%';
+        pctEl.textContent = Math.round(cur) + '%';
+        cur < target - 0.5 ? requestAnimationFrame(step) : res();
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
+  function showStatus(type, html) {
+    statusBox.className = 'status-box show ' + type;
+    statusMsg.innerHTML = html;
+    if (type !== 'success') gistLink.style.display = 'none';
+  }
+
+  uploadBtn.addEventListener('click', async () => {
+    if (!selectedFile) return;
+
+    const filename = (nameEl.value.trim() || selectedFile.name).replace(/\s+/g, '_');
+    uploadBtn.disabled = true;
+    btnText.textContent = 'Uploading…';
+    progWrap.classList.add('show');
+    progBar.style.width = '0%';
+    statusBox.className = 'status-box';
+    gistLink.style.display = 'none';
+
+    try {
+      await animProg(30);
+
+      const base64 = await new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = e => res(e.target.result.split(',')[1]);
+        r.onerror = rej;
+        r.readAsDataURL(selectedFile);
+      });
+
+      await animProg(55);
+
+      const content =
+`# RoMidi Archive
+# File     : ${filename}
+# Size     : ${selectedFile.size} bytes
+# Uploaded : ${new Date().toISOString()}
+# Encoding : base64
+#
+${base64}`;
+
+      // POST to Cloudflare Worker — token is a server-side secret, never in this file
+      const resp = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          description: `RoMidi — ${filename} — ${new Date().toUTCString()}`,
+          public: true,
+          files: { [filename + '.b64']: { content } },
+        }),
+      });
+
+      await animProg(95);
+
+      if (!resp.ok) {
+        const e = await resp.json().catch(() => ({}));
+        throw new Error(e.message || `Error ${resp.status}`);
+      }
+
+      const data = await resp.json();
+      await animProg(100);
+
+      btnText.textContent = 'Archived!';
+      showStatus('success', `🎉 <strong>${filename}</strong> has been archived and indexed successfully!`);
+      gistLink.href = data.html_url;
+      gistLink.style.display = 'inline-block';
+      gistLink.textContent = '🔗 View archive entry ↗';
+
+    } catch (err) {
+      await animProg(100);
+      showStatus('error', '❌ Upload failed: ' + err.message);
+      btnText.textContent = 'Upload & Archive';
+      uploadBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
