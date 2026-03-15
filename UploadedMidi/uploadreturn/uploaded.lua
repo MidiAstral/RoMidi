@@ -1,6 +1,7 @@
 return {
     "Amethyst - Geometry Dash",
     "Back To Friends - Sombr",
+    "Geometry Dash - Avernus",
     "Hikaru Utada - Sakura Nagashi",
     "Mice on Venus (Minecraft)",
     "Multo - Cup of Joe RNE",
