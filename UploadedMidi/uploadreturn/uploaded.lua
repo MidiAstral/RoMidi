@@ -6,5 +6,6 @@ return {
     "Mice on Venus (Minecraft)",
     "Multo - Cup of Joe RNE",
     "One Summer's Day (Spirited Away)",
-    "Pasilyo"
+    "Pasilyo",
+    "Tada Koe Hitotsu (One Voice) by Rokudenashi & MIMI"
 }
