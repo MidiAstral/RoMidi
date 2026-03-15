@@ -114,6 +114,40 @@
     input[type="text"] { width:100%; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:10px; color:var(--text); font-family:'Outfit',sans-serif; font-size:0.97rem; padding:12px 16px; outline:none; transition:border-color 0.25s, box-shadow 0.25s; margin-bottom:22px; }
     input:focus { border-color:var(--p2); box-shadow:0 0 0 3px rgba(168,85,247,0.2); }
     input::placeholder { color:var(--muted); opacity:0.55; }
+
+    /* ── Category Select ── */
+    .select-wrap { position:relative; margin-bottom:22px; }
+    .select-wrap::after {
+      content:'▾'; position:absolute; right:16px; top:50%; transform:translateY(-50%);
+      color:var(--p2); font-size:1rem; pointer-events:none;
+    }
+    select {
+      width:100%; background:rgba(255,255,255,0.04); border:1px solid var(--border);
+      border-radius:10px; color:var(--text); font-family:'Outfit',sans-serif;
+      font-size:0.97rem; padding:12px 16px; outline:none; appearance:none;
+      cursor:pointer; transition:border-color 0.25s, box-shadow 0.25s;
+    }
+    select:focus { border-color:var(--p2); box-shadow:0 0 0 3px rgba(168,85,247,0.2); }
+    select option { background:#1A0535; color:var(--text); padding:8px; }
+    select.unset { color:var(--muted); border-color:var(--border); }
+    select.unset:focus { border-color:var(--p2); }
+    /* dim the placeholder option text */
+    select option[value=""] { color:var(--muted); }
+
+    /* Category badge shown in success message */
+    .cat-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      padding:3px 10px; border-radius:99px; font-size:0.78rem; font-weight:700;
+      border:1px solid; margin-left:6px; vertical-align:middle;
+    }
+    .cat-Anime     { background:rgba(236,72,153,0.12); border-color:rgba(236,72,153,0.4); color:#F9A8D4; }
+    .cat-Classical { background:rgba(245,158,11,0.12); border-color:rgba(245,158,11,0.4); color:var(--gold); }
+    .cat-Emotional { background:rgba(168,85,247,0.12); border-color:rgba(168,85,247,0.4); color:var(--p3); }
+    .cat-GameOST   { background:rgba(34,211,238,0.12); border-color:rgba(34,211,238,0.4); color:var(--cyan); }
+    .cat-Modern    { background:rgba(52,211,153,0.12); border-color:rgba(52,211,153,0.4); color:var(--green); }
+    .cat-Movie     { background:rgba(99,102,241,0.12); border-color:rgba(99,102,241,0.4); color:#A5B4FC; }
+    .cat-Others    { background:rgba(139,120,168,0.12); border-color:rgba(139,120,168,0.4); color:var(--muted); }
+
     .dropzone { border:2px dashed var(--border); border-radius:16px; padding:52px 24px; text-align:center; cursor:pointer; transition:border-color 0.3s, background 0.3s, box-shadow 0.3s; position:relative; overflow:hidden; margin-bottom:24px; }
     .dropzone:hover, .dropzone.drag-over { border-color:var(--p2); background:rgba(168,85,247,0.05); box-shadow:0 0 30px rgba(168,85,247,0.15); }
     .dropzone.has-file { border-color:var(--green); background:rgba(52,211,153,0.04); box-shadow:0 0 30px rgba(52,211,153,0.12); }
@@ -192,12 +226,13 @@
         Drop any <span class="highlight">.mid</span> file below and it gets archived instantly.
       </p>
       <p>
-        Every song you upload will show up inside the RoMidi script under the
-        <span class="library-tag">📚 Library · Songs Uploaded</span>
-        category, ready to be searched and played by anyone using the script.
+        Every song you upload will show up inside the RoMidi script under its chosen category,
+        ready to be searched and played by anyone using the script.
+        <br>
+        <span class="library-tag">📚 Anime · Classical · Emotional · Game OST · Modern · Movie · Others</span>
       </p>
       <p>
-        Just pick a name, drop your file, and hit upload. That is all it takes.
+        Pick a category, give it a name, drop your file, and hit upload. That is all it takes.
       </p>
     </div>
 
@@ -207,8 +242,24 @@
 
   <div class="card">
     <div class="card-title">📤 Upload MIDI File <span>// Archive &amp; Index</span></div>
+
     <label for="file-name">Custom Filename <small style="color:var(--p2);font-size:0.78rem;">(optional — auto-filled from file)</small></label>
-    <input type="text" id="file-name" placeholder="e.g. epic-battle-theme.mid" />
+    <input type="text" id="file-name" placeholder="e.g. yung-kai-blue.mid" />
+
+    <label for="category">Category</label>
+    <div class="select-wrap">
+      <select id="category" class="unset">
+        <option value="" disabled selected>— Choose a category —</option>
+        <option value="Anime">🌸 Anime</option>
+        <option value="Classical">🎻 Classical</option>
+        <option value="Emotional">💜 Emotional</option>
+        <option value="Game OST">🎮 Game OST</option>
+        <option value="Modern">🎧 Modern</option>
+        <option value="Movie">🎬 Movie</option>
+        <option value="Others">🎵 Others</option>
+      </select>
+    </div>
+
     <label>MIDI File</label>
     <div class="dropzone" id="dropzone">
       <input type="file" id="file-input" accept=".mid,.midi" />
@@ -231,7 +282,7 @@
   </div>
 
   <div class="info-grid">
-    <div class="info-tile"><div class="info-tile-icon">📚</div><div class="info-tile-title">Library Ready</div><div class="info-tile-text">Every upload is indexed into the Songs Uploaded category inside the RoMidi script automatically.</div></div>
+    <div class="info-tile"><div class="info-tile-icon">📂</div><div class="info-tile-title">Category Sorted</div><div class="info-tile-text">Songs are saved into their own category folder: Anime, Classical, Emotional, Game OST, Modern, Movie, or Others.</div></div>
     <div class="info-tile"><div class="info-tile-icon">🎵</div><div class="info-tile-title">Play in Script</div><div class="info-tile-text">Uploaded files are stored as original MIDI binary and are fully playable inside the RoMidi script.</div></div>
     <div class="info-tile"><div class="info-tile-icon">⚡</div><div class="info-tile-title">Instant Archive</div><div class="info-tile-text">Files are archived immediately and synced into the repo within minutes.</div></div>
     <div class="info-tile"><div class="info-tile-icon">🐼</div><div class="info-tile-title">By Panda Hub</div><div class="info-tile-text">RoMidi is crafted and maintained by Panda Hub to bring music to every Roblox experience.</div></div>
@@ -247,6 +298,19 @@
 
 <script>
   const WORKER_URL = 'https://jolly-water-c7cc.pandamidi64.workers.dev';
+
+  // Category emoji map for the success badge
+  const CAT_EMOJI = {
+    'Anime':    '🌸',
+    'Classical':'🎻',
+    'Emotional':'💜',
+    'Game OST': '🎮',
+    'Modern':   '🎧',
+    'Movie':    '🎬',
+    'Others':   '🎵',
+  };
+  // CSS class key (no spaces)
+  function catClass(c){ return 'cat-' + c.replace(' ',''); }
 
   /* Starfield */
   (function(){
@@ -281,36 +345,52 @@
   })();
 
   /* Upload */
-  const nameEl=document.getElementById('file-name'),
-    fileInput=document.getElementById('file-input'),
-    dropzone=document.getElementById('dropzone'),
-    dropIcon=document.getElementById('drop-icon'),
-    dropLabel=document.getElementById('drop-label'),
-    dropFname=document.getElementById('drop-fname'),
-    uploadBtn=document.getElementById('upload-btn'),
-    btnText=document.getElementById('btn-text'),
-    progWrap=document.getElementById('prog-wrap'),
-    progBar=document.getElementById('prog-bar'),
-    pctEl=document.getElementById('pct'),
-    statusBox=document.getElementById('status-box'),
-    statusMsg=document.getElementById('status-msg'),
-    gistLink=document.getElementById('gist-link');
+  const nameEl    = document.getElementById('file-name'),
+    categoryEl    = document.getElementById('category'),
+    fileInput     = document.getElementById('file-input'),
+    dropzone      = document.getElementById('dropzone'),
+    dropIcon      = document.getElementById('drop-icon'),
+    dropLabel     = document.getElementById('drop-label'),
+    dropFname     = document.getElementById('drop-fname'),
+    uploadBtn     = document.getElementById('upload-btn'),
+    btnText       = document.getElementById('btn-text'),
+    progWrap      = document.getElementById('prog-wrap'),
+    progBar       = document.getElementById('prog-bar'),
+    pctEl         = document.getElementById('pct'),
+    statusBox     = document.getElementById('status-box'),
+    statusMsg     = document.getElementById('status-msg'),
+    gistLink      = document.getElementById('gist-link');
 
-  let selectedFile=null;
+  let selectedFile = null;
 
-  dropzone.addEventListener('dragover',e=>{e.preventDefault();dropzone.classList.add('drag-over');});
-  dropzone.addEventListener('dragleave',()=>dropzone.classList.remove('drag-over'));
-  dropzone.addEventListener('drop',e=>{e.preventDefault();dropzone.classList.remove('drag-over');const f=e.dataTransfer.files[0];if(f)setFile(f);});
-  fileInput.addEventListener('change',()=>{if(fileInput.files[0])setFile(fileInput.files[0]);});
+  // Remove unset style when a real category is picked
+  categoryEl.addEventListener('change', ()=>{
+    categoryEl.classList.remove('unset');
+    checkReady();
+  });
+
+  // Both file AND category must be set before the button enables
+  function checkReady(){
+    uploadBtn.disabled = !(selectedFile && categoryEl.value);
+  }
+
+  dropzone.addEventListener('dragover', e=>{e.preventDefault();dropzone.classList.add('drag-over');});
+  dropzone.addEventListener('dragleave', ()=>dropzone.classList.remove('drag-over'));
+  dropzone.addEventListener('drop', e=>{e.preventDefault();dropzone.classList.remove('drag-over');const f=e.dataTransfer.files[0];if(f)setFile(f);});
+  fileInput.addEventListener('change', ()=>{if(fileInput.files[0])setFile(fileInput.files[0]);});
 
   function setFile(f){
     if(!/\.(mid|midi)$/i.test(f.name)){showStatus('error','⚠️ Only .mid / .midi files are accepted.');return;}
-    selectedFile=f;
+    selectedFile = f;
     dropzone.classList.add('has-file');
-    dropIcon.textContent='✅';dropLabel.textContent='MIDI file ready!';
+    dropIcon.textContent='✅'; dropLabel.textContent='MIDI file ready!';
     dropFname.textContent=f.name+' ('+(f.size/1024).toFixed(1)+' KB)';
     nameEl.value=f.name;
-    uploadBtn.disabled=false;
+
+    // Reset category so the user must pick one for the new file
+    categoryEl.value = '';
+    categoryEl.classList.add('unset');
+    checkReady();   // button stays disabled until category is chosen
   }
 
   function animProg(t){return new Promise(res=>{
@@ -319,40 +399,54 @@
     requestAnimationFrame(step);
   });}
 
-  function showStatus(type,html){
-    statusBox.className='status-box show '+type;statusMsg.innerHTML=html;
+  function showStatus(type, html){
+    statusBox.className='status-box show '+type;
+    statusMsg.innerHTML=html;
     if(type!=='success')gistLink.style.display='none';
   }
 
-  uploadBtn.addEventListener('click',async()=>{
+  uploadBtn.addEventListener('click', async ()=>{
     if(!selectedFile)return;
+
+    const category = categoryEl.value;
+    if(!category){
+      showStatus('error','⚠️ Please choose a category before uploading.');
+      return;
+    }
+
     let filename=(nameEl.value.trim()||selectedFile.name).replace(/\s+/g,'_');
     if(!filename.toLowerCase().endsWith('.mid')&&!filename.toLowerCase().endsWith('.midi'))
       filename+='.mid';
     filename=filename.replace(/\.midi$/i,'.mid');
-    uploadBtn.disabled=true;btnText.textContent='Uploading…';
-    progWrap.classList.add('show');progBar.style.width='0%';
-    statusBox.className='status-box';gistLink.style.display='none';
+
+    uploadBtn.disabled=true; btnText.textContent='Uploading…';
+    progWrap.classList.add('show'); progBar.style.width='0%';
+    statusBox.className='status-box'; gistLink.style.display='none';
+
     try{
       await animProg(30);
       const base64=await new Promise((res,rej)=>{
         const r=new FileReader();
         r.onload=e=>res(e.target.result.split(',')[1]);
-        r.onerror=rej;r.readAsDataURL(selectedFile);
+        r.onerror=rej; r.readAsDataURL(selectedFile);
       });
       await animProg(55);
       const resp=await fetch(WORKER_URL,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({ filename, base64, size: selectedFile.size }),
+        body:JSON.stringify({ filename, base64, size: selectedFile.size, category }),
       });
       await animProg(95);
       if(!resp.ok){const e=await resp.json().catch(()=>({}));throw new Error(e.message||e.error||`Error ${resp.status}`);}
       const data=await resp.json();
       await animProg(100);
       btnText.textContent='Archived!';
+
+      const emoji = CAT_EMOJI[category] || '🎵';
+      const cls   = catClass(category);
       showStatus('success',
-        `🎉 <strong>${filename}</strong> archived!<br>
+        `🎉 <strong>${filename}</strong> archived!
+         <span class="cat-badge ${cls}">${emoji} ${category}</span><br>
          <small style="opacity:0.8">Will appear in the RoMidi Library within 1 to 10 minutes.</small>`
       );
       gistLink.href=data.html_url;
