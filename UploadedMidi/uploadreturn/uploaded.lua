@@ -1,4 +1,5 @@
 return {
+    "87560 Cause-I-love-you MP8",
     "Amethyst - Geometry Dash",
     "Back To Friends - Sombr",
     "Geometry Dash - Avernus",
