@@ -2,8 +2,8 @@ name: Sync MIDI from Gists
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # every 5 minutes
-  workflow_dispatch:          # manual trigger from Actions tab
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -15,100 +15,97 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Fetch & decode MIDI gists
+      - name: Write sync script
+        run: |
+          cat > /tmp/sync_midi.py << 'ENDOFSCRIPT'
+          import os, json, base64, urllib.request
+
+          token = os.environ['GIST_SECRET']
+          headers = {
+              'Authorization': 'Bearer ' + token,
+              'Accept': 'application/vnd.github+json',
+              'User-Agent': 'RoMidi-Sync',
+          }
+
+          def gh_get(url):
+              req = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(req) as r:
+                  return json.loads(r.read().decode())
+
+          os.makedirs('UploadedMidi', exist_ok=True)
+
+          page, saved, skipped = 1, 0, 0
+
+          while True:
+              url = 'https://api.github.com/gists?per_page=100&page=' + str(page)
+              gists = gh_get(url)
+              if not gists:
+                  break
+
+              print('Page ' + str(page) + ': ' + str(len(gists)) + ' gists')
+
+              for gist in gists:
+                  desc = gist.get('description', '')
+                  if not desc.startswith('RoMidi'):
+                      continue
+
+                  files = gist.get('files', {})
+                  for fname, fdata in files.items():
+                      if not fname.lower().endswith('.mid.b64'):
+                          continue
+
+                      # Strip .b64 -> song.mid, then strip .mid -> song
+                      mid_with_ext = fname[:-4]
+                      out_name = os.path.splitext(mid_with_ext)[0]
+                      out_path = os.path.join('UploadedMidi', out_name)
+
+                      if os.path.exists(out_path):
+                          print('  [skip]  ' + out_name)
+                          skipped += 1
+                          continue
+
+                      raw_url = fdata.get('raw_url')
+                      if not raw_url:
+                          continue
+
+                      try:
+                          req = urllib.request.Request(raw_url, headers=headers)
+                          with urllib.request.urlopen(req) as resp:
+                              b64_data = resp.read().decode('utf-8').strip()
+
+                          midi_bytes = base64.b64decode(b64_data)
+
+                          with open(out_path, 'wb') as f:
+                              f.write(midi_bytes)
+
+                          print('  [saved] ' + out_name + ' (' + str(len(midi_bytes)) + ' bytes)')
+                          saved += 1
+
+                      except Exception as e:
+                          print('  [error] ' + out_name + ': ' + str(e))
+
+              page += 1
+
+          print('Done: ' + str(saved) + ' saved, ' + str(skipped) + ' skipped.')
+          ENDOFSCRIPT
+
+      - name: Run sync script
         env:
           GIST_SECRET: ${{ secrets.GIST_SECRET }}
+        run: python3 /tmp/sync_midi.py
+
+      - name: Commit and push changes
         run: |
-          mkdir -p UploadedMidi
-
-          python3 << 'PYEOF'
-import os, sys, json, base64, urllib.request, urllib.error
-
-token = os.environ['GIST_SECRET']
-headers = {
-    'Authorization': f'token {token}',
-    'Accept': 'application/vnd.github+json',
-    'User-Agent': 'RoMidi-Sync',
-}
-
-def gh_get(url):
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req) as r:
-        return json.loads(r.read().decode())
-
-# ── Paginate through all gists ───────────────────────────────────────────
-page, saved, skipped = 1, 0, 0
-
-while True:
-    url   = f'https://api.github.com/gists?per_page=100&page={page}'
-    gists = gh_get(url)
-    if not gists:
-        break
-
-    print(f'Page {page}: {len(gists)} gists')
-
-    for gist in gists:
-        desc = gist.get('description', '')
-
-        # Only process gists uploaded by RoMidi
-        if not desc.startswith('RoMidi'):
-            continue
-
-        files = gist.get('files', {})
-
-        for fname, fdata in files.items():
-            # ── KEY FILTER: only files named  something.mid.b64 ──────────
-            if not fname.lower().endswith('.mid.b64'):
-                continue
-
-            # Strip .b64  →  "my-song.mid"
-            mid_with_ext = fname[:-4]                       # e.g. my-song.mid
-            # Strip .mid  →  "my-song"  (no extension for UploadedMidi)
-            out_name = os.path.splitext(mid_with_ext)[0]   # e.g. my-song
-
-            out_path = os.path.join('UploadedMidi', out_name)
-
-            if os.path.exists(out_path):
-                print(f'  [skip]  {out_name}')
-                skipped += 1
-                continue
-
-            raw_url = fdata.get('raw_url')
-            if not raw_url:
-                continue
-
-            try:
-                req = urllib.request.Request(raw_url, headers=headers)
-                with urllib.request.urlopen(req) as resp:
-                    b64_data = resp.read().decode('utf-8').strip()
-
-                midi_bytes = base64.b64decode(b64_data)
-
-                with open(out_path, 'wb') as f:
-                    f.write(midi_bytes)
-
-                print(f'  [saved] {out_name}  ({len(midi_bytes):,} bytes)')
-                saved += 1
-
-            except Exception as e:
-                print(f'  [error] {out_name}: {e}')
-
-    page += 1
-
-print(f'\nDone — {saved} new file(s) saved, {skipped} skipped.')
-PYEOF
-
-      - name: Commit & push if anything changed
-        run: |
-          git config user.name  "RoMidi Bot"
+          git config user.name "RoMidi Bot"
           git config user.email "romidi-bot@users.noreply.github.com"
           git add UploadedMidi/
           if git diff --cached --quiet; then
-            echo "No new files — nothing to commit."
+            echo "No new files to commit."
           else
             COUNT=$(git diff --cached --name-only | wc -l)
             git commit -m "🎵 Sync ${COUNT} MIDI file(s) from Gists [skip ci]"
             git push
             echo "Pushed ${COUNT} new file(s)."
+          fi
           fi
 
