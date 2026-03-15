@@ -15,6 +15,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Wait 10 seconds
+        run: sleep 10
+
       - name: Generate uploaded.lua
         run: |
           OUTPUT="UploadedMidi/uploadreturn/uploaded.lua"
