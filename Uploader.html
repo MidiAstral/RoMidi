@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RoMidi – MIDI Uploader</title>
+  <title>RoMidi Upload · by Panda Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
@@ -30,22 +30,82 @@
       100%{ transform:translateY(-10vh) rotate(360deg); opacity:0;   }
     }
     .wrapper { position:relative; z-index:10; max-width:740px; margin:0 auto; padding:0 24px 80px; }
-    .hero { text-align:center; padding:90px 0 56px; }
+
+    /* ── Hero ── */
+    .hero { text-align:center; padding:80px 0 48px; }
+    .panda-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.72rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold); border:1px solid rgba(245,158,11,0.35);
+      padding:6px 18px; border-radius:99px; margin-bottom:22px;
+      background:rgba(245,158,11,0.07);
+      animation: fadeSlide 0.8s ease both;
+    }
+    .panda-badge .dot { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2s ease infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
     .logo-ring {
       display:inline-flex; align-items:center; justify-content:center;
       width:104px; height:104px; border-radius:50%;
       background:conic-gradient(from 0deg,var(--p2),var(--cyan),var(--gold),var(--p2));
-      animation:spinRing 8s linear infinite; margin-bottom:28px; position:relative;
+      animation:spinRing 8s linear infinite; margin-bottom:24px; position:relative;
     }
     .logo-ring::before { content:''; position:absolute; inset:4px; border-radius:50%; background:var(--bg); }
     .logo-inner { position:relative; z-index:1; font-size:2.7rem; }
     @keyframes spinRing { to{transform:rotate(360deg)} }
-    .badge { display:inline-block; font-size:0.68rem; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--cyan); border:1px solid rgba(34,211,238,0.35); padding:5px 16px; border-radius:99px; margin-bottom:18px; background:rgba(34,211,238,0.06); }
-    h1 { font-family:'Cinzel Decorative',serif; font-size:clamp(2.2rem,6vw,4rem); font-weight:900; background:linear-gradient(135deg,var(--p3) 0%,var(--cyan) 55%,var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1.15; margin-bottom:20px; animation:shimmer 4s ease-in-out infinite; background-size:200% 200%; }
+
+    .platform-chip {
+      display:inline-block; font-size:0.68rem; font-weight:600; letter-spacing:0.22em;
+      text-transform:uppercase; color:var(--cyan); border:1px solid rgba(34,211,238,0.35);
+      padding:5px 16px; border-radius:99px; margin-bottom:18px; background:rgba(34,211,238,0.06);
+    }
+
+    h1 { font-family:'Cinzel Decorative',serif; font-size:clamp(2.2rem,6vw,4rem); font-weight:900;
+      background:linear-gradient(135deg,var(--p3) 0%,var(--cyan) 55%,var(--gold) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      line-height:1.15; margin-bottom:24px; animation:shimmer 4s ease-in-out infinite;
+      background-size:200% 200%; }
     @keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-    .tagline { font-size:1.04rem; color:var(--muted); max-width:520px; margin:0 auto 12px; line-height:1.75; }
-    .tagline strong { color:var(--p3); }
-    .divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,var(--border),var(--p2),var(--border),transparent); margin:48px 0; }
+
+    /* ── Intro block ── */
+    .intro-block {
+      background: linear-gradient(135deg, rgba(123,47,190,0.13), rgba(34,211,238,0.07));
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 18px;
+      padding: 28px 32px;
+      margin: 0 auto 8px;
+      max-width: 600px;
+      text-align: left;
+      animation: fadeSlide 0.9s ease 0.2s both;
+    }
+    .intro-block .intro-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .intro-block p {
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .intro-block p:last-child { margin-bottom: 0; }
+    .intro-block p strong { color: var(--p3); }
+    .intro-block p .highlight { color: var(--cyan); font-weight: 600; }
+    .intro-block .library-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3);
+      color: var(--green); font-size: 0.8rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 99px; margin-top: 4px;
+    }
+
+    .divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,var(--border),var(--p2),var(--border),transparent); margin:44px 0; }
     .card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:36px 40px; box-shadow:0 0 60px var(--glow-p), inset 0 1px 0 rgba(216,169,255,0.08); transition:box-shadow 0.4s; }
     .card:hover { box-shadow:0 0 90px var(--glow-p), 0 0 40px var(--glow-c), inset 0 1px 0 rgba(216,169,255,0.08); }
     .card-title { font-family:'Cinzel Decorative',serif; font-size:1rem; color:var(--p3); letter-spacing:0.06em; margin-bottom:28px; display:flex; align-items:center; gap:10px; }
@@ -88,7 +148,18 @@
     .info-tile-icon  { font-size:1.9rem; margin-bottom:10px; }
     .info-tile-title { font-size:0.8rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--p2); margin-bottom:6px; }
     .info-tile-text  { font-size:0.87rem; color:var(--muted); line-height:1.65; }
+
+    /* ── Footer ── */
     footer { text-align:center; padding:40px 0 20px; font-size:0.8rem; color:var(--muted); position:relative; z-index:10; }
+    .footer-inner { display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .footer-brand {
+      display:inline-flex; align-items:center; gap:8px;
+      background: rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2);
+      padding: 7px 18px; border-radius: 99px; color: var(--gold);
+      font-weight: 600; font-size: 0.82rem; letter-spacing: 0.08em;
+    }
+    .footer-copy { color: var(--muted); font-size: 0.76rem; }
+
     ::-webkit-scrollbar { width:6px; }
     ::-webkit-scrollbar-track { background:var(--bg); }
     ::-webkit-scrollbar-thumb { background:var(--border); border-radius:99px; }
@@ -101,17 +172,41 @@
 
 <div class="wrapper">
   <section class="hero">
+
+    <!-- Panda Hub badge -->
+    <div class="panda-badge">
+      <span class="dot"></span>
+      Made by Panda Hub
+      <span class="dot"></span>
+    </div>
+
     <div class="logo-ring"><span class="logo-inner">🎵</span></div>
-    <div class="badge">✦ Open MIDI Archive Platform ✦</div>
-    <h1>RoMidi</h1>
-    <p class="tagline">Place your <strong>MIDI files</strong> here and they'll be archived instantly — ready to be fetched, played, and downloaded inside the script by name, by anyone, anywhere.</p>
-    <p class="tagline" style="font-size:0.93rem;">Upload a <strong>.mid</strong> file below. Once archived, the original file is fully recoverable — play it or download it directly from the script.</p>
+    <div class="platform-chip">✦ Open MIDI Archive Platform ✦</div>
+    <h1>RoMidi Upload</h1>
+
+    <!-- Intro block -->
+    <div class="intro-block">
+      <div class="intro-title">🐼 Welcome to RoMidi Upload</div>
+      <p>
+        This is the official <strong>MIDI uploader</strong> for <strong>RoMidi</strong>, built and maintained by <strong>Panda Hub</strong>.
+        Drop any <span class="highlight">.mid</span> file below and it gets archived instantly.
+      </p>
+      <p>
+        Every song you upload will show up inside the RoMidi script under the
+        <span class="library-tag">📚 Library · Songs Uploaded</span>
+        category, ready to be searched and played by anyone using the script.
+      </p>
+      <p>
+        Just pick a name, drop your file, and hit upload. That is all it takes.
+      </p>
+    </div>
+
   </section>
 
   <div class="divider"></div>
 
   <div class="card">
-    <div class="card-title">📤 Upload MIDI File <span>// Archive & Index</span></div>
+    <div class="card-title">📤 Upload MIDI File <span>// Archive &amp; Index</span></div>
     <label for="file-name">Custom Filename <small style="color:var(--p2);font-size:0.78rem;">(optional — auto-filled from file)</small></label>
     <input type="text" id="file-name" placeholder="e.g. epic-battle-theme.mid" />
     <label>MIDI File</label>
@@ -119,11 +214,11 @@
       <input type="file" id="file-input" accept=".mid,.midi" />
       <span class="drop-icon" id="drop-icon">🎹</span>
       <div class="drop-label" id="drop-label">Drop your .mid file here</div>
-      <div class="drop-sub">or click to browse — .mid / .midi only</div>
+      <div class="drop-sub">or click to browse · .mid / .midi only</div>
       <div class="drop-fname" id="drop-fname"></div>
     </div>
     <button class="btn btn-primary" id="upload-btn" disabled>
-      <span>🚀</span><span id="btn-text">Upload & Archive</span>
+      <span>🚀</span><span id="btn-text">Upload &amp; Archive</span>
     </button>
     <div class="progress-wrap" id="prog-wrap">
       <div class="progress-label"><span>Archiving…</span><span id="pct">0%</span></div>
@@ -136,19 +231,24 @@
   </div>
 
   <div class="info-grid">
-    <div class="info-tile"><div class="info-tile-icon">🌐</div><div class="info-tile-title">Global Access</div><div class="info-tile-text">Anyone worldwide can upload MIDI files and have them indexed for use inside the script.</div></div>
-    <div class="info-tile"><div class="info-tile-icon">🎵</div><div class="info-tile-title">Play & Download</div><div class="info-tile-text">Uploaded files are stored as original MIDI binary — fully playable and downloadable from the script.</div></div>
+    <div class="info-tile"><div class="info-tile-icon">📚</div><div class="info-tile-title">Library Ready</div><div class="info-tile-text">Every upload is indexed into the Songs Uploaded category inside the RoMidi script automatically.</div></div>
+    <div class="info-tile"><div class="info-tile-icon">🎵</div><div class="info-tile-title">Play in Script</div><div class="info-tile-text">Uploaded files are stored as original MIDI binary and are fully playable inside the RoMidi script.</div></div>
     <div class="info-tile"><div class="info-tile-icon">⚡</div><div class="info-tile-title">Instant Archive</div><div class="info-tile-text">Files are archived immediately and synced into the repo within minutes.</div></div>
-    <div class="info-tile"><div class="info-tile-icon">🎼</div><div class="info-tile-title">Name It Yours</div><div class="info-tile-text">Give your file a custom name — it'll be stored and retrievable by that exact name.</div></div>
+    <div class="info-tile"><div class="info-tile-icon">🐼</div><div class="info-tile-title">By Panda Hub</div><div class="info-tile-text">RoMidi is crafted and maintained by Panda Hub to bring music to every Roblox experience.</div></div>
   </div>
 </div>
 
-<footer><p>RoMidi &mdash; MIDI Uploader &nbsp;·&nbsp; All files are processed and indexed automatically.</p></footer>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">🐼 Made by Panda Hub</div>
+    <div class="footer-copy">RoMidi Upload · All files are processed and indexed automatically.</div>
+  </div>
+</footer>
 
 <script>
   const WORKER_URL = 'https://jolly-water-c7cc.pandamidi64.workers.dev';
 
-  /* ── Starfield ── */
+  /* Starfield */
   (function(){
     const c=document.getElementById('starfield'),ctx=c.getContext('2d');
     let W,H,stars=[];
@@ -163,7 +263,7 @@
     })();
   })();
 
-  /* ── Floating notes ── */
+  /* Floating notes */
   (function(){
     const g=['♩','♪','♫','♬','𝄞','𝄢'],w=document.getElementById('notes');
     function spawn(){
@@ -180,7 +280,7 @@
     setInterval(spawn,2600);
   })();
 
-  /* ── Upload ── */
+  /* Upload */
   const nameEl=document.getElementById('file-name'),
     fileInput=document.getElementById('file-input'),
     dropzone=document.getElementById('dropzone'),
@@ -226,51 +326,38 @@
 
   uploadBtn.addEventListener('click',async()=>{
     if(!selectedFile)return;
-
-    // Normalise filename: spaces→underscores, ensure .mid
     let filename=(nameEl.value.trim()||selectedFile.name).replace(/\s+/g,'_');
     if(!filename.toLowerCase().endsWith('.mid')&&!filename.toLowerCase().endsWith('.midi'))
       filename+='.mid';
     filename=filename.replace(/\.midi$/i,'.mid');
-
     uploadBtn.disabled=true;btnText.textContent='Uploading…';
     progWrap.classList.add('show');progBar.style.width='0%';
     statusBox.className='status-box';gistLink.style.display='none';
-
     try{
       await animProg(30);
-
-      // Pure base64 — no prefix
       const base64=await new Promise((res,rej)=>{
         const r=new FileReader();
         r.onload=e=>res(e.target.result.split(',')[1]);
         r.onerror=rej;r.readAsDataURL(selectedFile);
       });
-
       await animProg(55);
-
       const resp=await fetch(WORKER_URL,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({ filename, base64, size: selectedFile.size }),
       });
-
       await animProg(95);
       if(!resp.ok){const e=await resp.json().catch(()=>({}));throw new Error(e.message||e.error||`Error ${resp.status}`);}
       const data=await resp.json();
       await animProg(100);
-
       btnText.textContent='Archived!';
-      // Show what the file will be saved as in the repo
-      const repoName=filename.replace(/\.mid$/i,'');
       showStatus('success',
         `🎉 <strong>${filename}</strong> archived!<br>
-         <small style="opacity:0.8">Will appear in RoMidi after 1 to 10 minutes.</small>`
+         <small style="opacity:0.8">Will appear in the RoMidi Library within 1 to 10 minutes.</small>`
       );
       gistLink.href=data.html_url;
       gistLink.style.display='inline-block';
       gistLink.textContent='🔗 View archive entry ↗';
-
     }catch(err){
       await animProg(100);
       showStatus('error','❌ Upload failed: '+err.message);
