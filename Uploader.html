@@ -209,7 +209,7 @@
     dropzone.classList.add('has-file');
     dropIcon.textContent='✅';dropLabel.textContent='MIDI file ready!';
     dropFname.textContent=f.name+' ('+(f.size/1024).toFixed(1)+' KB)';
-    if(!nameEl.value.trim())nameEl.value=f.name;
+    nameEl.value=f.name;
     uploadBtn.disabled=false;
   }
 
@@ -265,7 +265,7 @@
       const repoName=filename.replace(/\.mid$/i,'');
       showStatus('success',
         `🎉 <strong>${filename}</strong> archived!<br>
-         <small style="opacity:0.8">Will appear in RoMidi after 5 minutes.</small>`
+         <small style="opacity:0.8">Will appear in RoMidi after 1 to 10 minutes.</small>`
       );
       gistLink.href=data.html_url;
       gistLink.style.display='inline-block';
