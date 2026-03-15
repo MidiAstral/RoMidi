@@ -10,5 +10,6 @@ return {
     "One Summer's Day (Spirited Away)",
     "Pasilyo",
     "Tada Koe Hitotsu (One Voice) by Rokudenashi & MIMI",
-    "What I Love(cpk)"
+    "What I Love(cpk)",
+    "my light (我的光) - yung kai"
 }
