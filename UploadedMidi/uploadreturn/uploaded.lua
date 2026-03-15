@@ -9,5 +9,6 @@ return {
     "Multo - Cup of Joe RNE",
     "One Summer's Day (Spirited Away)",
     "Pasilyo",
-    "Tada Koe Hitotsu (One Voice) by Rokudenashi & MIMI"
+    "Tada Koe Hitotsu (One Voice) by Rokudenashi & MIMI",
+    "What I Love(cpk)"
 }
