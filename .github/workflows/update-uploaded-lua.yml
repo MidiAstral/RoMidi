@@ -1,12 +1,11 @@
 name: Sync uploaded.lua
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'UploadedMidi/**'
-      - '!UploadedMidi/uploadreturn/**'
+  workflow_run:
+    workflows: ["Sync MIDI from Gists"]
+    types:
+      - completed
   workflow_dispatch:
+
 jobs:
   update-lua:
     runs-on: ubuntu-latest
@@ -44,6 +43,7 @@ jobs:
           } > "$OUTPUT"
           echo "--- Generated $OUTPUT ---"
           cat "$OUTPUT"
+
       - name: Commit and push if changed
         run: |
           git config user.name  "github-actions[bot]"
