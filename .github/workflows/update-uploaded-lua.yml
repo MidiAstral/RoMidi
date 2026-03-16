@@ -1,4 +1,5 @@
-name: Sync uploaded.lua
+name: Sync Category Return Lua Files
+
 on:
   workflow_run:
     workflows: ["Sync MIDI from Gists"]
@@ -11,47 +12,68 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Wait 10 seconds
+      - name: Wait for file system to settle
         run: sleep 10
 
-      - name: Generate uploaded.lua
+      - name: Generate per-category return Lua files
         run: |
-          OUTPUT="UploadedMidi/uploadreturn/uploaded.lua"
           mkdir -p "UploadedMidi/uploadreturn"
-          mapfile -t FILES < <(
-            find UploadedMidi -maxdepth 1 -type f ! -name '.*' \
-              | sed 's|UploadedMidi/||' \
-              | sed 's|\.[^.]*$||' \
-              | sort -u
-          )
-          echo "Found ${#FILES[@]} file(s): ${FILES[*]}"
-          {
-            echo "return {"
-            for i in "${!FILES[@]}"; do
-              NAME="${FILES[$i]}"
-              if [ $((i + 1)) -lt ${#FILES[@]} ]; then
-                echo "    \"${NAME}\","
-              else
-                echo "    \"${NAME}\""
-              fi
-            done
-            echo "}"
-          } > "$OUTPUT"
-          echo "--- Generated $OUTPUT ---"
-          cat "$OUTPUT"
+
+          # ── Category → subfolder → output lua filename ─────────────────────
+          # Array index ties the three arrays together.
+          FOLDERS=("Anime"        "Classical"        "Emotional"        "GameOST"   "Modern"   "Movie"   "Others")
+          LUAOUT=( "Animereturn"  "Classicalreturn"  "Emotionalreturn"  "GameOST"   "Modern"   "Movie"   "Others")
+
+          for i in "${!FOLDERS[@]}"; do
+            FOLDER="${FOLDERS[$i]}"
+            LUA_NAME="${LUAOUT[$i]}"
+            CAT_DIR="UploadedMidi/${FOLDER}"
+            OUTPUT="UploadedMidi/uploadreturn/${LUA_NAME}.lua"
+
+            # Collect all non-hidden files in this category folder (no extension files = MIDI)
+            if [ -d "$CAT_DIR" ]; then
+              mapfile -t FILES < <(
+                find "$CAT_DIR" -maxdepth 1 -type f ! -name '.*' \
+                  | sed "s|${CAT_DIR}/||" \
+                  | sort -u
+              )
+            else
+              FILES=()
+            fi
+
+            echo "[$FOLDER] ${#FILES[@]} song(s) → ${OUTPUT}"
+
+            {
+              echo "return {"
+              for j in "${!FILES[@]}"; do
+                NAME="${FILES[$j]}"
+                if [ $((j + 1)) -lt ${#FILES[@]} ]; then
+                  echo "    \"${NAME}\","
+                else
+                  echo "    \"${NAME}\""
+                fi
+              done
+              echo "}"
+            } > "$OUTPUT"
+
+            echo "--- ${OUTPUT} ---"
+            cat "$OUTPUT"
+            echo ""
+          done
 
       - name: Commit and push if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add UploadedMidi/uploadreturn/uploaded.lua
+          git add UploadedMidi/uploadreturn/
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore: sync uploaded.lua [skip ci]"
+            git commit -m "chore: sync category return lua files [skip ci]"
             git push
           fi
