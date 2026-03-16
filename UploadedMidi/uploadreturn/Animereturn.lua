@@ -1,2 +1,3 @@
 return {
+    "DEAD OR LIE"
 }
