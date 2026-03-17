@@ -1,4 +1,5 @@
 return {
     "ASGORE - Toby Fox",
-    "Finale - Toby Fox"
+    "Finale - Toby Fox",
+    "Snowy - Toby Fox"
 }
