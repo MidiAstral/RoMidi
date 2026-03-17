@@ -5,5 +5,6 @@ return {
     "Gaster's Theme - Toby Fox",
     "MEGALOVANIA - Toby Fox",
     "Snowy - Toby Fox",
-    "Undertale - Toby Fox"
+    "Undertale - Toby Fox",
+    "sans. - Toby Fox"
 }
