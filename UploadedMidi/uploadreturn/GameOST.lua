@@ -1,2 +1,3 @@
 return {
+    "ASGORE - Toby Fox"
 }
