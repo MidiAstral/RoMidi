@@ -7,6 +7,7 @@ return {
     "Tony Ann - Awakening",
     "Tony Ann - Desire",
     "Tony Ann - Discovery",
+    "Tony Ann - Lost",
     "Wind Of Fjords - Soft Knees",
     "Worlds Smallest Violin AJR",
     "Worlds Smallest Violin full notes"
