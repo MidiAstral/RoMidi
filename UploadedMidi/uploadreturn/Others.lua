@@ -13,5 +13,6 @@ return {
     "Tony Ann - Rain",
     "Wind Of Fjords - Soft Knees",
     "Worlds Smallest Violin AJR",
-    "Worlds Smallest Violin full notes"
+    "Worlds Smallest Violin full notes",
+    "trillium"
 }
