@@ -1,4 +1,6 @@
 return {
     "Bohemian Rhapsody - Queen",
-    "My heartPIANO"
+    "My heartPIANO",
+    "Squid Game musique",
+    "Squid Game slow"
 }
