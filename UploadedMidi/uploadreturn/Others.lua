@@ -1,4 +1,5 @@
 return {
+    "Bruno Mars - When i was your man",
     "Golden Hour  JVKE Updated Ver 1772653873814",
     "Gravity - Hazbin Hotel",
     "Hello- OMFG (WIP)(Copy)",
