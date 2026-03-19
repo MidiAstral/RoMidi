@@ -14,5 +14,6 @@ return {
     "Wind Of Fjords - Soft Knees",
     "Worlds Smallest Violin AJR",
     "Worlds Smallest Violin full notes",
+    "cocktail",
     "trillium"
 }
