@@ -21,6 +21,7 @@ return {
     "cơn mưa ngang qua",
     "hãy trao cho anh",
     "những lời hứa bỏ quên ost",
+    "tháng 4là lời nói dối của em",
     "trillium",
     "vết mưa",
     "âm thầm bên em 2"
