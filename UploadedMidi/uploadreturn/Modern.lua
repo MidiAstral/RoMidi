@@ -1,5 +1,4 @@
 return {
-    "62971_Hanggang-Kailan.mid",
     "Bad Habit - Steve Lacy",
     "Beanie",
     "Her - JVKE",
@@ -7,5 +6,5 @@ return {
     "Tony Ann - Anxiety",
     "Young Girl A - siinamota (slightly more difficult)",
     "abcdefu",
-    "blue - yung kai"
+    "blue - yung kai",
 }
