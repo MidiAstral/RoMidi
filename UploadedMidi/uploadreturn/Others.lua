@@ -12,6 +12,7 @@ return {
     "Tony Ann - Lost",
     "Tony Ann - Pulse",
     "Tony Ann - Rain",
+    "Tony Ann Taurus",
     "Wind Of Fjords - Soft Knees",
     "Worlds Smallest Violin AJR",
     "Worlds Smallest Violin full notes",
