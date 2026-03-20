@@ -17,6 +17,7 @@ return {
     "Worlds Smallest Violin AJR",
     "Worlds Smallest Violin full notes",
     "cocktail",
+    "cơn mưa ngang qua",
     "trillium",
     "vết mưa"
 }
