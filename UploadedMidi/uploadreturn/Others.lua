@@ -15,7 +15,6 @@ return {
     "Tony Ann - Rain",
     "Tony Ann Taurus",
     "Wind Of Fjords - Soft Knees",
-    "Worlds Smallest Violin AJR",
     "Worlds Smallest Violin full notes",
     "buông đôi tay nhau ra x nắng ấm xa dần",
     "cause i love you x gạt đi nc mắt",
