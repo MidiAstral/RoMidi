@@ -18,6 +18,7 @@ return {
     "những lời hứa bỏ quên ost",
     "NOSTALGIA  Tony Ann 1769819486012",
     "RUSH_F",
+    "Rush_of_Life_-_Tony_Ann",
     "tháng 4là lời nói dối của em",
     "Tony Ann - Awakening",
     "Tony Ann - Desire",
