@@ -5,6 +5,7 @@ return {
     "buông đôi tay nhau ra x nắng ấm xa dần",
     "cause i love you x gạt đi nc mắt",
     "chắc ai đó sẽ về",
+    "Chờ_đợi_có_đáng_sợ",
     "cocktail",
     "cơn mưa ngang qua",
     "Golden Hour  JVKE Updated Ver 1772653873814",
