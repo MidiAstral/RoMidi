@@ -8,5 +8,4 @@ return {
     "Tek It - Cafune",
     "Tony Ann - Anxiety",
     "Young Girl A - siinamota (slightly more difficult)",
-    "بروحي فتاة",
 }
