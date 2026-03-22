@@ -5,5 +5,6 @@ return {
     "Moonlight - XXXTentacion",
     "Multo - Cup of Joe RNE",
     "PULSE  Tony Ann aka my neighbours car alarm 1770203303452",
-    "Washing Machine Heart - Mitski"
+    "Tony Ann - ICARUS",
+    "Washing Machine Heart - Mitski",
 }
