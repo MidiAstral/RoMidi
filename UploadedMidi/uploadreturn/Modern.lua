@@ -1,6 +1,7 @@
 return {
     "abcdefu",
     "Bad Habit - Steve Lacy",
+    "basic_pitch_transcription",
     "Beanie",
     "blue - yung kai",
     "Her - JVKE",
