@@ -5,6 +5,7 @@ return {
     "Kimi no Na wa    Sparkle  TheIshter  Full Sheets 1772654410756",
     "Mermaid_Rhapsody_–_v3rmillionkyo",
     "Never Meant To Belong (Bleach OST)",
+    "pf solo",
     "Summer_Pockets",
     "Tokyo Ghoul - Unravel",
 }
