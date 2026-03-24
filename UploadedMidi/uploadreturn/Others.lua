@@ -6,7 +6,6 @@ return {
     "chắc ai đó sẽ về",
     "Chờ_đợi_có_đáng_sợ",
     "cocktail",
-    "cơn mưa ngang qua",
     "Golden Hour  JVKE Updated Ver 1772653873814",
     "Gravity - Hazbin Hotel",
     "hãy trao cho anh",
