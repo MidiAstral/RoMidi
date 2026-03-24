@@ -90,25 +90,31 @@ jobs:
             [[ -d "$CAT_DIR" ]] || continue
             [[ -f "$LUA_FILE" ]] || continue
 
-            ENTRIES=()
-            while IFS= read -r -d '' FILEPATH; do
-              ENTRIES+=("$(basename "$FILEPATH")")
-            done < <(find "$CAT_DIR" -maxdepth 1 -type f -print0 | sort -z)
+            TMPFILE="$(mktemp)"
+            find "$CAT_DIR" -maxdepth 1 -type f -printf '%f\0' \
+              | sort -z -f \
+              | tr '\0' '\n' > "$TMPFILE"
 
-            NEW_CONTENT="return {\n"
-            for ENTRY in $(printf '%s\n' "${ENTRIES[@]}" | sort -f); do
-              NEW_CONTENT+="    \"${ENTRY}\",\n"
-            done
-            NEW_CONTENT+="}\n"
+            LUA_OUT="return {\n"
+            while IFS= read -r ENTRY; do
+              [[ -z "$ENTRY" ]] && continue
+              LUA_OUT+="    \"${ENTRY}\",\n"
+            done < "$TMPFILE"
+            LUA_OUT+="}\n"
+
+            rm -f "$TMPFILE"
 
             CURRENT="$(cat "$LUA_FILE")"
-            RENDERED="$(printf '%b' "$NEW_CONTENT")"
+            RENDERED="$(printf '%b' "$LUA_OUT")"
+
+            COUNT="$(grep -c '.' "$LUA_FILE" || true)"
 
             if [[ "$CURRENT" == "$RENDERED" ]]; then
               echo "  ✔ no change : ${LUA_MAP[$FOLDER]}"
             else
-              printf '%b' "$NEW_CONTENT" > "$LUA_FILE"
-              echo "  ✏ rebuilt   : ${LUA_MAP[$FOLDER]} (${#ENTRIES[@]} entries)"
+              printf '%b' "$LUA_OUT" > "$LUA_FILE"
+              ENTRY_COUNT="$(printf '%b' "$LUA_OUT" | grep -c '\"' || true)"
+              echo "  ✏ rebuilt   : ${LUA_MAP[$FOLDER]} ($ENTRY_COUNT entries)"
               CHANGED=$((CHANGED + 1))
             fi
           done
