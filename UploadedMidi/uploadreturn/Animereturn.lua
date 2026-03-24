@@ -9,4 +9,5 @@ return {
     "pf solo",
     "Summer Pockets",
     "Tokyo Ghoul - Unravel",
+    "Vickeblanka - Black Catcher Black Clover Opening 10 WT1",
 }
