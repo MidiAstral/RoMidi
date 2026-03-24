@@ -1,21 +1,3 @@
-# ─────────────────────────────────────────────────────────────────────────────
-# strip-midi-extensions.yml
-#
-# What this does (in order):
-#   1. Renames every MIDI file in every category folder — strips ALL
-#      .mid / .midi extensions no matter how many are stacked.
-#      e.g. song.mid.mid.mid → song
-#
-#   2. Rebuilds every Lua return file from scratch using the actual
-#      files on disk so the index is always 100% in sync.
-#
-#   3. Lua entries have underscores replaced with spaces for clean
-#      in-game display names.
-#      e.g. file: song_fallen  →  Lua entry: "song fallen"
-#
-# Required secret: GIST_SECRET (GitHub PAT with repo + workflow scopes)
-# ─────────────────────────────────────────────────────────────────────────────
-
 name: Strip MIDI Extensions
 
 on:
@@ -26,14 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ── 1. Checkout ──────────────────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GIST_SECRET }}
 
-      # ── 2. Strip extensions from every MIDI file ─────────────────────────────
-      - name: Rename files — strip all .mid / .midi suffixes
+      - name: Rename files
         run: |
           set -euo pipefail
 
@@ -41,28 +21,26 @@ jobs:
           RENAMED=0
           SKIPPED=0
 
-          strip_ext() {
+          clean_name() {
             local name="$1"
             while [[ "${name,,}" == *.mid || "${name,,}" == *.midi ]]; do
-              if   [[ "${name,,}" == *.midi ]]; then name="${name%.*}"
-              elif [[ "${name,,}" == *.mid  ]]; then name="${name%.*}"
-              fi
+              name="${name%.*}"
             done
+            name="${name//_/ }"
             echo "$name"
           }
 
           for CAT in "${CATEGORIES[@]}"; do
             DIR="UploadedMidi/${CAT}"
-            [[ -d "$DIR" ]] || { echo "⚠ Folder not found, skipping: $DIR"; continue; }
-
-            echo "📂 Processing: $DIR"
+            [[ -d "$DIR" ]] || continue
+            echo "── $CAT ──────────────────────────────"
 
             while IFS= read -r -d '' FILEPATH; do
               BASENAME="$(basename "$FILEPATH")"
-              CLEAN="$(strip_ext "$BASENAME")"
+              CLEAN="$(clean_name "$BASENAME")"
 
               if [[ "$BASENAME" == "$CLEAN" ]]; then
-                echo "  ✔ already clean: $BASENAME"
+                echo "  ✔ already clean : $BASENAME"
                 SKIPPED=$((SKIPPED + 1))
                 continue
               fi
@@ -70,37 +48,28 @@ jobs:
               NEWPATH="${DIR}/${CLEAN}"
 
               if [[ -e "$NEWPATH" ]]; then
-                echo "  ⚠ skipping — target already exists: $CLEAN"
+                echo "  ⚠ collision — skipping : $BASENAME → $CLEAN (target exists)"
                 SKIPPED=$((SKIPPED + 1))
                 continue
               fi
 
               git mv "$FILEPATH" "$NEWPATH"
-              echo "  ✏ renamed: $BASENAME → $CLEAN"
+              echo "  ✏ renamed : $BASENAME → $CLEAN"
               RENAMED=$((RENAMED + 1))
 
             done < <(find "$DIR" -maxdepth 1 -type f -print0 | sort -z)
           done
 
           echo ""
-          echo "────────────────────────────────────"
-          echo "Files renamed : $RENAMED"
-          echo "Files skipped : $SKIPPED"
-          echo "────────────────────────────────────"
+          echo "══════════════════════════════════════"
+          echo "Files renamed  : $RENAMED"
+          echo "Files skipped  : $SKIPPED"
+          echo "══════════════════════════════════════"
 
-      # ── 3. Rebuild every Lua return file from actual files on disk ────────────
-      - name: Rebuild Lua return files from disk
+      - name: Rebuild Lua indexes
         run: |
           set -euo pipefail
 
-          LUA_DIR="UploadedMidi/uploadreturn"
-
-          if [[ ! -d "$LUA_DIR" ]]; then
-            echo "⚠ No uploadreturn folder found, skipping."
-            exit 0
-          fi
-
-          # Exact mapping: category folder → lua filename (matches your repo)
           declare -A LUA_MAP=(
             ["Anime"]="Animereturn.lua"
             ["Classical"]="Classicalreturn.lua"
@@ -111,67 +80,44 @@ jobs:
             ["Others"]="Others.lua"
           )
 
-          UPDATED=0
+          LUA_DIR="UploadedMidi/uploadreturn"
+          CHANGED=0
 
-          for CAT in "${!LUA_MAP[@]}"; do
-            MIDI_DIR="UploadedMidi/${CAT}"
-            LUA_FILE="${LUA_DIR}/${LUA_MAP[$CAT]}"
+          for FOLDER in "${!LUA_MAP[@]}"; do
+            CAT_DIR="UploadedMidi/${FOLDER}"
+            LUA_FILE="${LUA_DIR}/${LUA_MAP[$FOLDER]}"
 
-            if [[ ! -d "$MIDI_DIR" ]]; then
-              echo "⚠ Skipping $CAT — folder not found"
-              continue
-            fi
+            [[ -d "$CAT_DIR" ]] || continue
+            [[ -f "$LUA_FILE" ]] || continue
 
-            echo "📋 Rebuilding: ${LUA_MAP[$CAT]} from $MIDI_DIR"
-
-            # Collect all filenames, strip any leftover extensions (safety net),
-            # replace underscores with spaces for display, sort alphabetically
             ENTRIES=()
             while IFS= read -r -d '' FILEPATH; do
-              BASENAME="$(basename "$FILEPATH")"
+              ENTRIES+=("$(basename "$FILEPATH")")
+            done < <(find "$CAT_DIR" -maxdepth 1 -type f -print0 | sort -z)
 
-              # Strip extensions (safety net in case step 2 missed anything)
-              while [[ "${BASENAME,,}" == *.mid || "${BASENAME,,}" == *.midi ]]; do
-                if   [[ "${BASENAME,,}" == *.midi ]]; then BASENAME="${BASENAME%.*}"
-                elif [[ "${BASENAME,,}" == *.mid  ]]; then BASENAME="${BASENAME%.*}"
-                fi
-              done
+            NEW_CONTENT="return {\n"
+            for ENTRY in $(printf '%s\n' "${ENTRIES[@]}" | sort -f); do
+              NEW_CONTENT+="    \"${ENTRY}\",\n"
+            done
+            NEW_CONTENT+="}\n"
 
-              # Replace underscores with spaces for the Lua display name
-              DISPLAY="${BASENAME//_/ }"
+            CURRENT="$(cat "$LUA_FILE")"
+            RENDERED="$(printf '%b' "$NEW_CONTENT")"
 
-              ENTRIES+=("$DISPLAY")
-            done < <(find "$MIDI_DIR" -maxdepth 1 -type f -print0 | sort -z)
-
-            if [[ ${#ENTRIES[@]} -eq 0 ]]; then
-              echo "  ⚠ No files found in $MIDI_DIR — writing empty table"
-              printf "return {\n}\n" > "$LUA_FILE"
-              continue
+            if [[ "$CURRENT" == "$RENDERED" ]]; then
+              echo "  ✔ no change : ${LUA_MAP[$FOLDER]}"
+            else
+              printf '%b' "$NEW_CONTENT" > "$LUA_FILE"
+              echo "  ✏ rebuilt   : ${LUA_MAP[$FOLDER]} (${#ENTRIES[@]} entries)"
+              CHANGED=$((CHANGED + 1))
             fi
-
-            # Sort entries alphabetically (case-insensitive)
-            IFS=$'\n' SORTED=($(printf '%s\n' "${ENTRIES[@]}" | sort -f))
-            unset IFS
-
-            # Build and write Lua content
-            {
-              echo "return {"
-              for ENTRY in "${SORTED[@]}"; do
-                echo "    \"${ENTRY}\","
-              done
-              echo "}"
-            } > "$LUA_FILE"
-
-            echo "  ✏ wrote ${#SORTED[@]} entries → ${LUA_MAP[$CAT]}"
-            UPDATED=$((UPDATED + 1))
           done
 
           echo ""
-          echo "────────────────────────────────────"
-          echo "Lua files rebuilt : $UPDATED"
-          echo "────────────────────────────────────"
+          echo "══════════════════════════════════════"
+          echo "Lua files updated : $CHANGED"
+          echo "══════════════════════════════════════"
 
-      # ── 4. Commit & push ─────────────────────────────────────────────────────
       - name: Commit changes
         run: |
           git config user.name  "github-actions[bot]"
@@ -182,7 +128,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Nothing to commit — everything was already clean."
           else
-            git commit -m "🧹 Strip .mid/.midi extensions + rebuild Lua indexes (underscores → spaces)"
+            git commit -m "🧹 Clean filenames & rebuild Lua indexes (strip extensions, underscores → spaces)"
             git push
             echo "✅ Changes pushed."
           fi
