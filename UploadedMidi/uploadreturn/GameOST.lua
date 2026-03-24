@@ -4,7 +4,7 @@ return {
     "Finale - Toby Fox",
     "Gaster's Theme - Toby Fox",
     "MEGALOVANIA - Toby Fox",
-    "my_light_(我的光)_-_yung_kai",
+    "my light (我的光) - yung kai",
     "sans. - Toby Fox",
     "Snowy - Toby Fox",
     "Undertale - Toby Fox",
