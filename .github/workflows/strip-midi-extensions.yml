@@ -1,28 +1,29 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # strip-midi-extensions.yml
 #
-# One-time (or on-demand) workflow that renames every file inside
-# UploadedMidi/<Category>/ so it has NO .mid / .midi extension,
-# no matter how many are stacked (song.mid.mid.mid → song).
+# What this does (in order):
+#   1. Renames every MIDI file in every category folder — strips ALL
+#      .mid / .midi extensions no matter how many are stacked.
+#      e.g. song.mid.mid.mid → song
 #
-# It also cleans the matching Lua return files so their entries
-# are extension-free too.
+#   2. Rebuilds every Lua return file from scratch using the actual
+#      files on disk so the index is always 100% in sync.
 #
-# Required secret: GIST_SECRET  (GitHub PAT with repo + workflow scopes)
+#   3. Lua entries have underscores replaced with spaces for clean
+#      in-game display names.
+#      e.g. file: song_fallen  →  Lua entry: "song fallen"
+#
+# Required secret: GIST_SECRET (GitHub PAT with repo + workflow scopes)
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: Strip MIDI Extensions
 
 on:
-  workflow_dispatch:          # run manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   strip:
     runs-on: ubuntu-latest
-
-    env:
-      GH_TOKEN: ${{ secrets.GIST_SECRET }}
-      REPO:     ${{ github.repository }}   # owner/repo
 
     steps:
       # ── 1. Checkout ──────────────────────────────────────────────────────────
@@ -31,7 +32,7 @@ jobs:
         with:
           token: ${{ secrets.GIST_SECRET }}
 
-      # ── 2. Strip extensions from MIDI files ──────────────────────────────────
+      # ── 2. Strip extensions from every MIDI file ─────────────────────────────
       - name: Rename files — strip all .mid / .midi suffixes
         run: |
           set -euo pipefail
@@ -42,7 +43,6 @@ jobs:
 
           strip_ext() {
             local name="$1"
-            # Keep removing .mid / .midi (case-insensitive) until clean
             while [[ "${name,,}" == *.mid || "${name,,}" == *.midi ]]; do
               if   [[ "${name,,}" == *.midi ]]; then name="${name%.*}"
               elif [[ "${name,,}" == *.mid  ]]; then name="${name%.*}"
@@ -53,24 +53,24 @@ jobs:
 
           for CAT in "${CATEGORIES[@]}"; do
             DIR="UploadedMidi/${CAT}"
-            [[ -d "$DIR" ]] || continue
+            [[ -d "$DIR" ]] || { echo "⚠ Folder not found, skipping: $DIR"; continue; }
 
-            # Only look at files directly in the category folder (not sub-dirs)
+            echo "📂 Processing: $DIR"
+
             while IFS= read -r -d '' FILEPATH; do
               BASENAME="$(basename "$FILEPATH")"
               CLEAN="$(strip_ext "$BASENAME")"
 
               if [[ "$BASENAME" == "$CLEAN" ]]; then
-                echo "  ✔ already clean: $FILEPATH"
+                echo "  ✔ already clean: $BASENAME"
                 SKIPPED=$((SKIPPED + 1))
                 continue
               fi
 
               NEWPATH="${DIR}/${CLEAN}"
 
-              # Guard against accidental collision
               if [[ -e "$NEWPATH" ]]; then
-                echo "  ⚠ skipping — target already exists: $NEWPATH"
+                echo "  ⚠ skipping — target already exists: $CLEAN"
                 SKIPPED=$((SKIPPED + 1))
                 continue
               fi
@@ -79,7 +79,7 @@ jobs:
               echo "  ✏ renamed: $BASENAME → $CLEAN"
               RENAMED=$((RENAMED + 1))
 
-            done < <(find "$DIR" -maxdepth 1 -type f -print0)
+            done < <(find "$DIR" -maxdepth 1 -type f -print0 | sort -z)
           done
 
           echo ""
@@ -88,78 +88,101 @@ jobs:
           echo "Files skipped : $SKIPPED"
           echo "────────────────────────────────────"
 
-      # ── 3. Fix Lua return files ───────────────────────────────────────────────
-      - name: Clean Lua return files — strip all .mid / .midi from entries
+      # ── 3. Rebuild every Lua return file from actual files on disk ────────────
+      - name: Rebuild Lua return files from disk
         run: |
           set -euo pipefail
 
           LUA_DIR="UploadedMidi/uploadreturn"
-          [[ -d "$LUA_DIR" ]] || { echo "No Lua dir found, skipping."; exit 0; }
 
-          strip_ext() {
-            local name="$1"
-            while [[ "${name,,}" == *.mid || "${name,,}" == *.midi ]]; do
-              if   [[ "${name,,}" == *.midi ]]; then name="${name%.*}"
-              elif [[ "${name,,}" == *.mid  ]]; then name="${name%.*}"
-              fi
-            done
-            echo "$name"
-          }
+          if [[ ! -d "$LUA_DIR" ]]; then
+            echo "⚠ No uploadreturn folder found, skipping."
+            exit 0
+          fi
 
-          CHANGED=0
+          # Exact mapping: category folder → lua filename (matches your repo)
+          declare -A LUA_MAP=(
+            ["Anime"]="Animereturn.lua"
+            ["Classical"]="Classicalreturn.lua"
+            ["Emotional"]="Emotionalreturn.lua"
+            ["GameOST"]="GameOST.lua"
+            ["Modern"]="Modern.lua"
+            ["Movie"]="Movie.lua"
+            ["Others"]="Others.lua"
+          )
 
-          for LUAFILE in "$LUA_DIR"/*.lua; do
-            [[ -f "$LUAFILE" ]] || continue
-            ORIGINAL="$(cat "$LUAFILE")"
-            NEWCONTENT=""
+          UPDATED=0
 
-            while IFS= read -r LINE; do
-              # Lines that hold a song entry look like:    "SomeName.mid",
-              # Strip extension only from the quoted value
-              if [[ "$LINE" =~ ^([[:space:]]*\")(.*)(\"[[:space:]]*,?[[:space:]]*)$ ]]; then
-                PREFIX="${BASH_REMATCH[1]}"
-                VALUE="${BASH_REMATCH[2]}"
-                SUFFIX="${BASH_REMATCH[3]}"
-                CLEAN_VALUE="$(strip_ext "$VALUE")"
-                NEWCONTENT+="${PREFIX}${CLEAN_VALUE}${SUFFIX}"$'\n'
-              else
-                NEWCONTENT+="$LINE"$'\n'
-              fi
-            done < "$LUAFILE"
+          for CAT in "${!LUA_MAP[@]}"; do
+            MIDI_DIR="UploadedMidi/${CAT}"
+            LUA_FILE="${LUA_DIR}/${LUA_MAP[$CAT]}"
 
-            # Remove trailing newline added by the loop
-            NEWCONTENT="${NEWCONTENT%$'\n'}"
-
-            if [[ "$ORIGINAL" != "$NEWCONTENT" ]]; then
-              echo "$NEWCONTENT" > "$LUAFILE"
-              echo "  ✏ updated Lua: $(basename "$LUAFILE")"
-              CHANGED=$((CHANGED + 1))
-            else
-              echo "  ✔ already clean: $(basename "$LUAFILE")"
+            if [[ ! -d "$MIDI_DIR" ]]; then
+              echo "⚠ Skipping $CAT — folder not found"
+              continue
             fi
+
+            echo "📋 Rebuilding: ${LUA_MAP[$CAT]} from $MIDI_DIR"
+
+            # Collect all filenames, strip any leftover extensions (safety net),
+            # replace underscores with spaces for display, sort alphabetically
+            ENTRIES=()
+            while IFS= read -r -d '' FILEPATH; do
+              BASENAME="$(basename "$FILEPATH")"
+
+              # Strip extensions (safety net in case step 2 missed anything)
+              while [[ "${BASENAME,,}" == *.mid || "${BASENAME,,}" == *.midi ]]; do
+                if   [[ "${BASENAME,,}" == *.midi ]]; then BASENAME="${BASENAME%.*}"
+                elif [[ "${BASENAME,,}" == *.mid  ]]; then BASENAME="${BASENAME%.*}"
+                fi
+              done
+
+              # Replace underscores with spaces for the Lua display name
+              DISPLAY="${BASENAME//_/ }"
+
+              ENTRIES+=("$DISPLAY")
+            done < <(find "$MIDI_DIR" -maxdepth 1 -type f -print0 | sort -z)
+
+            if [[ ${#ENTRIES[@]} -eq 0 ]]; then
+              echo "  ⚠ No files found in $MIDI_DIR — writing empty table"
+              printf "return {\n}\n" > "$LUA_FILE"
+              continue
+            fi
+
+            # Sort entries alphabetically (case-insensitive)
+            IFS=$'\n' SORTED=($(printf '%s\n' "${ENTRIES[@]}" | sort -f))
+            unset IFS
+
+            # Build and write Lua content
+            {
+              echo "return {"
+              for ENTRY in "${SORTED[@]}"; do
+                echo "    \"${ENTRY}\","
+              done
+              echo "}"
+            } > "$LUA_FILE"
+
+            echo "  ✏ wrote ${#SORTED[@]} entries → ${LUA_MAP[$CAT]}"
+            UPDATED=$((UPDATED + 1))
           done
 
           echo ""
           echo "────────────────────────────────────"
-          echo "Lua files updated : $CHANGED"
+          echo "Lua files rebuilt : $UPDATED"
           echo "────────────────────────────────────"
 
-      # ── 4. Remove duplicates introduced by rename collisions ─────────────────
-      # If "song" already existed AND "song.mid" was renamed to "song",
-      # git mv would have failed above (we skip those), so no extra cleanup needed.
-
-      # ── 5. Commit & push ─────────────────────────────────────────────────────
+      # ── 4. Commit & push ─────────────────────────────────────────────────────
       - name: Commit changes
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Only commit if there is anything staged
-          if git diff --cached --quiet && git diff --quiet; then
-            echo "Nothing to commit — all files were already extension-free."
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "Nothing to commit — everything was already clean."
           else
-            git add -A
-            git commit -m "🧹 Strip all .mid/.midi extensions from files and Lua indexes"
+            git commit -m "🧹 Strip .mid/.midi extensions + rebuild Lua indexes (underscores → spaces)"
             git push
             echo "✅ Changes pushed."
           fi
