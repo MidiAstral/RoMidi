@@ -1,0 +1,165 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# strip-midi-extensions.yml
+#
+# One-time (or on-demand) workflow that renames every file inside
+# UploadedMidi/<Category>/ so it has NO .mid / .midi extension,
+# no matter how many are stacked (song.mid.mid.mid → song).
+#
+# It also cleans the matching Lua return files so their entries
+# are extension-free too.
+#
+# Required secret: GIST_SECRET  (GitHub PAT with repo + workflow scopes)
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Strip MIDI Extensions
+
+on:
+  workflow_dispatch:          # run manually from the Actions tab
+
+jobs:
+  strip:
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.GIST_SECRET }}
+      REPO:     ${{ github.repository }}   # owner/repo
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIST_SECRET }}
+
+      # ── 2. Strip extensions from MIDI files ──────────────────────────────────
+      - name: Rename files — strip all .mid / .midi suffixes
+        run: |
+          set -euo pipefail
+
+          CATEGORIES=(Anime Classical Emotional GameOST Modern Movie Others)
+          RENAMED=0
+          SKIPPED=0
+
+          strip_ext() {
+            local name="$1"
+            # Keep removing .mid / .midi (case-insensitive) until clean
+            while [[ "${name,,}" == *.mid || "${name,,}" == *.midi ]]; do
+              if   [[ "${name,,}" == *.midi ]]; then name="${name%.*}"
+              elif [[ "${name,,}" == *.mid  ]]; then name="${name%.*}"
+              fi
+            done
+            echo "$name"
+          }
+
+          for CAT in "${CATEGORIES[@]}"; do
+            DIR="UploadedMidi/${CAT}"
+            [[ -d "$DIR" ]] || continue
+
+            # Only look at files directly in the category folder (not sub-dirs)
+            while IFS= read -r -d '' FILEPATH; do
+              BASENAME="$(basename "$FILEPATH")"
+              CLEAN="$(strip_ext "$BASENAME")"
+
+              if [[ "$BASENAME" == "$CLEAN" ]]; then
+                echo "  ✔ already clean: $FILEPATH"
+                SKIPPED=$((SKIPPED + 1))
+                continue
+              fi
+
+              NEWPATH="${DIR}/${CLEAN}"
+
+              # Guard against accidental collision
+              if [[ -e "$NEWPATH" ]]; then
+                echo "  ⚠ skipping — target already exists: $NEWPATH"
+                SKIPPED=$((SKIPPED + 1))
+                continue
+              fi
+
+              git mv "$FILEPATH" "$NEWPATH"
+              echo "  ✏ renamed: $BASENAME → $CLEAN"
+              RENAMED=$((RENAMED + 1))
+
+            done < <(find "$DIR" -maxdepth 1 -type f -print0)
+          done
+
+          echo ""
+          echo "────────────────────────────────────"
+          echo "Files renamed : $RENAMED"
+          echo "Files skipped : $SKIPPED"
+          echo "────────────────────────────────────"
+
+      # ── 3. Fix Lua return files ───────────────────────────────────────────────
+      - name: Clean Lua return files — strip all .mid / .midi from entries
+        run: |
+          set -euo pipefail
+
+          LUA_DIR="UploadedMidi/uploadreturn"
+          [[ -d "$LUA_DIR" ]] || { echo "No Lua dir found, skipping."; exit 0; }
+
+          strip_ext() {
+            local name="$1"
+            while [[ "${name,,}" == *.mid || "${name,,}" == *.midi ]]; do
+              if   [[ "${name,,}" == *.midi ]]; then name="${name%.*}"
+              elif [[ "${name,,}" == *.mid  ]]; then name="${name%.*}"
+              fi
+            done
+            echo "$name"
+          }
+
+          CHANGED=0
+
+          for LUAFILE in "$LUA_DIR"/*.lua; do
+            [[ -f "$LUAFILE" ]] || continue
+            ORIGINAL="$(cat "$LUAFILE")"
+            NEWCONTENT=""
+
+            while IFS= read -r LINE; do
+              # Lines that hold a song entry look like:    "SomeName.mid",
+              # Strip extension only from the quoted value
+              if [[ "$LINE" =~ ^([[:space:]]*\")(.*)(\"[[:space:]]*,?[[:space:]]*)$ ]]; then
+                PREFIX="${BASH_REMATCH[1]}"
+                VALUE="${BASH_REMATCH[2]}"
+                SUFFIX="${BASH_REMATCH[3]}"
+                CLEAN_VALUE="$(strip_ext "$VALUE")"
+                NEWCONTENT+="${PREFIX}${CLEAN_VALUE}${SUFFIX}"$'\n'
+              else
+                NEWCONTENT+="$LINE"$'\n'
+              fi
+            done < "$LUAFILE"
+
+            # Remove trailing newline added by the loop
+            NEWCONTENT="${NEWCONTENT%$'\n'}"
+
+            if [[ "$ORIGINAL" != "$NEWCONTENT" ]]; then
+              echo "$NEWCONTENT" > "$LUAFILE"
+              echo "  ✏ updated Lua: $(basename "$LUAFILE")"
+              CHANGED=$((CHANGED + 1))
+            else
+              echo "  ✔ already clean: $(basename "$LUAFILE")"
+            fi
+          done
+
+          echo ""
+          echo "────────────────────────────────────"
+          echo "Lua files updated : $CHANGED"
+          echo "────────────────────────────────────"
+
+      # ── 4. Remove duplicates introduced by rename collisions ─────────────────
+      # If "song" already existed AND "song.mid" was renamed to "song",
+      # git mv would have failed above (we skip those), so no extra cleanup needed.
+
+      # ── 5. Commit & push ─────────────────────────────────────────────────────
+      - name: Commit changes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Only commit if there is anything staged
+          if git diff --cached --quiet && git diff --quiet; then
+            echo "Nothing to commit — all files were already extension-free."
+          else
+            git add -A
+            git commit -m "🧹 Strip all .mid/.midi extensions from files and Lua indexes"
+            git push
+            echo "✅ Changes pushed."
+          fi
