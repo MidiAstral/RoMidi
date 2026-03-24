@@ -4,7 +4,7 @@ return {
     "basic pitch transcription",
     "Beanie",
     "blue - yung kai",
-    "Die_with_a_smile_-_Piano_Solo_LKZ",
+    "Die with a smile - Piano Solo LKZ",
     "Her - JVKE",
     "Mitski - My Love Mine All Mine",
     "Tek It - Cafune",
