@@ -1,5 +1,6 @@
 return {
     "ASGORE - Toby Fox",
+    "Doki Doki Literature Club - Main Theme - ShinkoNetCavy",
     "Fallen Down - Toby Fox",
     "Fallen down (Reprise)",
     "Finale - Toby Fox",
