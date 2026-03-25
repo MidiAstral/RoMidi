@@ -1,6 +1,7 @@
 return {
     "ASGORE - Toby Fox",
     "Fallen Down - Toby Fox",
+    "Fallen down (Reprise)",
     "Finale - Toby Fox",
     "Gaster's Theme - Toby Fox",
     "MEGALOVANIA - Toby Fox",
