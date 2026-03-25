@@ -5,5 +5,6 @@ return {
     "MIDI File - Bruno Mars - Risk It All (Easy)",
     "Pirates of the Caribbean - He's a Pirate (1)",
     "Risk it all",
+    "Summer",
     "بروحي فتاة.",
 }
