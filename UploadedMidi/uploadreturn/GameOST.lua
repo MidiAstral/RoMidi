@@ -7,6 +7,7 @@ return {
     "Finale - Toby Fox",
     "Gaster's Theme - Toby Fox",
     "MEGALOVANIA - Toby Fox",
+    "Metal Crusher",
     "my light (我的光) - yung kai",
     "sans. - Toby Fox",
     "Snowy - Toby Fox",
