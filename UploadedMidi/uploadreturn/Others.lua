@@ -19,6 +19,7 @@ return {
     "Rush Among Us 2",
     "Rush C# 3",
     "RUSH E 2 but its HAPPY",
+    "RUSH E but something is OFF!",
     "RUSH F",
     "Rush of Life - Tony Ann",
     "tháng 4là lời nói dối của em",
