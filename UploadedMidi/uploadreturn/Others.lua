@@ -16,6 +16,7 @@ return {
     "Never-Gonna-Give-You-Up-3",
     "những lời hứa bỏ quên ost",
     "NOSTALGIA  Tony Ann 1769819486012",
+    "Rush Among Us 2",
     "Rush C# 3",
     "RUSH E 2 but its HAPPY",
     "RUSH F",
