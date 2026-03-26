@@ -16,6 +16,7 @@ return {
     "Never-Gonna-Give-You-Up-3",
     "những lời hứa bỏ quên ost",
     "NOSTALGIA  Tony Ann 1769819486012",
+    "Rush C# 3",
     "RUSH F",
     "Rush of Life - Tony Ann",
     "tháng 4là lời nói dối của em",
