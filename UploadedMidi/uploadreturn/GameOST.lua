@@ -12,6 +12,7 @@ return {
     "Mili - Compass",
     "Mili - Hero",
     "my light (我的光) - yung kai",
+    "Red Battle - Pokémon Gold Silver",
     "sans. - Toby Fox",
     "Snowy - Toby Fox",
     "Stronger Than You - Undertale",
