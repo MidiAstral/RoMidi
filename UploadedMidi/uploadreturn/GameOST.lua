@@ -8,6 +8,7 @@ return {
     "Gaster's Theme - Toby Fox",
     "MEGALOVANIA - Toby Fox",
     "Metal Crusher",
+    "Mili - Compass",
     "my light (我的光) - yung kai",
     "sans. - Toby Fox",
     "Snowy - Toby Fox",
