@@ -10,6 +10,7 @@ return {
     "Never Meant To Belong - Bleach",
     "Never Meant To Belong (Bleach OST)",
     "pf solo",
+    "shock-attack-on-titan-ed6",
     "Summer Pockets",
     "Tokyo Ghoul - Unravel",
     "Vickeblanka - Black Catcher Black Clover Opening 10 WT1",
