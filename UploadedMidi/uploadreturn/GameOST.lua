@@ -6,6 +6,7 @@ return {
     "Fallen Down - Toby Fox",
     "Fallen down (Reprise)",
     "Finale - Toby Fox",
+    "finale-undertale",
     "Gaster's Theme - Toby Fox",
     "MEGALOVANIA - Toby Fox",
     "Metal Crusher",
