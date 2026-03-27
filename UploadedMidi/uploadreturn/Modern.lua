@@ -7,6 +7,7 @@ return {
     "Country Roads",
     "Die with a smile - Piano Solo LKZ",
     "Her - JVKE",
+    "iris-goo-goo-dolls",
     "Mitski - My Love Mine All Mine",
     "mrs magic",
     "Tek It - Cafune",
