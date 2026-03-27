@@ -6,5 +6,6 @@ return {
     "Pirates of the Caribbean - He's a Pirate (3)",
     "Squid Game musique",
     "Squid Game slow",
+    "succession-piano-version-7",
     "The Simpsons Main Theme  Danny Elfman MLX",
 }
