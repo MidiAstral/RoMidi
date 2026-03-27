@@ -8,6 +8,7 @@ return {
     "Die with a smile - Piano Solo LKZ",
     "Her - JVKE",
     "Mitski - My Love Mine All Mine",
+    "mrs magic",
     "Tek It - Cafune",
     "Tony Ann - Anxiety",
     "Young Girl A - siinamota (slightly more difficult)",
