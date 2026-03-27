@@ -13,6 +13,7 @@ return {
     "shock-attack-on-titan-ed6",
     "Summer Pockets",
     "Tokyo Ghoul - Unravel",
+    "utsukushiki-zankoku-na-sekai-attack-on-titanshingeki-no-kyojin-ed-1-full",
     "Vickeblanka - Black Catcher Black Clover Opening 10 WT1",
     "Yoshimasa Terui - IF I AM WITH YOU",
 }
