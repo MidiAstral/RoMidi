@@ -3,6 +3,7 @@ return {
     "Beethoven Virus (insane)",
     "Beethoven Virus (insane).mid (1)",
     "Bruno Mars - Risk It All",
+    "Gloria Gaynor Arr.  Elaine Kelkel - I Will Survive",
     "in the pool  C",
     "MIDI File - Bruno Mars - Risk It All (Easy)",
     "Pirates of the Caribbean - He's a Pirate (1)",
