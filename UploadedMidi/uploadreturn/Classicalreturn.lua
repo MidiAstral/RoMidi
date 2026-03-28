@@ -7,6 +7,7 @@ return {
     "Bruno Mars - Risk It All",
     "Gloria Gaynor Arr.  Elaine Kelkel - I Will Survive",
     "in the pool  C",
+    "Merry-Go-Round of Life  Animenz",
     "MIDI File - Bruno Mars - Risk It All (Easy)",
     "moonlight-sonata-i",
     "Pirates of the Caribbean - He's a Pirate (1)",
