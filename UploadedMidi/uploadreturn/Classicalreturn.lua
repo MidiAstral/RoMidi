@@ -6,6 +6,7 @@ return {
     "Beethoven Virus (insane)",
     "Beethoven Virus (insane).mid (1)",
     "Bruno Mars - Risk It All",
+    "chopin ballade 4 (c)lubetsky",
     "Gloria Gaynor Arr.  Elaine Kelkel - I Will Survive",
     "in the pool  C",
     "Merry-Go-Round of Life  Animenz",
