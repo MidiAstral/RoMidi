@@ -21,6 +21,7 @@ return {
     "NOSTALGIA  Tony Ann 1769819486012",
     "R U Mine",
     "Rush Among Us 2",
+    "RUSH B - ReBlacked",
     "Rush C# 3",
     "RUSH E 2 but its HAPPY",
     "RUSH E but something is OFF!",
