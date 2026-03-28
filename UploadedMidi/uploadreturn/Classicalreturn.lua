@@ -9,6 +9,7 @@ return {
     "chopin ballade 4 (c)lubetsky",
     "Gloria Gaynor Arr.  Elaine Kelkel - I Will Survive",
     "in the pool  C",
+    "liebestraum",
     "Merry-Go-Round of Life  Animenz",
     "MIDI File - Bruno Mars - Risk It All (Easy)",
     "moonlight-sonata-i",
