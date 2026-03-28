@@ -12,6 +12,7 @@ return {
     "Metal Crusher",
     "Mili - Compass",
     "Mili - Hero",
+    "Mili - Through Patches of Violet",
     "my light (我的光) - yung kai",
     "Red Battle - Pokémon Gold Silver",
     "sans. - Toby Fox",
