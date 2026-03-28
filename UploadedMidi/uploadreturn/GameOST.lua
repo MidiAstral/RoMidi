@@ -1,4 +1,5 @@
 return {
+    "Animation Warrior Theme - Nighthawk22",
     "ASGORE - Toby Fox",
     "Battle Against a True Hero (Undyne the Undying) (wip)",
     "C418 - Mice on Venus",
