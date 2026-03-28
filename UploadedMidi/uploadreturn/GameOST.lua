@@ -11,6 +11,7 @@ return {
     "MEGALOVANIA - Toby Fox",
     "Metal Crusher",
     "Mili - Compass",
+    "Mili - Fly, My Wings",
     "Mili - Hero",
     "Mili - Through Patches of Violet",
     "my light (我的光) - yung kai",
