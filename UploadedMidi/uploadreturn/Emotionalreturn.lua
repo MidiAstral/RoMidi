@@ -5,6 +5,7 @@ return {
     "Hope - XXXTENTACION",
     "I Deserve To Bleed - Suchi Soucy",
     "Interstellar main theme (With Effects!)",
+    "Laufey - Promise",
     "Moonlight - XXXTentacion",
     "Multo - Cup of Joe RNE",
     "Øneheart & reidenshi snowfall piano midi",
