@@ -28,6 +28,7 @@ return {
     "Rush of Life - Tony Ann",
     "tháng 4là lời nói dối của em",
     "the-real-slim-shady-eminem",
+    "this is the talking",
     "Tony Ann - Awakening",
     "Tony Ann - Desire",
     "Tony Ann - Discovery",
