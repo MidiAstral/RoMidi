@@ -18,6 +18,7 @@ return {
     "my light (我的光) - yung kai",
     "Red Battle - Pokémon Gold Silver",
     "sans. - Toby Fox",
+    "Shiawase Vip",
     "Snowy - Toby Fox",
     "Stronger Than You - Undertale",
     "Thick Of It [The one from IG reels]",
