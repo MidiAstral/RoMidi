@@ -30,6 +30,7 @@ return {
     "RUSH E but something is OFF!",
     "RUSH F",
     "Rush of Life - Tony Ann",
+    "Tally Hall - The Bidding",
     "tháng 4là lời nói dối của em",
     "the-real-slim-shady-eminem",
     "this is the talking",
