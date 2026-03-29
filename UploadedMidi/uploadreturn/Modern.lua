@@ -4,6 +4,7 @@ return {
     "basic pitch transcription",
     "Beanie",
     "blue - yung kai",
+    "coffin nails   rapp snitch knishes",
     "Congratulations - Mac Miller (Final Project)",
     "Country Roads",
     "Die with a smile - Piano Solo LKZ",
