@@ -39,6 +39,7 @@ return {
     "Tony Ann - Rain",
     "Tony Ann Taurus",
     "trillium",
+    "White Stripes (The) — We Re Going to Be Friends [MIDIfind.com]",
     "Wind Of Fjords - Soft Knees",
     "Worlds Smallest Violin full notes",
 }
