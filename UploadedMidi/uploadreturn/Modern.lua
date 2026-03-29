@@ -8,6 +8,7 @@ return {
     "Die with a smile - Piano Solo LKZ",
     "Guns N Roses - Sweet Child O' Mine (1)",
     "Her - JVKE",
+    "How The World Works - Bo Burnham",
     "iris-goo-goo-dolls",
     "Mitski - My Love Mine All Mine",
     "mrs magic",
