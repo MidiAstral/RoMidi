@@ -13,6 +13,7 @@ return {
     "iris-goo-goo-dolls",
     "Mitski - My Love Mine All Mine",
     "mrs magic",
+    "Rapp Snitch Knishes - MF DOOM",
     "Tek It - Cafune",
     "Tony Ann - Anxiety",
     "Young Girl A - siinamota (slightly more difficult)",
