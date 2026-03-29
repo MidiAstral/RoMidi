@@ -2,6 +2,7 @@ return {
     "a good man with a broken heart - lovibe",
     "Back To Friends - Sombr",
     "D4vd Romantic Homicide piano midi",
+    "Elton John - I'm still standing",
     "Hope - XXXTENTACION",
     "I Deserve To Bleed - Suchi Soucy",
     "Interstellar main theme (With Effects!)",
