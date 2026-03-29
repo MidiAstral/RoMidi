@@ -6,6 +6,7 @@ return {
     "blue - yung kai",
     "Country Roads",
     "Die with a smile - Piano Solo LKZ",
+    "Guns N Roses - Sweet Child O' Mine (1)",
     "Her - JVKE",
     "iris-goo-goo-dolls",
     "Mitski - My Love Mine All Mine",
