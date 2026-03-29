@@ -7,6 +7,7 @@ return {
     "I Deserve To Bleed - Suchi Soucy",
     "Interstellar main theme (With Effects!)",
     "Laufey - Promise",
+    "Like Him Tyler The Creator",
     "Moonlight - XXXTentacion",
     "Multo - Cup of Joe RNE",
     "Øneheart & reidenshi snowfall piano midi",
