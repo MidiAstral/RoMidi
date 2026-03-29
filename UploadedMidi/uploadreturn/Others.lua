@@ -11,6 +11,7 @@ return {
     "EnterSandman",
     "Golden Hour  JVKE Updated Ver 1772653873814",
     "Gravity - Hazbin Hotel",
+    "Guns N Roses - Sweet Child O' Mine",
     "hãy trao cho anh",
     "Hello- OMFG (WIP)(Copy)",
     "id 072019",
