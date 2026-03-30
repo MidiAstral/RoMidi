@@ -21,6 +21,7 @@ return {
     "sans. - Toby Fox",
     "Shiawase Vip",
     "Snowy - Toby Fox",
+    "Stereo Madness - ForeverBound",
     "Stronger Than You - Undertale",
     "Thick Of It [The one from IG reels]",
     "Undertale - SAVE the World",
