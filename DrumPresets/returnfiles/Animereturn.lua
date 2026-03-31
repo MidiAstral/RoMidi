@@ -1,1 +1,2 @@
-return "Anime"
+return {
+}
