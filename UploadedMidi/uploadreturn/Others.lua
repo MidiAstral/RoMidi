@@ -26,6 +26,7 @@ return {
     "Rush Among Us 2",
     "RUSH B - ReBlacked",
     "Rush C# 3",
+    "rush e",
     "RUSH E 2 but its HAPPY",
     "RUSH E but something is OFF!",
     "RUSH F",
