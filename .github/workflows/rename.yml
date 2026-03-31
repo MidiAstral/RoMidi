@@ -1,0 +1,86 @@
+name: Rename DrumPreset Files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rename-presets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Rename files and update return files
+        run: |
+          python3 << 'EOF'
+          import os
+          import re
+
+          BASE = "DrumPresets"
+          CATEGORIES = ["Anime", "Modern", "Movie", "Others", "Rock"]
+
+          def clean_name(name):
+              name = name.replace("_", " ")
+              name = name.replace("\u2014", "-")  # em dash
+              name = name.replace("\u2013", "-")  # en dash
+              return name
+
+          def strip_ext(filename):
+              return re.sub(r'\.rtx$', '', filename, flags=re.IGNORECASE)
+
+          for category in CATEGORIES:
+              cat_path = os.path.join(BASE, category)
+              if not os.path.isdir(cat_path):
+                  print(f"[SKIP] {cat_path} does not exist.")
+                  continue
+
+              files = [f for f in os.listdir(cat_path) if f.lower().endswith(".rtx")]
+              names_for_return = []
+
+              for filename in sorted(files):
+                  cleaned = clean_name(filename)
+                  old_path = os.path.join(cat_path, filename)
+                  new_path = os.path.join(cat_path, cleaned)
+
+                  if filename != cleaned:
+                      os.rename(old_path, new_path)
+                      print(f"[RENAME] {filename} -> {cleaned}")
+                  else:
+                      print(f"[OK]     {filename}")
+
+                  names_for_return.append(strip_ext(cleaned))
+
+              # Build return file
+              return_dir = os.path.join(BASE, "returnfiles")
+              os.makedirs(return_dir, exist_ok=True)
+              return_path = os.path.join(return_dir, f"{category}return.lua")
+
+              if names_for_return:
+                  lines = []
+                  for i, name in enumerate(names_for_return):
+                      comma = "," if i < len(names_for_return) - 1 else ""
+                      lines.append(f'\t"{name}"{comma}')
+                  content = "return {\n" + "\n".join(lines) + "\n}"
+              else:
+                  content = "return {\n}"
+
+              with open(return_path, "w", encoding="utf-8") as f:
+                  f.write(content)
+
+              print(f"[RETURN] {category}return.lua -> {len(names_for_return)} entries")
+              print(content)
+              print()
+          EOF
+
+      - name: Commit and push changes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add DrumPresets/
+          if git diff --cached --quiet; then
+            echo "Nothing to commit - all files already clean."
+          else
+            git commit -m "Rename presets: underscores to spaces, dashes normalized, return files updated"
+            git push
+          fi
