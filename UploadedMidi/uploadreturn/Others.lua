@@ -30,6 +30,7 @@ return {
     "Rush C# 3",
     "rush e",
     "Rush E (1.2M Notes)",
+    "Rush E 2 (Impossible) (1)",
     "RUSH E 2 but its HAPPY",
     "RUSH E but something is OFF!",
     "RUSH F",
