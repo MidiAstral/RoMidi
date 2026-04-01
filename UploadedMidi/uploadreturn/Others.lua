@@ -32,6 +32,7 @@ return {
     "Rush E (1.2M Notes)",
     "Rush E 2 (Impossible) (1)",
     "RUSH E 2 but its HAPPY",
+    "rush e 3",
     "RUSH E but something is OFF!",
     "RUSH F",
     "Rush of Life - Tony Ann",
