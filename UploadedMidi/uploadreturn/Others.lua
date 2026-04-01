@@ -28,6 +28,7 @@ return {
     "RUSH B - ReBlacked",
     "Rush C# 3",
     "rush e",
+    "Rush E (1.2M Notes)",
     "RUSH E 2 but its HAPPY",
     "RUSH E but something is OFF!",
     "RUSH F",
