@@ -7,6 +7,7 @@ return {
     "Hope - XXXTENTACION",
     "I Deserve To Bleed - Suchi Soucy",
     "Interstellar main theme (With Effects!)",
+    "KISS — I Was Made For Loving You",
     "Laufey - Promise",
     "like him - tyler creator",
     "Like Him Tyler The Creator",
