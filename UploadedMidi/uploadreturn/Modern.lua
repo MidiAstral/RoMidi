@@ -9,6 +9,7 @@ return {
     "Congratulations - Mac Miller (Final Project)",
     "Country Roads",
     "Die with a smile - Piano Solo LKZ",
+    "Elton John - I'm Still Standing (Expert)",
     "Guns N Roses - Sweet Child O' Mine (1)",
     "Her - JVKE",
     "How The World Works - Bo Burnham",
