@@ -1,3 +1,3 @@
 return {
-	"Beggin' - Måneskin Drum Sheet Music"
+	"Beggin - Maneskin Drum Sheet Music"
 }
