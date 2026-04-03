@@ -1,38 +1,33 @@
-name: Create Guitar Preset Folders
+name: Create Return Files
 
 on:
-  workflow_dispatch: # manual trigger
+  workflow_dispatch:
   push:
     branches:
       - main
 
 jobs:
-  create-folders:
+  create-returnfiles:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Create folders
+      - name: Create returnfiles
         run: |
-          mkdir -p GuitarPresets/Anime
-          mkdir -p GuitarPresets/GameOST
-          mkdir -p GuitarPresets/Classical
-          mkdir -p GuitarPresets/Modern
-          mkdir -p GuitarPresets/Rock
+          mkdir -p GuitarPresets/returnfiles
 
-          # Add placeholder files so Git tracks folders
-          touch GuitarPresets/Anime/.gitkeep
-          touch GuitarPresets/GameOST/.gitkeep
-          touch GuitarPresets/Classical/.gitkeep
-          touch GuitarPresets/Modern/.gitkeep
-          touch GuitarPresets/Rock/.gitkeep
+          echo "return {}" > GuitarPresets/returnfiles/Animereturn.lua
+          echo "return {}" > GuitarPresets/returnfiles/GameOSTreturn.lua
+          echo "return {}" > GuitarPresets/returnfiles/Classicalreturn.lua
+          echo "return {}" > GuitarPresets/returnfiles/Modernreturn.lua
+          echo "return {}" > GuitarPresets/returnfiles/Rockreturn.lua
 
       - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .
-          git commit -m "Create GuitarPresets category folders" || echo "No changes to commit"
+          git commit -m "Create returnfiles for categories" || echo "No changes to commit"
           git push
