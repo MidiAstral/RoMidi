@@ -1,1 +1,3 @@
-return {}
+return {
+	"Sweden - C418",
+}
