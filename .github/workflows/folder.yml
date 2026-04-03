@@ -1,33 +1,41 @@
-name: Create Return Files
+name: Cleanup Guitar Presets
 
 on:
+  # Allows you to run this manually from the Actions tab
   workflow_dispatch:
+  # Runs automatically when you push to main
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
-  create-returnfiles:
+  delete-presets:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create returnfiles
+      - name: Remove files from category folders
         run: |
-          mkdir -p GuitarPresets/returnfiles
+          # Define the list of categories
+          CATEGORIES=("Anime" "GameOST" "Modern" "Classical" "Rock")
+          
+          for CAT in "${CATEGORIES[@]}"; do
+            TARGET="GuitarPresets/$CAT"
+            
+            if [ -d "$TARGET" ]; then
+              echo "Cleaning $TARGET..."
+              # Deletes all files but keeps the directory
+              rm -rf "$TARGET"/*
+            else
+              echo "Directory $TARGET does not exist, skipping."
+            fi
+          done
 
-          echo "return {}" > GuitarPresets/returnfiles/Animereturn.lua
-          echo "return {}" > GuitarPresets/returnfiles/GameOSTreturn.lua
-          echo "return {}" > GuitarPresets/returnfiles/Classicalreturn.lua
-          echo "return {}" > GuitarPresets/returnfiles/Modernreturn.lua
-          echo "return {}" > GuitarPresets/returnfiles/Rockreturn.lua
-
-      - name: Commit changes
+      - name: Commit and Push changes
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Create returnfiles for categories" || echo "No changes to commit"
-          git push
+          # Only commit if there are actually changes to avoid errors
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Automated cleanup of Guitar Presets" && git push)
