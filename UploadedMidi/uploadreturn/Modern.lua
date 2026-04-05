@@ -9,6 +9,7 @@ return {
     "coffin nails   rapp snitch knishes",
     "Congratulations - Mac Miller (Final Project)",
     "Country Roads",
+    "Credits Song For My Death (Code: 900)",
     "Die with a smile - Piano Solo LKZ",
     "Elton John - I'm Still Standing (Expert)",
     "Guns N Roses - Sweet Child O' Mine (1)",
