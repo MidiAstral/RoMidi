@@ -45,6 +45,7 @@ return {
     "sinkingtown",
     "Tally Hall - The Bidding",
     "tháng 4là lời nói dối của em",
+    "the entertainer",
     "the-real-slim-shady-eminem",
     "this is the talking",
     "Tony Ann - Awakening",
