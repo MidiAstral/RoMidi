@@ -16,6 +16,7 @@ return {
     "Like Him Tyler The Creator",
     "Lost Sky - Dreams Pt. II",
     "Moonlight - XXXTentacion",
+    "Mrs Magic - Strawberry Guy (Piano Version)",
     "Multo - Cup of Joe RNE",
     "Øneheart & reidenshi snowfall piano midi",
     "PULSE  Tony Ann aka my neighbours car alarm 1770203303452",
