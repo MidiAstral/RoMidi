@@ -11,6 +11,7 @@ return {
     "Flamewall",
     "Gloria Gaynor Arr.  Elaine Kelkel - I Will Survive",
     "in the pool  C",
+    "JOPLIN.The entertainer",
     "liebestraum",
     "Merry-Go-Round of Life  Animenz",
     "MIDI File - Bruno Mars - Risk It All (Easy)",
