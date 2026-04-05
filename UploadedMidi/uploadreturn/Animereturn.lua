@@ -1,4 +1,5 @@
 return {
+    "audio2midi",
     "Beastars - JUNO is in love -adult-",
     "DEAD OR LIE",
     "Eldoraudio-Juan Arenosa - Ofelia  Official Music Video  - Juan Arenosa  128k  humanized",
