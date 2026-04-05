@@ -5,6 +5,7 @@ return {
     "Back To Friends - Sombr",
     "Buttercup - Jack Stauber",
     "Childish Gambino - Redbone",
+    "Credits Song For My Death",
     "D4vd Romantic Homicide piano midi",
     "Elton John - I'm still standing",
     "Hope - XXXTENTACION",
