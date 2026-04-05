@@ -1,5 +1,4 @@
 return {
-    "a good man with a broken heart - lovibe",
     "Baby Hotline",
     "Back To Friends - Sombr",
     "Buttercup - Jack Stauber",
