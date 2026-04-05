@@ -28,6 +28,7 @@ return {
     "những lời hứa bỏ quên ost",
     "no name (7)",
     "NOSTALGIA  Tony Ann 1769819486012",
+    "not yours",
     "oi josuke",
     "Rush Among Us 2",
     "RUSH B - ReBlacked",
