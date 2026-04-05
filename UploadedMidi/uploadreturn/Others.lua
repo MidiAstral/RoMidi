@@ -1,4 +1,5 @@
 return {
+    "audio2midi (3)",
     "Bad Apple - touhou - midi by tutogamer2a - final version",
     "Beta0404",
     "Bruno Mars - When i was your man",
