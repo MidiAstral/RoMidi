@@ -11,6 +11,7 @@ return {
     "Mermaid Rhapsody – v3rmillionkyo",
     "Never Meant To Belong - Bleach",
     "Never Meant To Belong (Bleach OST)",
+    "New Darling",
     "pf solo",
     "shock-attack-on-titan-ed6",
     "Summer Pockets",
