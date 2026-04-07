@@ -15,6 +15,7 @@ return {
     "New Darling",
     "pf solo",
     "shock-attack-on-titan-ed6",
+    "Short but Seems Long, Time of Our Life",
     "Summer Pockets",
     "Tokyo Ghoul - Unravel",
     "utsukushiki-zankoku-na-sekai-attack-on-titanshingeki-no-kyojin-ed-1-full",
