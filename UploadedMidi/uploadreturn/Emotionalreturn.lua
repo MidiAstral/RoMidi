@@ -18,6 +18,7 @@ return {
     "like him - tyler creator",
     "Like Him Tyler The Creator",
     "Lost Sky - Dreams Pt. II",
+    "Love Story  Taylor Swift 1775672226231",
     "Moonlight - XXXTentacion",
     "Mrs Magic - Strawberry Guy (Piano Version)",
     "Multo - Cup of Joe RNE",
