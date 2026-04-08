@@ -24,6 +24,7 @@ return {
     "Sinking Town   沈める街 - Yoeko Kurahashi",
     "Stranglers — Golden Brown",
     "Tally Hall- Hidden in the Sand ",
+    "The Stranglers - Golden Brown 2",
     "Tony Ann - ICARUS",
     "Tony Ann - Reminisce 2",
     "Washing Machine Heart - Mitski",
