@@ -22,6 +22,7 @@ return {
     "Øneheart & reidenshi snowfall piano midi",
     "PULSE  Tony Ann aka my neighbours car alarm 1770203303452",
     "Sinking Town   沈める街 - Yoeko Kurahashi",
+    "Stranglers — Golden Brown",
     "Tally Hall- Hidden in the Sand ",
     "Tony Ann - ICARUS",
     "Tony Ann - Reminisce 2",
