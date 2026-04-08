@@ -1,5 +1,6 @@
 return {
     "Accomplished",
+    "Bad Style",
     "Bohemian Rhapsody - Queen",
     "Dạo Bước HongKong 1999",
     "hans-zimmer-cornfield-chase-interstellar-soundtrack-21091-nonstop2k.com",
