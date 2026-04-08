@@ -9,6 +9,7 @@ return {
     "chopin ballade 4 (c)lubetsky",
     "Dạo Bước HongKong 1999",
     "Flamewall",
+    "Fur Elise (1)",
     "Gloria Gaynor Arr.  Elaine Kelkel - I Will Survive",
     "in the pool  C",
     "JOPLIN.The entertainer",
