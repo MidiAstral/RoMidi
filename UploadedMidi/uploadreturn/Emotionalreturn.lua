@@ -9,6 +9,7 @@ return {
     "Elton John - I'm still standing",
     "Hope - XXXTENTACION",
     "I Deserve To Bleed - Suchi Soucy",
+    "Indila - Love Story",
     "Interstellar main theme (With Effects!)",
     "Jack Stauber - Baby Hotline (5)",
     "KISS — I Was Made For Loving You",
