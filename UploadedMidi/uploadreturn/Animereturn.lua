@@ -1,4 +1,5 @@
 return {
+    "AIZO HalcyonMusic",
     "audio2midi",
     "Beastars - JUNO is in love -adult-",
     "DEAD OR LIE",
