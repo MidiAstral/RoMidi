@@ -18,6 +18,7 @@ return {
     "pf solo",
     "shock-attack-on-titan-ed6",
     "Summer Pockets",
+    "Sword Art Online Medley HalcyonMusic",
     "Tokyo Ghoul - Unravel",
     "utsukushiki-zankoku-na-sekai-attack-on-titanshingeki-no-kyojin-ed-1-full",
     "Vickeblanka - Black Catcher Black Clover Opening 10 WT1",
