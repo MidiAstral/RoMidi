@@ -7,6 +7,7 @@ return {
     "If I am with you",
     "If I Am With You  Yoshimasa Terui  Jujutsu Kaisen S2 OST LB7",
     "itterasshai-attack-on-titan-ss4-ed-ai-higuchi",
+    "Josuke's theme Diamond Is Unbreakable in piano(COMPLETE)",
     "Judas",
     "Kensuke Ushio - IN THE POOL",
     "Kimi no Na wa    Sparkle  TheIshter  Full Sheets 1772654410756",
