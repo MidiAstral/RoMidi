@@ -22,4 +22,5 @@ return {
     "Risk it all",
     "Summer",
     "بروحي فتاة.",
+    "กลัวว่าฉันจะไม่เสียใจ (Fear) – PURPEECH",
 }
