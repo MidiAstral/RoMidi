@@ -1,5 +1,4 @@
 return {
-    "ABBA - The Winner Takes it All",
     "Adele - Skyfall",
     "AnyConv.com  5875-ed88-4b61-9772-980efa64c95d",
     "Arabesque-in-E-Nr-1",
