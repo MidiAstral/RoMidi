@@ -10,7 +10,6 @@ return {
     "cocktail",
     "coffin nails   rapp snitch knishes",
     "drag-me-down-twenty-one-two",
-    "Eldoraudio-Lady - Gaga Judas",
     "EnterSandman",
     "Ethan Bortnick - cut my fingers off",
     "Golden Hour  JVKE Updated Ver 1772653873814",
