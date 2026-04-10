@@ -4,6 +4,7 @@ return {
     "Beastars - JUNO is in love -adult-",
     "DEAD OR LIE",
     "Eldoraudio-Juan Arenosa - Ofelia  Official Music Video  - Juan Arenosa  128k  humanized",
+    "Fukashigi no Carte",
     "Giornos Theme",
     "HalcyonMusic 10k subs medley",
     "If I am with you",
