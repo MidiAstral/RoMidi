@@ -1,4 +1,5 @@
 return {
+    "*Looping the Rooms",
     "audio2midi",
     "audio2midi (1)",
     "audio2midi (2)",
