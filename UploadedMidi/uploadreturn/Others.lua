@@ -10,6 +10,7 @@ return {
     "cocktail",
     "coffin nails   rapp snitch knishes",
     "drag-me-down-twenty-one-two",
+    "Eldoraudio-Lady - Gaga Judas",
     "EnterSandman",
     "Ethan Bortnick - cut my fingers off",
     "Ethan Bortnick cut my fingers off",
