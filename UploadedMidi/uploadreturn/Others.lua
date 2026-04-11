@@ -68,6 +68,7 @@ return {
     "Tony Ann - Rain",
     "Tony Ann Taurus",
     "Touhou 21 Owen was her V1",
+    "Touhou Bad Apple mhxa",
     "trillium",
     "We're Going To Be Friends (WIP)",
     "White Stripes (The) — We Re Going to Be Friends [MIDIfind.com]",
