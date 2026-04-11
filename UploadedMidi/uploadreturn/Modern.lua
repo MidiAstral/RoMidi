@@ -16,6 +16,7 @@ return {
     "Guns N Roses - Sweet Child O' Mine (1)",
     "Her - JVKE",
     "How The World Works - Bo Burnham",
+    "In the end drum",
     "iris-goo-goo-dolls",
     "Mitski - My Love Mine All Mine",
     "mrs magic",
