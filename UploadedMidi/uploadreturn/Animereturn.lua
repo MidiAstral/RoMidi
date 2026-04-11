@@ -1,4 +1,5 @@
 return {
+    "200 AniSong Medley HalcyonMusic",
     "AIZO HalcyonMusic",
     "audio2midi",
     "Beastars - JUNO is in love -adult-",
