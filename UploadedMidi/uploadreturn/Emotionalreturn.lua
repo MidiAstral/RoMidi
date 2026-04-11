@@ -22,6 +22,7 @@ return {
     "Jowel: nunca es suficiente",
     "Jowel: Perdón",
     "Jowel: Por qué te vas",
+    "Jowel: Your Love",
     "KISS — I Was Made For Loving You",
     "Laufey - Promise",
     "like him - tyler creator",
