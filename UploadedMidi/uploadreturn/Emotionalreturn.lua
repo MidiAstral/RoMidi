@@ -7,6 +7,7 @@ return {
     "Credits Song For My Death",
     "D4vd Romantic Homicide piano midi",
     "Elton John - I'm still standing",
+    "Happy",
     "Hope - XXXTENTACION",
     "I Deserve To Bleed - Suchi Soucy",
     "Indila - Love Story",
