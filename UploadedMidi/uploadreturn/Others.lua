@@ -69,6 +69,7 @@ return {
     "Tony Ann Taurus",
     "Touhou Bad Apple mhxa",
     "Touhou Owen was her v1 mhxa",
+    "Touhou Owen was her V2 mhxa",
     "trillium",
     "We're Going To Be Friends (WIP)",
     "White Stripes (The) — We Re Going to Be Friends [MIDIfind.com]",
