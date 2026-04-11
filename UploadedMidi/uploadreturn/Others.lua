@@ -51,6 +51,7 @@ return {
     "the entertainer",
     "the-real-slim-shady-eminem",
     "this is the talking",
+    "Tokyo Ghoul Unravel",
     "Tony Ann - Awakening",
     "Tony Ann - Desire",
     "Tony Ann - Discovery",
