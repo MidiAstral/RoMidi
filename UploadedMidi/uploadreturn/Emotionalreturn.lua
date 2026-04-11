@@ -17,6 +17,7 @@ return {
     "Jack Stauber - Baby Hotline (5)",
     "Jowel: fantasmas",
     "Jowel: Goodbye World",
+    "Jowel: Im Still Standing",
     "Jowel: Let Me Down",
     "Jowel: nunca es suficiente",
     "Jowel: Perdón",
