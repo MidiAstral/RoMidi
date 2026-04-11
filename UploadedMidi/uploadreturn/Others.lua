@@ -58,6 +58,7 @@ return {
     "tháng 4là lời nói dối của em",
     "the entertainer",
     "the-real-slim-shady-eminem",
+    "Theatre mhxa",
     "this is the talking",
     "this is what falling in love feels like JVKE",
     "Tokyo Ghoul Unravel",
