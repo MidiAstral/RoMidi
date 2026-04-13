@@ -1,6 +1,7 @@
 return {
     " Erika  A German WW2 marching song",
     "*I've Lived for 1000 Years / Living millennium - Iyowa* mhxa",
+    "6 TRILLION YEARS AND AN OVERNIGHT STORY mhxa",
     "A Tale of SIX Trillion years and night  mhxa",
     "Bad Apple - touhou - midi by tutogamer2a - final version",
     "Beta0404",
