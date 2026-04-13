@@ -9,6 +9,7 @@ return {
     "Bruno Mars - When i was your man",
     "buông đôi tay nhau ra x nắng ấm xa dần",
     "cause i love you x gạt đi nc mắt",
+    "Celestial Opus",
     "chắc ai đó sẽ về",
     "Chờ đợi có đáng sợ",
     "cocktail",
