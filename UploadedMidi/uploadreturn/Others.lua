@@ -76,6 +76,7 @@ return {
     "Touhou Owen was her v1 mhxa",
     "Touhou Owen was her V2 mhxa",
     "trillium",
+    "Want to be Crem#ted/Ab#se mhxa",
     "We're Going To Be Friends (WIP)",
     "White Stripes (The) — We Re Going to Be Friends [MIDIfind.com]",
     "Wind Of Fjords - Soft Knees",
