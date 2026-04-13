@@ -26,6 +26,7 @@ return {
     "Jowel: Your Love",
     "KISS — I Was Made For Loving You",
     "Laufey - Promise",
+    "Laufey - Too little, too late",
     "like him - tyler creator",
     "Like Him Tyler The Creator",
     "Lost Sky - Dreams Pt. II",
