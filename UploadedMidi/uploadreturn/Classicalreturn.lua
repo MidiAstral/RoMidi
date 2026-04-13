@@ -17,6 +17,7 @@ return {
     "MIDI File - Bruno Mars - Risk It All (Easy)",
     "moonlight-sonata-i",
     "MỘT ĐỜI (14 Casper & Bon Nghiêm)",
+    "operas",
     "Pirates of the Caribbean - He's a Pirate (1)",
     "Risk it all",
     "Summer",
