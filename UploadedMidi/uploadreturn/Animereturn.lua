@@ -20,6 +20,7 @@ return {
     "Never Meant To Belong - Bleach",
     "Never Meant To Belong (Bleach OST)",
     "New Darling",
+    "Orange 7!! - Your Lie In April",
     "pf solo",
     "shock-attack-on-titan-ed6",
     "Summer Pockets",
