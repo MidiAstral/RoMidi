@@ -36,6 +36,7 @@ jobs:
 
           for genre in "${genres[@]}"; do
             mkdir -p "$base/$genre"
+            touch "$base/$genre/.gitkeep"
           done
 
       - name: 📌 Commit and Push
