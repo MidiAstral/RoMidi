@@ -22,6 +22,7 @@ return {
     "Golden Hour  JVKE Updated Ver 1772653873814",
     "Gooseworx - Your New Home MIDI (Your Piano Tutorials)",
     "Gravity - Hazbin Hotel",
+    "Gravity (from Hazbin Hotel)",
     "Guns N Roses - Sweet Child O' Mine",
     "hãy trao cho anh",
     "Hello- OMFG (WIP)(Copy)",
