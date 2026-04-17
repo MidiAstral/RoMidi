@@ -3,6 +3,9 @@ name: Create Drum Categories
 on:
 workflow_dispatch:
 
+permissions:
+contents: write
+
 jobs:
 create-folders:
 runs-on: ubuntu-latest
@@ -17,7 +20,6 @@ steps:
 
       mkdir -p "$base"
 
-      # List your drum genres here
       genres=(
         "Pop"
         "HipHop"
@@ -37,6 +39,7 @@ steps:
 
       for genre in "${genres[@]}"; do
         mkdir -p "$base/$genre"
+        touch "$base/$genre/.gitkeep"
       done
 
   - name: 📌 Commit and Push
@@ -45,5 +48,10 @@ steps:
       git config user.email "github-actions@github.com"
 
       git add .
-      git commit -m "Auto-create drum category folders" || echo "No changes to commit"
-      git push
+
+      if git diff --cached --quiet; then
+        echo "No changes to commit"
+      else
+        git commit -m "Auto-create drum category folders"
+        git push
+      fi
