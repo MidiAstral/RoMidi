@@ -14,6 +14,7 @@ return {
     "itterasshai-attack-on-titan-ss4-ed-ai-higuchi",
     "Josuke's theme Diamond Is Unbreakable in piano(COMPLETE)",
     "Judas",
+    "Kamado Nezuko no Uta HalcyonMusic",
     "Kensuke Ushio - IN THE POOL",
     "Kimi no Na wa    Sparkle  TheIshter  Full Sheets 1772654410756",
     "Mermaid Rhapsody – v3rmillionkyo",
