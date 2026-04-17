@@ -21,6 +21,7 @@ return {
     "Never Meant To Belong - Bleach",
     "Never Meant To Belong (Bleach OST)",
     "New Darling",
+    "Nezuko HalcyonMusic",
     "Orange 7!! - Your Lie In April",
     "pf solo",
     "Shinzou wo Sasageyo HalcyonMusic",
