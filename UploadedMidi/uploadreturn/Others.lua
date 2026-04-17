@@ -14,6 +14,7 @@ return {
     "Chờ đợi có đáng sợ",
     "cocktail",
     "coffin nails   rapp snitch knishes",
+    "CupofJoe & Multo mhxa",
     "drag-me-down-twenty-one-two",
     "Engravings mhxa",
     "EnterSandman",
