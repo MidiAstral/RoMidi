@@ -60,6 +60,7 @@ return {
     "RUSH E 2 but its HAPPY",
     "rush e 3",
     "Rush E 4 Black Midi By S3G",
+    "Rush E boss? mhxa",
     "RUSH E but something is OFF!",
     "RUSH F",
     "Rush of Life - Tony Ann",
