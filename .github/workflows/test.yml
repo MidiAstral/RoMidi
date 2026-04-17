@@ -1,0 +1,51 @@
+name: Create Drum Categories
+
+on:
+workflow_dispatch:
+
+jobs:
+create-folders:
+runs-on: ubuntu-latest
+
+```
+steps:
+  - name: 📥 Checkout Repository
+    uses: actions/checkout@v4
+
+  - name: 📁 Create Drum Category Folders
+    run: |
+      base="Uploaded Drums/Categories"
+
+      mkdir -p "$base"
+
+      # List your drum genres here
+      genres=(
+        "Pop"
+        "HipHop"
+        "Trap"
+        "Rock"
+        "Metal"
+        "EDM"
+        "Jazz"
+        "Funk"
+        "LoFi"
+        "Latin"
+        "Afrobeat"
+        "Anime"
+        "GameOST"
+        "Cinematic"
+      )
+
+      for genre in "${genres[@]}"; do
+        mkdir -p "$base/$genre"
+      done
+
+  - name: 📌 Commit and Push
+    run: |
+      git config user.name "github-actions"
+      git config user.email "github-actions@github.com"
+
+      git add .
+      git commit -m "Auto-create drum category folders" || echo "No changes to commit"
+      git push
+```
