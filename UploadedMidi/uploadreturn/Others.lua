@@ -4,6 +4,7 @@ return {
     "6 TRILLION YEARS AND AN OVERNIGHT STORY mhxa",
     "A Tale of SIX Trillion years and night  mhxa",
     "Bad Apple - touhou - midi by tutogamer2a - final version",
+    "Beethoven - Moonlight sonata 3th movement mhxa",
     "Beta0404",
     "Broken World mhxa",
     "Bruno Mars - When i was your man",
