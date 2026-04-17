@@ -22,6 +22,7 @@ return {
     "New Darling",
     "Orange 7!! - Your Lie In April",
     "pf solo",
+    "Shinzou wo Sasageyo HalcyonMusic",
     "shock-attack-on-titan-ed6",
     "Summer Pockets",
     "Sword Art Online Medley HalcyonMusic",
