@@ -7,7 +7,6 @@ jobs:
 create-folders:
 runs-on: ubuntu-latest
 
-```
 steps:
   - name: 📥 Checkout Repository
     uses: actions/checkout@v4
@@ -48,4 +47,3 @@ steps:
       git add .
       git commit -m "Auto-create drum category folders" || echo "No changes to commit"
       git push
-```
