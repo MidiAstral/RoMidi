@@ -96,5 +96,4 @@ return {
     "Wind Of Fjords - Soft Knees",
     "Worlds Smallest Violin full notes",
     "Young Girl A mhxa",
-    "Yurima - River flows in you mhxa",
 }
