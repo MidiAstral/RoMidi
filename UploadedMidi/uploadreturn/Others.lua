@@ -33,6 +33,7 @@ return {
     "JVKE golden hour piano mhxa",
     "JVKE her mhxa",
     "Kaijuu Ni Naritai",
+    "Leviteto - LOL mhxa",
     "Lightning Moment",
     "Looping The Rooms mhxa",
     "Mac Miller - Congratulations",
