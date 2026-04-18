@@ -7,6 +7,7 @@ return {
     "Alexander Rybak - Fairytale mhxa",
     "Beethoven - Moonlight sonata 3th movement mhxa",
     "Beta0404",
+    "Boywithluke - Problematic mhxa",
     "Broken World mhxa",
     "Bruno Mars - When i was your man",
     "buông đôi tay nhau ra x nắng ấm xa dần",
