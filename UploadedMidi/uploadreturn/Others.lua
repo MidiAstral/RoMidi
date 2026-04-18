@@ -25,7 +25,6 @@ return {
     "drag-me-down-twenty-one-two",
     "Engravings mhxa",
     "EnterSandman",
-    "Ethan Bortnick - cut my fingers off",
     "Every Living Breathing Moment mhxa",
     "Golden Hour  JVKE Updated Ver 1772653873814",
     "Gooseworx - Your New Home MIDI (Your Piano Tutorials)",
