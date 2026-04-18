@@ -83,7 +83,6 @@ return {
     "Tally Hall - The Bidding",
     "tháng 4là lời nói dối của em",
     "the entertainer",
-    "The vampire - Hatsune Miku mhxa",
     "the-real-slim-shady-eminem",
     "Theatre mhxa",
     "this is the talking",
