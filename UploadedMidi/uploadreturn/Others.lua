@@ -94,6 +94,5 @@ return {
     "We're Going To Be Friends (WIP)",
     "White Stripes (The) — We Re Going to Be Friends [MIDIfind.com]",
     "Wind Of Fjords - Soft Knees",
-    "Worlds Smallest Violin full notes",
     "Young Girl A mhxa",
 }
