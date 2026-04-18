@@ -1,7 +1,6 @@
 return {
     " Erika  A German WW2 marching song",
     "6 TRILLION YEARS AND AN OVERNIGHT STORY mhxa",
-    "Bad Apple - touhou - midi by tutogamer2a - final version",
     "Beethoven - Moonlight sonata 3th movement mhxa",
     "Beta0404",
     "Broken World mhxa",
