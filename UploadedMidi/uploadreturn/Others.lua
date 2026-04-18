@@ -35,6 +35,7 @@ return {
     "JVKE golden hour piano mhxa",
     "JVKE her mhxa",
     "Kaijuu Ni Naritai",
+    "Lightning Moment",
     "Looping The Rooms mhxa",
     "Mac Miller - Congratulations",
     "Metallica-Enter-Sandman midi",
