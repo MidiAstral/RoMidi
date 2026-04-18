@@ -3,6 +3,7 @@ return {
     "6 TRILLION YEARS AND AN OVERNIGHT STORY mhxa",
     "Ado - Gira Gira mhxa",
     "Ado - MIRROR mhxa",
+    "Ado - Usseewa mhxa",
     "Alexander Rybak - Fairytale mhxa",
     "Beethoven - Moonlight sonata 3th movement mhxa",
     "Beta0404",
