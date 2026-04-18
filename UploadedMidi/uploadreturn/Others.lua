@@ -14,6 +14,7 @@ return {
     "coffin nails   rapp snitch knishes",
     "Confession of a rotten girl* mhxa",
     "CupofJoe & Multo mhxa",
+    "Deco27 - Monitoring best friend remix mhxa",
     "drag-me-down-twenty-one-two",
     "Engravings mhxa",
     "EnterSandman",
