@@ -21,6 +21,7 @@ return {
     "CupofJoe & Multo mhxa",
     "Deco27 - Monitoring best friend remix mhxa",
     "Deco27 - Monitoring mhxa",
+    "Deco27 - The vampire mhxa",
     "drag-me-down-twenty-one-two",
     "Engravings mhxa",
     "EnterSandman",
