@@ -42,6 +42,7 @@ return {
     "JVKE golden hour piano mhxa",
     "JVKE her mhxa",
     "Kaijuu Ni Naritai",
+    "Lady Gaga - Judas mhxa",
     "Leviteto - LOL mhxa",
     "Lightning Moment",
     "Looping The Rooms mhxa",
