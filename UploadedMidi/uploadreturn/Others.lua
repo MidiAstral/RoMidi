@@ -2,6 +2,7 @@ return {
     " Erika  A German WW2 marching song",
     "6 TRILLION YEARS AND AN OVERNIGHT STORY mhxa",
     "Ado - Gira Gira mhxa",
+    "Ado - MIRROR mhxa",
     "Alexander Rybak - Fairytale mhxa",
     "Beethoven - Moonlight sonata 3th movement mhxa",
     "Beta0404",
