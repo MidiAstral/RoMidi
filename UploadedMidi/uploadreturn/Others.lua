@@ -89,6 +89,7 @@ return {
     "this is the talking",
     "this is what falling in love feels like JVKE",
     "Tokyo ghoul unravel mhxa",
+    "TOKYOVANIA mhxa",
     "Tony Ann - Awakening",
     "Tony Ann - Desire",
     "Tony Ann - Discovery",
