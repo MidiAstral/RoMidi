@@ -84,6 +84,7 @@ return {
     "Rush Eb Optimized not impossible but still very hard",
     "RUSH F",
     "Rush of Life - Tony Ann",
+    "Rush USSR Optimized not impossible but hard",
     "sinkingtown",
     "Somewhere only we know mhxa",
     "Tally Hall - The Bidding",
