@@ -80,7 +80,6 @@ return {
     "RUSH F",
     "Rush of Life - Tony Ann",
     "sinkingtown",
-    "Somewhere Only We Know ADVANCED",
     "Tally Hall - The Bidding",
     "tháng 4là lời nói dối của em",
     "the entertainer",
