@@ -83,6 +83,7 @@ return {
     "RUSH E SMBs version pre-remaster",
     "Rush Eb Optimized not impossible but still very hard",
     "RUSH F",
+    "Rush Mountain King Optimized not impossible but hard",
     "Rush of Life - Tony Ann",
     "Rush USSR Optimized not impossible but hard",
     "sinkingtown",
