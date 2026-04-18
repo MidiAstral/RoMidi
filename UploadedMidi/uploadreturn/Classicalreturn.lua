@@ -22,6 +22,7 @@ return {
     "operas",
     "Pirates of the Caribbean - He's a Pirate (1)",
     "Risk it all",
+    "Rush E but its as difficult as humanly possible",
     "Summer",
     "بروحي فتاة.",
     "กลัวว่าฉันจะไม่เสียใจ (Fear) – PURPEECH",
