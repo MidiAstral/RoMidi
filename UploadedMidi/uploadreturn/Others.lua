@@ -64,6 +64,7 @@ return {
     "Rush E 4 Black Midi By S3G",
     "Rush E boss? mhxa",
     "RUSH E but something is OFF!",
+    "RUSH E SMBs version pre-remaster",
     "RUSH F",
     "Rush of Life - Tony Ann",
     "sinkingtown",
