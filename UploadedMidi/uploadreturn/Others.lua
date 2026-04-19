@@ -69,6 +69,7 @@ return {
     "Rush #1",
     "Rush Ab Optimized not impossible still very hard",
     "Rush Among Us 2",
+    "Rush ANKHA Not impossible",
     "Rush Astronomia not impossible but hard",
     "RUSH B - ReBlacked",
     "Rush C# 3",
