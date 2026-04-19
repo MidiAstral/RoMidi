@@ -81,6 +81,7 @@ return {
     "Rush E boss? mhxa",
     "RUSH E but something is OFF!",
     "Rush E not impossible but still very hard fixed",
+    "Rush E Optimized Fixed Fixed Fixed Fixed",
     "Rush E Optimized not impossible but still hard",
     "RUSH E Optimized not impossible but still very hard",
     "Rush E Optimized Not Impossible But Still Very Hard Fixed Fixed Fixed",
