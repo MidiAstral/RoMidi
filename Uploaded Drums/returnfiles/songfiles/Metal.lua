@@ -6,6 +6,5 @@ return {
     "Gentley",
     "PrisonSong",
     "Revenga",
-    "Sugar",
-    "Toxicity"
+    "Sugar"
 }
