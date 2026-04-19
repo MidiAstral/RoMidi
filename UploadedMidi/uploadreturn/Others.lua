@@ -86,6 +86,7 @@ return {
     "Rush Mountain King Optimized not impossible but hard",
     "Rush of Life - Tony Ann",
     "Rush Rush not impossible but hard",
+    "Rush Sigma Boy not impossible but hard",
     "Rush USSR Optimized not impossible but hard",
     "Rush Z not impossible but still hard",
     "sinkingtown",
