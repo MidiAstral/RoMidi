@@ -72,6 +72,7 @@ return {
     "Rush Astronomia not impossible but hard",
     "RUSH B - ReBlacked",
     "Rush C# 3",
+    "Rush D Optimized Still Possible",
     "rush e",
     "Rush E (1.2M Notes)",
     "Rush E 2 (Impossible) (1)",
