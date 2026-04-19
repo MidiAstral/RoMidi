@@ -9,6 +9,7 @@ return {
     "Camellia - Flamewall",
     "coffin nails   rapp snitch knishes",
     "Congratulations - Mac Miller (Final Project)",
+    "Counting Stars by OneRepublic - Drums",
     "Country Roads",
     "Credits Song For My Death (Code: 900)",
     "Die with a smile - Piano Solo LKZ",
