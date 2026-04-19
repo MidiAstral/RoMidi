@@ -1,3 +1,4 @@
 return {
-    "Eyeless"
+    "Eyeless",
+    "Toxicity"
 }
