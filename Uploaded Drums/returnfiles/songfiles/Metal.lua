@@ -1,4 +1,5 @@
 return {
+    "Bitchslap",
     "Eyeless",
     "PrisonSong",
     "Revenga",
