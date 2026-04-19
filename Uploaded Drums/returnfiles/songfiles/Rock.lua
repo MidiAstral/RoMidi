@@ -10,6 +10,5 @@ return {
     "Leech",
     "Rollin",
     "Smells Like Teen Spirit - Drums",
-    "SweetChildOfMine",
     "Weezer - Undone the Sweater Song [MIDIfind.com]"
 }
