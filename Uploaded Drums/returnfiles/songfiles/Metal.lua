@@ -1,4 +1,5 @@
 return {
     "Eyeless",
+    "Revenga",
     "Toxicity"
 }
