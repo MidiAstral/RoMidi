@@ -97,6 +97,7 @@ return {
     "Rush Rush not impossible but hard",
     "Rush Sigma Boy not impossible but hard",
     "Rush USSR Optimized not impossible but hard",
+    "Rush Vietnam sounds bad btw midi by oganesson(Loadstringsgi)",
     "Rush Z not impossible but still hard",
     "sinkingtown",
     "Somewhere only we know mhxa",
