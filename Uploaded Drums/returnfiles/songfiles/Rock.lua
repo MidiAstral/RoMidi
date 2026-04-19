@@ -4,6 +4,7 @@ return {
     "BreakStuff",
     "Come as you are (3 beats)",
     "Complicated",
+    "Faith",
     "Girlfriend",
     "SweetChildOfMine",
     "Weezer - Undone the Sweater Song [MIDIfind.com]"
