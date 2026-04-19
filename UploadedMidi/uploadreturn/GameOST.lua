@@ -11,6 +11,7 @@ return {
     "Finale - Toby Fox",
     "finale-undertale",
     "Gaster's Theme - Toby Fox",
+    "KEY AFTER KEY LMS",
     "MEGALOVANIA - Toby Fox",
     "Metal Crusher",
     "Mili - Compass",
