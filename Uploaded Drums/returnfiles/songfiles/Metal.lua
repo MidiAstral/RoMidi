@@ -1,6 +1,7 @@
 return {
     "AssItch",
     "Bitchslap",
+    "Chi",
     "Clown",
     "Disasterpiece",
     "Duality",
