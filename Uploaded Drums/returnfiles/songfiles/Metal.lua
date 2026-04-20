@@ -11,6 +11,7 @@ return {
     "FreakOnALeash",
     "Gentley",
     "GoodGod",
+    "HereToStay",
     "PrisonSong",
     "Revenga",
     "Sugar"
