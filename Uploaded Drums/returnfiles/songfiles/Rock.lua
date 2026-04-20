@@ -2,6 +2,7 @@ return {
     "505",
     "AllTheSmallThings",
     "AmericanIdiot",
+    "BoysDontCry",
     "BreakStuff",
     "Come as you are (3 beats)",
     "Counterfeit",
