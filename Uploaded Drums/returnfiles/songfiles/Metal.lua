@@ -14,6 +14,7 @@ return {
     "GoodGod",
     "HereToStay",
     "PhantomOfTheOpera",
+    "Powerslave",
     "PrisonSong",
     "Revenga",
     "Sugar"
