@@ -27,6 +27,7 @@ return {
     "Nezuko HalcyonMusic",
     "Orange 7!! - Your Lie In April",
     "pf solo",
+    "Self Embodiment of Perfection (Mahito Theme)",
     "Shinzou wo Sasageyo HalcyonMusic",
     "shock-attack-on-titan-ed6",
     "Summer Pockets",
