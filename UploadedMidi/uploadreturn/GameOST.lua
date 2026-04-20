@@ -10,6 +10,7 @@ return {
     "Fallen down (Reprise)",
     "Finale - Toby Fox",
     "finale-undertale",
+    "Five nights at Freddy's Song",
     "Gaster's Theme - Toby Fox",
     "KEY AFTER KEY LMS",
     "MEGALOVANIA - Toby Fox",
