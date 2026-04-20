@@ -93,6 +93,7 @@ return {
     "RUSH E SMBs version pre-remaster",
     "Rush Eb Optimized not impossible but still very hard",
     "RUSH F",
+    "Rush Lin gan guli guli not impossible",
     "Rush Mountain King Optimized not impossible but hard",
     "Rush of Life - Tony Ann",
     "Rush Piggies not impossible but hard.mjd",
