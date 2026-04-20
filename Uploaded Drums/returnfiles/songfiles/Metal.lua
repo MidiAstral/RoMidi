@@ -4,6 +4,7 @@ return {
     "Disasterpiece",
     "Duality",
     "Eyeless",
+    "FreakOnALeash",
     "Gentley",
     "PrisonSong",
     "Revenga",
