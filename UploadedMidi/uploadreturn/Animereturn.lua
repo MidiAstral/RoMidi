@@ -32,6 +32,7 @@ return {
     "shock-attack-on-titan-ed6",
     "Summer Pockets",
     "Sword Art Online Medley HalcyonMusic",
+    "Throughout heaven and earth, i alone am the honored one",
     "Tokyo Ghoul - Unravel",
     "utsukushiki-zankoku-na-sekai-attack-on-titanshingeki-no-kyojin-ed-1-full",
     "Vickeblanka - Black Catcher Black Clover Opening 10 WT1",
