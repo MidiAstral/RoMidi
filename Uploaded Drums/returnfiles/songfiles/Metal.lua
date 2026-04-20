@@ -13,6 +13,7 @@ return {
     "Gentley",
     "GoodGod",
     "HereToStay",
+    "PhantomOfTheOpera",
     "PrisonSong",
     "Revenga",
     "Sugar"
