@@ -8,6 +8,7 @@ return {
     "Eyeless",
     "FreakOnALeash",
     "Gentley",
+    "GoodGod",
     "PrisonSong",
     "Revenga",
     "Sugar"
