@@ -1,4 +1,5 @@
 return {
+    "AssItch",
     "Bitchslap",
     "Clown",
     "Disasterpiece",
