@@ -30,6 +30,7 @@ return {
     "Self Embodiment of Perfection (Mahito Theme)",
     "Shinzou wo Sasageyo HalcyonMusic",
     "shock-attack-on-titan-ed6",
+    "Sono Chi No Sadame - Jojo's Bizarre Adventure",
     "Summer Pockets",
     "Sword Art Online Medley HalcyonMusic",
     "Throughout heaven and earth, i alone am the honored one",
