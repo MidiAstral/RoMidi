@@ -67,6 +67,7 @@ return {
     "not yours",
     "oi josuke",
     "One Direction Night Changes ADVANCED",
+    "Pi the Song",
     "Rush #1",
     "Rush Ab Optimized not impossible still very hard",
     "Rush Among Us 2",
