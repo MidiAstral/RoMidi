@@ -3,6 +3,7 @@ return {
     "AssItch",
     "Bitchslap",
     "Blind",
+    "CaughtSomewhereInTime",
     "Chi",
     "Clown",
     "Disasterpiece",
