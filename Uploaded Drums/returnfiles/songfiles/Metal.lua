@@ -8,6 +8,7 @@ return {
     "Disasterpiece",
     "Duality",
     "Eyeless",
+    "Faget",
     "FreakOnALeash",
     "Gentley",
     "GoodGod",
