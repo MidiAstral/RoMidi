@@ -1,5 +1,6 @@
 return {
     "Bitchslap",
+    "Clown",
     "Disasterpiece",
     "Duality",
     "Eyeless",
