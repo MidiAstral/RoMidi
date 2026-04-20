@@ -5,6 +5,7 @@ return {
     "Ado - MIRROR mhxa",
     "Ado - Usseewa mhxa",
     "Alexander Rybak - Fairytale mhxa",
+    "At the speed of light(Bloodbath)",
     "Beethoven - Moonlight sonata 3th movement mhxa",
     "Beta0404",
     "Boywithluke - Problematic mhxa",
