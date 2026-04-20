@@ -7,6 +7,7 @@ return {
     "Come as you are (3 beats)",
     "Counterfeit",
     "Creep",
+    "Degenerate",
     "Faith",
     "Girlfriend",
     "Leech",
