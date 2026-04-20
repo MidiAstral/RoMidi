@@ -12,6 +12,7 @@ return {
     "If I Am With You  Yoshimasa Terui  Jujutsu Kaisen S2 OST LB7",
     "IRIS OUT HalcyonMusic",
     "itterasshai-attack-on-titan-ss4-ed-ai-higuchi",
+    "Jojo's Bizarre Adventure Part 2   Battle Tendency OP - Bloody Stream",
     "Josuke's theme Diamond Is Unbreakable in piano(COMPLETE)",
     "Judas",
     "Kamado Nezuko no Uta HalcyonMusic",
