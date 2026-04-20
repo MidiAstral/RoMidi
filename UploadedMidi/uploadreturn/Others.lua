@@ -20,6 +20,7 @@ return {
     "Confession of a rotten girl* mhxa",
     "Counting Stars by OneRepublic - Drums",
     "CupofJoe & Multo mhxa",
+    "Dark dragon fire-F777 (Avernus)",
     "Deco27 - Monitoring best friend remix mhxa",
     "Deco27 - Monitoring mhxa",
     "Deco27 - The vampire mhxa",
