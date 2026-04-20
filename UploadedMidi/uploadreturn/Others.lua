@@ -130,6 +130,7 @@ return {
     "Touhou Bad Apple mhxa",
     "Touhou Owen was her v1 mhxa",
     "Touhou Owen was her V2 mhxa",
+    "Trap royalty but impossible",
     "trillium",
     "Vaundy - Odoriko mhxa",
     "vicetone-nevada",
