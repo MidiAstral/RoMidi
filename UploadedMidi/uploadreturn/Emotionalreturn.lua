@@ -45,6 +45,7 @@ return {
     "Sinking Town   沈める街 - Yoeko Kurahashi",
     "Sunsezt yt @moongate 1234",
     "Tally Hall- Hidden in the Sand ",
+    "Thằng điên impossible",
     "The Stranglers - Golden Brown 2",
     "Tony Ann - ICARUS",
     "Tony Ann - Reminisce 2",
