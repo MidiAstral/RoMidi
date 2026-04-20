@@ -1,4 +1,5 @@
 return {
+    "505",
     "AmericanIdiot",
     "BreakStuff",
     "Come as you are (3 beats)",
