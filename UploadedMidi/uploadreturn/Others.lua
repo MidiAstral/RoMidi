@@ -46,6 +46,7 @@ return {
     "hãy trao cho anh",
     "Hello- OMFG (WIP)(Copy)",
     "HELP!! Kobo kanaeru* mhxa",
+    "Highscore",
     "I'm just a chill guy mhxa",
     "id 072019",
     "If I Am With You - I alone the hornored one mhxa",
