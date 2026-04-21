@@ -33,6 +33,7 @@ return {
     "Ethan Bortnick - cut my fingers off mhxa",
     "Evangelion - A Cruel Angel's Thesis Neon Genesis mhxa",
     "Every Living Breathing Moment mhxa",
+    "flamewall",
     "Fullmetal Alchemist - Brotherhood mhxa",
     "Golden Hour  JVKE Updated Ver 1772653873814",
     "Gooseworx - Your New Home MIDI (Your Piano Tutorials)",
