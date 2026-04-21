@@ -1,4 +1,5 @@
 return {
+    " NieR Automata -- Emil (Despair) ",
     "200 AniSong Medley HalcyonMusic",
     "AIZO HalcyonMusic",
     "audio2midi",
