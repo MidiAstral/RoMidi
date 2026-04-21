@@ -115,6 +115,7 @@ return {
     "Rush Vietnam sounds bad btw midi by oganesson(Loadstringsgi)",
     "Rush Z not impossible but still hard",
     "Sheena Ringo - A double suicide mhxa",
+    "Sheena Ringo -Crime & Punishment mhxa",
     "sinkingtown",
     "Somewhere only we know mhxa",
     "Tally Hall - The Bidding",
