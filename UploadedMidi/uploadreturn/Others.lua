@@ -112,6 +112,7 @@ return {
     "Rush Vietnam remastered better and possible",
     "Rush Vietnam sounds bad btw midi by oganesson(Loadstringsgi)",
     "Rush Z not impossible but still hard",
+    "Sheena Ringo - A double suicide mhxa",
     "sinkingtown",
     "Somewhere only we know mhxa",
     "Tally Hall - The Bidding",
