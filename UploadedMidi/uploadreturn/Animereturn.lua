@@ -25,6 +25,7 @@ return {
     "Never Meant To Belong (Bleach OST)",
     "New Darling",
     "Nezuko HalcyonMusic",
+    "NieR - Kaine Salvation",
     "Orange 7!! - Your Lie In April",
     "pf solo",
     "Self Embodiment of Perfection (Mahito Theme)",
