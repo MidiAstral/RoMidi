@@ -40,4 +40,5 @@ return {
     "utsukushiki-zankoku-na-sekai-attack-on-titanshingeki-no-kyojin-ed-1-full",
     "Vickeblanka - Black Catcher Black Clover Opening 10 WT1",
     "Yoshimasa Terui - IF I AM WITH YOU",
+    "You Say Run - My Hero Academia OST",
 }
