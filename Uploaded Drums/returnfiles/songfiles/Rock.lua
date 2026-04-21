@@ -10,6 +10,7 @@ return {
     "Degenerate",
     "Faith",
     "Girlfriend",
+    "Korn - Embrace",
     "Leech",
     "Rollin",
     "Smells Like Teen Spirit - Drums",
