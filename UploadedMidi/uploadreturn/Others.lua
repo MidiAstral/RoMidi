@@ -73,6 +73,7 @@ return {
     "no name (7)",
     "NOSTALGIA  Tony Ann 1769819486012",
     "not yours",
+    "Nuke powder",
     "oi josuke",
     "One Direction Night Changes ADVANCED",
     "Open+Window+vGH",
