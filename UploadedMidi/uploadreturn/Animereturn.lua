@@ -2,6 +2,7 @@ return {
     " NieR Automata -- Emil (Despair) ",
     "200 AniSong Medley HalcyonMusic",
     "AIZO HalcyonMusic",
+    "Akuma no Ko (a child of evil) - Attack on Titan The Final Season Part 2 Ending",
     "audio2midi",
     "Beastars - JUNO is in love -adult-",
     "DEAD OR LIE",
