@@ -3,6 +3,7 @@ return {
     "Adele - Skyfall",
     "AnyConv.com  5875-ed88-4b61-9772-980efa64c95d",
     "Arabesque-in-E-Nr-1",
+    "Beethoven - Moonlight Sonata (1st Movement) ",
     "Beethoven Virus (insane)",
     "Beethoven Virus (insane).mid (1)",
     "Bruno Mars - Risk It All",
