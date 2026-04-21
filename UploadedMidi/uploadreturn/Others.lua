@@ -78,6 +78,7 @@ return {
     "One Direction Night Changes ADVANCED",
     "Open+Window+vGH",
     "Pi the Song",
+    "Ricochet Love Amethyst Part Piano arr 1776788643947",
     "Rush #1",
     "Rush Ab Optimized not impossible still very hard",
     "Rush Among Us 2",
