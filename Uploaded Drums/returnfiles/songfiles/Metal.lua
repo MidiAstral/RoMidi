@@ -15,6 +15,7 @@ return {
     "Gentley",
     "GoodGod",
     "HereToStay",
+    "Master of Puppets",
     "PhantomOfTheOpera",
     "Powerslave",
     "PrisonSong",
