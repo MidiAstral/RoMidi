@@ -75,7 +75,6 @@ return {
     "những lời hứa bỏ quên ost",
     "Night of Knights Lunatic mhxa",
     "no name (7)",
-    "NOSTALGIA  Tony Ann 1769819486012",
     "not yours",
     "Nuke powder",
     "oi josuke",
