@@ -53,6 +53,7 @@ return {
     "Tai sinh",
     "Tally Hall- Hidden in the Sand ",
     "Thằng điên impossible",
+    "Thằng điên normal",
     "The Stranglers - Golden Brown 2",
     "Tony Ann - ICARUS",
     "Tony Ann - Reminisce 2",
