@@ -29,6 +29,7 @@ return {
     "Rapp Snitch Knishes - MF DOOM",
     "Strawberry Guy - Mrs Magic (Strings Version)",
     "Tek It - Cafune",
+    "The+New+Periodic+Table+Song",
     "TheFatRat+-+Windfall",
     "Tony Ann - Anxiety",
     "بروحي فتاة.",
