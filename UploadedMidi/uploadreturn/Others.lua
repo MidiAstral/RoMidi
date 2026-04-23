@@ -34,6 +34,7 @@ return {
     "drag-me-down-twenty-one-two",
     "Engravings mhxa",
     "EnterSandman",
+    "Erika piano",
     "Ethan Bortnick - cut my fingers off mhxa",
     "Evangelion - A Cruel Angel's Thesis Neon Genesis mhxa",
     "Every Living Breathing Moment mhxa",
