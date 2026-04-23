@@ -1,5 +1,4 @@
 return {
-    "61097 Stronger-Than-You",
     "Animation Warrior Theme - Nighthawk22",
     "ASGORE - Toby Fox",
     "Basics in behavior",
