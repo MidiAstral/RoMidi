@@ -142,6 +142,7 @@ return {
     "tháng 4là lời nói dối của em",
     "Thang dien impossible lol",
     "the entertainer",
+    "The Entertainer - Scott Joplin",
     "the-real-slim-shady-eminem",
     "Theatre mhxa",
     "this is the talking",
