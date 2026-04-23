@@ -14,6 +14,7 @@ return {
     "Country Roads",
     "Credits Song For My Death (Code: 900)",
     "Die with a smile - Piano Solo LKZ",
+    "Dimension Creo",
     "Elton John - I'm Still Standing (Expert)",
     "Golden Brown Arragement By natsu",
     "Guns N Roses - Sweet Child O' Mine (1)",
