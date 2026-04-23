@@ -159,6 +159,7 @@ return {
     "Touhou Owen was her V2 mhxa",
     "Trap royalty but impossible",
     "trillium",
+    "Ultimate destruction",
     "Vaundy - Odoriko mhxa",
     "vicetone-nevada",
     "Want to be Crem#ted/Ab#se mhxa",
