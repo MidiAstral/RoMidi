@@ -26,6 +26,7 @@ return {
     "Risk it all",
     "Rush E but its as difficult as humanly possible",
     "Summer",
+    "Wedding-Day-at-Troldhaugen",
     "بروحي فتاة.",
     "กลัวว่าฉันจะไม่เสียใจ (Fear) – PURPEECH",
 }
