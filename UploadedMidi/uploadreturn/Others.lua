@@ -113,6 +113,7 @@ return {
     "RUSH E Optimized not impossible but still very hard",
     "Rush E Optimized Not Impossible But Still Very Hard Fixed Fixed Fixed",
     "Rush E Optimized Not Impossible But StillHard Fixed Fixed",
+    "Rush E Original + Midi Download",
     "Rush E original sheet i spend my money on",
     "RUSH E SMBs version pre-remaster",
     "Rush Eb Optimized not impossible but still very hard",
