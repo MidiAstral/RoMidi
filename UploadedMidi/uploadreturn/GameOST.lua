@@ -30,6 +30,7 @@ return {
     "sans. - Toby Fox",
     "Shiawase Vip",
     "Snowy - Toby Fox",
+    "Stereo madness",
     "Stereo Madness - ForeverBound",
     "Stronger Than You - Undertale",
     "Tetris Theme, BLACK MIDI 50K NOTES",
