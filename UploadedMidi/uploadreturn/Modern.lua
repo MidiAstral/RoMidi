@@ -22,6 +22,7 @@ return {
     "How The World Works - Bo Burnham",
     "In the end drum",
     "iris-goo-goo-dolls",
+    "Laufey - From The Start",
     "Mitski - My Love Mine All Mine",
     "mrs magic",
     "Night Changes Piano Arr 1775503451731",
