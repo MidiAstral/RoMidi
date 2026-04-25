@@ -16,6 +16,7 @@ return {
     "Five nights at Freddy's Song",
     "Gaster's Theme - Toby Fox",
     "KEY AFTER KEY LMS",
+    "Legend Of Zelda - Saria's Song",
     "MEGALOVANIA - Toby Fox",
     "Metal Crusher",
     "Mili - Compass",
