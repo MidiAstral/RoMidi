@@ -5,6 +5,7 @@ return {
     "Back To Friends - Sombr",
     "Buttercup - Jack Stauber",
     "Childish Gambino - Redbone",
+    "Coldplay - Sparks",
     "Còn gì đẹp hơn impossible",
     "Credits Song For My Death",
     "Cry for me impossible",
