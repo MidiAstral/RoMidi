@@ -130,6 +130,7 @@ return {
     "Rush Round And Round not impossible",
     "Rush Rush not impossible but hard",
     "Rush Sigma Boy not impossible but hard",
+    "RUSH SONICSPIANOONIRL REMASTERED",
     "Rush USSR Optimized not impossible but hard",
     "Rush Vietnam remastered better and possible",
     "Rush Vietnam sounds bad btw midi by oganesson(Loadstringsgi)",
