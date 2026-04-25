@@ -144,6 +144,7 @@ return {
     "RUSH SM3DW",
     "Rush SM64",
     "RUSH SONICSPIANOONIRL REMASTERED",
+    "RUSH STAR",
     "RUSH STAR (Remake)",
     "RUSH STEREO MADNESS (Remake)",
     "RUSH TWINKLE TWINKLE LITTLE STAR",
