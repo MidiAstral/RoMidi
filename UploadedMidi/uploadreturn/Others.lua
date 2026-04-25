@@ -123,6 +123,7 @@ return {
     "Rush Epic Games Fortnite",
     "RUSH F",
     "RUSH HAPPY BIRTHDAY",
+    "Rush Jingle Bells",
     "Rush lin gan guli guli impossible",
     "Rush Lin gan guli guli not impossible",
     "RUSH LRABER",
