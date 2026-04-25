@@ -13,6 +13,7 @@ return {
     "Girlfriend",
     "Korn - Embrace",
     "Leech",
+    "Linkin Park - No More Sorrow",
     "Linkin Park - Numb",
     "Rollin",
     "Smells Like Teen Spirit - Drums",
