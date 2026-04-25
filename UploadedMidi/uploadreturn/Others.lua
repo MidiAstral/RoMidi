@@ -125,6 +125,7 @@ return {
     "Rush Gigachad (Remake)",
     "RUSH HAPPY BIRTHDAY",
     "Rush Jingle Bells",
+    "RUSH LGBT",
     "Rush lin gan guli guli impossible",
     "Rush Lin gan guli guli not impossible",
     "RUSH LRABER",
