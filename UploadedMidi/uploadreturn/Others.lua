@@ -91,6 +91,7 @@ return {
     "Ricochet Love Amethyst Part Piano arr 1776788643947",
     "Rush #1",
     "Rush Ab Optimized not impossible still very hard",
+    "RUSH ABCD",
     "Rush Among Us 2",
     "Rush ANKHA Not impossible",
     "Rush Astronomia not impossible but hard",
