@@ -130,6 +130,7 @@ return {
     "Rush lin gan guli guli impossible",
     "Rush Lin gan guli guli not impossible",
     "RUSH LRABER",
+    "RUSH Lynes (fixed)",
     "RUSH MOSKAU",
     "Rush Mountain King Optimized not impossible but hard",
     "Rush Moutain King Lala version",
