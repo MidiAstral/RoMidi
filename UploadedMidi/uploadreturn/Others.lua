@@ -121,6 +121,7 @@ return {
     "RUSH E SMBs version pre-remaster",
     "Rush Eb Optimized not impossible but still very hard",
     "RUSH F",
+    "RUSH HAPPY BIRTHDAY",
     "Rush lin gan guli guli impossible",
     "Rush Lin gan guli guli not impossible",
     "RUSH LRABER",
