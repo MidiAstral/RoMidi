@@ -21,6 +21,7 @@ return {
     "Powerslave",
     "PrisonSong",
     "Revenga",
+    "Slipknot - Psychosocial (ver 8 by Thaynan).mid",
     "Sugar",
     "ThunderStruck - ACDC",
     "Unholy Confessions"
