@@ -98,6 +98,7 @@ return {
     "RUSH B - ReBlacked",
     "Rush Bad Apple impossible",
     "Rush Bad Apple not impossible",
+    "RUSH BARBASHASSR",
     "Rush C# 3",
     "Rush D Optimized Still Possible",
     "rush e",
