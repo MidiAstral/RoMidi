@@ -120,6 +120,7 @@ return {
     "Rush E original sheet i spend my money on",
     "RUSH E SMBs version pre-remaster",
     "Rush Eb Optimized not impossible but still very hard",
+    "Rush Epic Games Fortnite",
     "RUSH F",
     "RUSH HAPPY BIRTHDAY",
     "Rush lin gan guli guli impossible",
