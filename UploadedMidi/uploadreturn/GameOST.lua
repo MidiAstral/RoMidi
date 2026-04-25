@@ -6,6 +6,7 @@ return {
     "Basics in behavior",
     "Battle Against a True Hero (Undyne the Undying) (wip)",
     "C418 - Mice on Venus",
+    "C418 - Subwoofer Lullaby",
     "Creo - Flow",
     "Dialtone - MIDI",
     "Doki Doki Literature Club - Main Theme - ShinkoNetCavy",
