@@ -186,6 +186,7 @@ return {
     "Tony Ann - Pulse",
     "Tony Ann - Rain",
     "Tony Ann Taurus",
+    "Took Her To The O- King Von",
     "Touhou Bad Apple mhxa",
     "Touhou Owen was her v1 mhxa",
     "Touhou Owen was her V2 mhxa",
