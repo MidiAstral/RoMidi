@@ -1,6 +1,7 @@
 return {
     "A.D.I.D.A.S.",
     "AssItch",
+    "Avenged Sevenfold - Bat Country",
     "BeQuickOrBeDead",
     "Bitchslap",
     "Blind",
