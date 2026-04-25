@@ -1,7 +1,6 @@
 return {
     "A.D.I.D.A.S.",
     "AC DC - Back in Black.mid",
-    "AssItch",
     "Avenged Sevenfold - Bat Country",
     "BeQuickOrBeDead",
     "Bitchslap",
