@@ -31,6 +31,7 @@ return {
     "Nơi này có anh impossible",
     "rapp snitch knishes",
     "Rapp Snitch Knishes - MF DOOM",
+    "Rush E – lyre only",
     "Strawberry Guy - Mrs Magic (Strings Version)",
     "Tek It - Cafune",
     "The+New+Periodic+Table+Song",
