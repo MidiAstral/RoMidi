@@ -17,6 +17,7 @@ return {
     "GoodGod",
     "HereToStay",
     "Master of Puppets",
+    "Megadeth - Holy Wars",
     "Meshuggah- Bleed.mid",
     "PhantomOfTheOpera",
     "Powerslave",
