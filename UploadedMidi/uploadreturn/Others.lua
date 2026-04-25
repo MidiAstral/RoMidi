@@ -132,6 +132,7 @@ return {
     "Rush Rush not impossible but hard",
     "Rush Sigma Boy not impossible but hard",
     "RUSH SONICSPIANOONIRL REMASTERED",
+    "RUSH STEREO MADNESS (Remake)",
     "Rush USSR Optimized not impossible but hard",
     "Rush Vietnam remastered better and possible",
     "Rush Vietnam sounds bad btw midi by oganesson(Loadstringsgi)",
