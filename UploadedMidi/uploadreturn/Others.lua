@@ -64,6 +64,7 @@ return {
     "JVKE golden hour piano mhxa",
     "JVKE her mhxa",
     "Kaijuu Ni Naritai",
+    "Kansas - Carry On My Wayward Son",
     "Lady Gaga - Judas mhxa",
     "Leviteto - LOL mhxa",
     "Lightning Moment",
