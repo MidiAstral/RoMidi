@@ -166,6 +166,7 @@ return {
     "trillium",
     "Ultimate destruction",
     "Vaundy - Odoriko mhxa",
+    "Vicetone nevada impossible",
     "vicetone-nevada",
     "Want to be Crem#ted/Ab#se mhxa",
     "We're Going To Be Friends (WIP)",
