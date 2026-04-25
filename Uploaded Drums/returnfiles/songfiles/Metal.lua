@@ -6,7 +6,6 @@ return {
     "Bitchslap",
     "Blind",
     "CaughtSomewhereInTime",
-    "Chi",
     "Clown",
     "Disasterpiece",
     "Duality",
