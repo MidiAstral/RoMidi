@@ -9,6 +9,7 @@ return {
     "Creep",
     "Degenerate",
     "Faith",
+    "Foo Fighters - Everlong",
     "Girlfriend",
     "Korn - Embrace",
     "Leech",
