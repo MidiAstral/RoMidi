@@ -3,6 +3,7 @@ return {
     "AC DC - Back in Black.mid",
     "ACDC - Back in Black (3) [MIDIfind.com]",
     "Avenged Sevenfold - Bat Country",
+    "Avenged Sevenfold~Critical Acclaim",
     "BeQuickOrBeDead",
     "Bitchslap",
     "Blind",
