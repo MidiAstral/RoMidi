@@ -1,4 +1,3 @@
 return {
-    "Blinding Lights - The Weeknd",
-    "Foo Fighters - Everlong"
+    "Blinding Lights - The Weeknd"
 }
