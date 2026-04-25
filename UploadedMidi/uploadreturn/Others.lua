@@ -122,6 +122,7 @@ return {
     "Rush Eb Optimized not impossible but still very hard",
     "Rush Epic Games Fortnite",
     "RUSH F",
+    "Rush Gigachad (Remake)",
     "RUSH HAPPY BIRTHDAY",
     "Rush Jingle Bells",
     "Rush lin gan guli guli impossible",
