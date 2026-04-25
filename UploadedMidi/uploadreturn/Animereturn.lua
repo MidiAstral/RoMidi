@@ -38,6 +38,7 @@ return {
     "Sono Chi No Sadame - Jojo's Bizarre Adventure",
     "Summer Pockets",
     "Sword Art Online Medley HalcyonMusic",
+    "Tau Cash",
     "Throughout heaven and earth, i alone am the honored one",
     "Tokyo Ghoul - Unravel",
     "utsukushiki-zankoku-na-sekai-attack-on-titanshingeki-no-kyojin-ed-1-full",
