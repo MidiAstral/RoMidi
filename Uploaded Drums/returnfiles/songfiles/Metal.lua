@@ -20,6 +20,7 @@ return {
     "Master of Puppets",
     "Megadeth - Holy Wars",
     "Meshuggah- Bleed.mid",
+    "Metallica - Battery (2) [MIDIfind.com]",
     "PhantomOfTheOpera",
     "Powerslave",
     "PrisonSong",
