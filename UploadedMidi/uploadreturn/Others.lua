@@ -149,6 +149,7 @@ return {
     "RUSH STEREO MADNESS (Remake)",
     "RUSH TWINKLE TWINKLE LITTLE STAR",
     "Rush USSR Optimized not impossible but hard",
+    "RUSH VAJUSO",
     "Rush Victory",
     "Rush Vietnam remastered better and possible",
     "Rush Vietnam sounds bad btw midi by oganesson(Loadstringsgi)",
