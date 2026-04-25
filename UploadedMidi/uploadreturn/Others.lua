@@ -101,6 +101,7 @@ return {
     "RUSH BARBASHASSR",
     "Rush C# 3",
     "Rush D Optimized Still Possible",
+    "RUSH DIGITAL CIRCUS (Remake)",
     "rush e",
     "Rush E (1.2M Notes)",
     "Rush E 2 (Impossible) (1)",
