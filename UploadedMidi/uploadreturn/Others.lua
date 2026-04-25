@@ -135,6 +135,7 @@ return {
     "Rush Piggies not impossible but hard.mjd",
     "Rush polish cow",
     "Rush Raining tacos impossible",
+    "RUSH RICK ASTLEY (Remake)",
     "Rush Round And Round not impossible",
     "Rush Rush not impossible but hard",
     "Rush Sigma Boy not impossible but hard",
