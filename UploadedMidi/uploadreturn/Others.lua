@@ -125,6 +125,7 @@ return {
     "Rush lin gan guli guli impossible",
     "Rush Lin gan guli guli not impossible",
     "RUSH LRABER",
+    "RUSH MOSKAU",
     "Rush Mountain King Optimized not impossible but hard",
     "Rush of Life - Tony Ann",
     "Rush Piggies not impossible but hard.mjd",
