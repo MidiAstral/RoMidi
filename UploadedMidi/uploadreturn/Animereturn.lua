@@ -6,6 +6,7 @@ return {
     "audio2midi",
     "bad apple 4.6 million",
     "Beastars - JUNO is in love -adult-",
+    "Cat Loving HSR",
     "DEAD OR LIE",
     "Eldoraudio-Juan Arenosa - Ofelia  Official Music Video  - Juan Arenosa  128k  humanized",
     "Fukashigi no Carte",
