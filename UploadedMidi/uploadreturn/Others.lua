@@ -135,6 +135,7 @@ return {
     "Rush Round And Round not impossible",
     "Rush Rush not impossible but hard",
     "Rush Sigma Boy not impossible but hard",
+    "Rush SM64",
     "RUSH SONICSPIANOONIRL REMASTERED",
     "RUSH STEREO MADNESS (Remake)",
     "Rush USSR Optimized not impossible but hard",
