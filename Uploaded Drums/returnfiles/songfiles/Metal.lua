@@ -10,6 +10,7 @@ return {
     "CaughtSomewhereInTime",
     "Clown",
     "Disasterpiece",
+    "Drum - Heavy Metal Drums [MIDIfind.com]",
     "Duality",
     "Eyeless",
     "Faget",
