@@ -21,5 +21,6 @@ return {
     "PrisonSong",
     "Revenga",
     "Sugar",
-    "ThunderStruck - ACDC"
+    "ThunderStruck - ACDC",
+    "Unholy Confessions"
 }
