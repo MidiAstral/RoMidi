@@ -146,6 +146,7 @@ return {
     "RUSH SONICSPIANOONIRL REMASTERED",
     "RUSH STAR (Remake)",
     "RUSH STEREO MADNESS (Remake)",
+    "RUSH TWINKLE TWINKLE LITTLE STAR",
     "Rush USSR Optimized not impossible but hard",
     "Rush Victory",
     "Rush Vietnam remastered better and possible",
