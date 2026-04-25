@@ -147,6 +147,7 @@ return {
     "Rush Vietnam remastered better and possible",
     "Rush Vietnam sounds bad btw midi by oganesson(Loadstringsgi)",
     "Rush Z not impossible but still hard",
+    "Rush 悪ノ召使 (重制版)",
     "RUSH+ELISE",
     "Sheena Ringo - A double suicide mhxa",
     "Sheena Ringo -Crime & Punishment mhxa",
