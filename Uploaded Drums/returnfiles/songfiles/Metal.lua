@@ -19,6 +19,7 @@ return {
     "Disasterpiece",
     "Drum - Heavy Metal Drums [MIDIfind.com]",
     "Duality",
+    "Elena Siegman - 115",
     "Eyeless",
     "Faget",
     "FreakOnALeash",
