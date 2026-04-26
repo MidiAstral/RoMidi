@@ -6,6 +6,7 @@ return {
     "Avenged Sevenfold - Almost Easy",
     "Avenged Sevenfold - Bat Country",
     "Avenged Sevenfold - Dear God.mid",
+    "Avenged Sevenfold - The Wicked End   WWW.MIDISFREE.COM",
     "Avenged Sevenfold~Critical Acclaim",
     "BeQuickOrBeDead",
     "Bitchslap",
