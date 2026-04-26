@@ -41,6 +41,7 @@ return {
     "Slipknot - Before I Forget.drum midi",
     "Slipknot - Psychosocial (ver 8 by Thaynan).mid",
     "Slipknot - Scissors [MIDIfind.com]",
+    "Slipknot-Snuff-Anonymous-20210724225809-nonstop2k.com",
     "So-Far-Away",
     "Sugar",
     "ThunderStruck - ACDC",
