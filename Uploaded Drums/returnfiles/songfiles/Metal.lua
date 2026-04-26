@@ -5,6 +5,7 @@ return {
     "ACDC - Back in Black (3) [MIDIfind.com]",
     "Avenged Sevenfold - Almost Easy",
     "Avenged Sevenfold - Bat Country",
+    "Avenged Sevenfold - Dear God.mid",
     "Avenged Sevenfold~Critical Acclaim",
     "BeQuickOrBeDead",
     "Bitchslap",
