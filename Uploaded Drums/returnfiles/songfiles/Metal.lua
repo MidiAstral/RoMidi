@@ -51,6 +51,7 @@ return {
     "Slipknot-Snuff-Anonymous-20210724225809-nonstop2k.com",
     "So-Far-Away",
     "Sugar",
+    "The Stage - Avenged Sevenfold by Rgman",
     "ThunderStruck - ACDC",
     "Unholy Confessions"
 }
