@@ -23,6 +23,7 @@ return {
     "moonlight-sonata-i",
     "MỘT ĐỜI (14 Casper & Bon Nghiêm)",
     "operas",
+    "Passacaglia 2",
     "Pirates of the Caribbean - He's a Pirate (1)",
     "Risk it all",
     "Rush E but its as difficult as humanly possible",
