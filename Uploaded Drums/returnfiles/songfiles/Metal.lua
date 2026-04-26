@@ -7,6 +7,7 @@ return {
     "Avenged Sevenfold - Almost Easy",
     "Avenged Sevenfold - Bat Country",
     "Avenged Sevenfold - Beast And The Harlot v7",
+    "Avenged Sevenfold - Buried Alive [MIDIfind.com]",
     "Avenged Sevenfold - Carry On [MIDIfind.com]",
     "Avenged Sevenfold - Chapter Four [MIDIfind.com]",
     "Avenged Sevenfold - Dear God.mid",
