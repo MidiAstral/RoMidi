@@ -1,4 +1,5 @@
 return {
+    "A Little Piece of Heaven - Avenged Sevenfold (With vocals).mid",
     "A.D.I.D.A.S.",
     "AC DC - Back in Black.mid",
     "ACDC - Back in Black (3) [MIDIfind.com]",
