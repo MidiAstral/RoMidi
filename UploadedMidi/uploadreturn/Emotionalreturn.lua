@@ -32,6 +32,7 @@ return {
     "Jowel: Perdón",
     "Jowel: Por qué te vas",
     "Jowel: Your Love",
+    "Katy Perry - The One That Got Away",
     "KISS — I Was Made For Loving You",
     "Laufey - Promise",
     "Laufey - Too little, too late",
