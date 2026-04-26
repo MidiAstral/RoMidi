@@ -19,6 +19,7 @@ return {
     "Gentley",
     "GoodGod",
     "HereToStay",
+    "I Won't See You Tonight - Avenged Sevenfold",
     "Master of Puppets",
     "Megadeth - Holy Wars",
     "Meshuggah- Bleed.mid",
