@@ -38,6 +38,7 @@ return {
     "PrisonSong",
     "Revenga",
     "Scream",
+    "Slipknot - Before I Forget.drum midi",
     "Slipknot - Psychosocial (ver 8 by Thaynan).mid",
     "Slipknot - Scissors [MIDIfind.com]",
     "So-Far-Away",
