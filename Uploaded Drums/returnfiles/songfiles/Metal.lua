@@ -28,6 +28,7 @@ return {
     "Disasterpiece",
     "Drum - Heavy Metal Drums [MIDIfind.com]",
     "Duality",
+    "Duality - Slipknot",
     "Elena Siegman - 115",
     "Eyeless",
     "Faget",
