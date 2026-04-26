@@ -17,6 +17,7 @@ return {
     "Avenged Sevenfold - Nightmare.mid",
     "Avenged Sevenfold - Nobody [MIDIfind.com]",
     "Avenged Sevenfold - Seize the Day [MIDIfind.com]",
+    "Avenged Sevenfold - Sidewinder [MIDIfind.com]",
     "Avenged Sevenfold - The Wicked End   WWW.MIDISFREE.COM",
     "Avenged Sevenfold~Critical Acclaim",
     "BeQuickOrBeDead",
