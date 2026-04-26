@@ -31,6 +31,7 @@ return {
     "Elena Siegman - 115",
     "Eyeless",
     "Faget",
+    "Fiction - Avenged Sevenfold   A7x",
     "FreakOnALeash",
     "Gentley",
     "GoodGod",
