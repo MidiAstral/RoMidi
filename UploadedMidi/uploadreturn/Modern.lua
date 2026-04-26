@@ -37,6 +37,7 @@ return {
     "The+New+Periodic+Table+Song",
     "TheFatRat+-+Windfall",
     "Tony Ann - Anxiety",
+    "Took Her To the O - King Vonn",
     "Took Her To The O- King Von",
     "بروحي فتاة.",
 }
