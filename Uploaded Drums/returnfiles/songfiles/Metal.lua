@@ -47,6 +47,7 @@ return {
     "Revenga",
     "Scream",
     "Slipknot - Before I Forget.drum midi",
+    "Slipknot - Eyeless",
     "Slipknot - Psychosocial (ver 8 by Thaynan).mid",
     "Slipknot - Scissors [MIDIfind.com]",
     "Slipknot-Snuff-Anonymous-20210724225809-nonstop2k.com",
