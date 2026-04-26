@@ -7,6 +7,7 @@ return {
     "Avenged Sevenfold - Bat Country",
     "Avenged Sevenfold - Beast And The Harlot v7",
     "Avenged Sevenfold - Dear God.mid",
+    "Avenged Sevenfold - I Won't See You Tonight Part (1) [MIDIfind.com]",
     "Avenged Sevenfold - M.I.A (WIP)",
     "Avenged Sevenfold - Nightmare.mid",
     "Avenged Sevenfold - The Wicked End   WWW.MIDISFREE.COM",
