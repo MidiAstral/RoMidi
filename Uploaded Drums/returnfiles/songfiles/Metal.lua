@@ -1,4 +1,5 @@
 return {
+    "37075 Danger-Line (2)",
     "A Little Piece of Heaven - Avenged Sevenfold (With vocals).mid",
     "A.D.I.D.A.S.",
     "AC DC - Back in Black.mid",
