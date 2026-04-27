@@ -2,6 +2,7 @@ return {
     "ABBA - The Winner Takes it All",
     "Adele - Skyfall",
     "Arabesque-in-E-Nr-1",
+    "Baby - Justin Bieber",
     "Beethoven - Moonlight Sonata (1st Movement) ",
     "Beethoven Virus (insane)",
     "Beethoven Virus (insane).mid (1)",
