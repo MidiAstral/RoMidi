@@ -66,6 +66,7 @@ return {
     "JVKE her mhxa",
     "Kaijuu Ni Naritai",
     "Kansas - Carry On My Wayward Son",
+    "Korn — A.D.I.D.A.S. (String) [MIDIfind.com]",
     "Lady Gaga - Judas mhxa",
     "Leviteto - LOL mhxa",
     "Lightning Moment",
