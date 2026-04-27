@@ -43,6 +43,7 @@ return {
     "GoodGod",
     "HereToStay",
     "I Won't See You Tonight - Avenged Sevenfold",
+    "Korn - Daddy(1)   WWW.MIDISFREE.COM",
     "Master of Puppets",
     "Megadeth - Holy Wars",
     "Meshuggah- Bleed.mid",
