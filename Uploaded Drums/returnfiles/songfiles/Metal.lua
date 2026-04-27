@@ -49,6 +49,7 @@ return {
     "PhantomOfTheOpera",
     "Powerslave",
     "PrisonSong",
+    "Rage Against the Machine - Killing in the Name with drum (1)",
     "Revenga",
     "Scream",
     "Slipknot - Before I Forget.drum midi",
