@@ -19,6 +19,7 @@ return {
     "Avenged Sevenfold - Seize the Day [MIDIfind.com]",
     "Avenged Sevenfold - Sidewinder [MIDIfind.com]",
     "Avenged Sevenfold - The Wicked End   WWW.MIDISFREE.COM",
+    "Avenged Sevenfold - Welcome to the Family",
     "Avenged Sevenfold~Critical Acclaim",
     "BeQuickOrBeDead",
     "Bitchslap",
