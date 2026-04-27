@@ -60,6 +60,7 @@ return {
     "Slipknot - Eyeless",
     "Slipknot - Psychosocial (ver 8 by Thaynan).mid",
     "Slipknot - Scissors [MIDIfind.com]",
+    "slipknot-sic",
     "Slipknot-Snuff-Anonymous-20210724225809-nonstop2k.com",
     "So-Far-Away",
     "Sugar",
