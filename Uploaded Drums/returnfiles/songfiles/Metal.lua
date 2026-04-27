@@ -25,6 +25,7 @@ return {
     "Blind",
     "CaughtSomewhereInTime",
     "Clown",
+    "Danger line (W.I.P)",
     "Disasterpiece",
     "Drum - Heavy Metal Drums [MIDIfind.com]",
     "Duality",
