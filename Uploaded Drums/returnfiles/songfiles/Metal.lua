@@ -18,6 +18,7 @@ return {
     "Avenged Sevenfold - Nightmare.mid",
     "Avenged Sevenfold - Nobody [MIDIfind.com]",
     "Avenged Sevenfold - Remenissions   WWW.MIDISFREE.COM",
+    "Avenged Sevenfold - Save Me [MIDIfind.com]",
     "Avenged Sevenfold - Second Heartbeat (2)   WWW.MIDISFREE.COM",
     "Avenged Sevenfold - Seize the Day [MIDIfind.com]",
     "Avenged Sevenfold - Shepherd of Fire (2) [MIDIfind.com]",
