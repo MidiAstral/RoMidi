@@ -20,6 +20,7 @@ return {
     "Avenged Sevenfold - Remenissions   WWW.MIDISFREE.COM",
     "Avenged Sevenfold - Second Heartbeat (2)   WWW.MIDISFREE.COM",
     "Avenged Sevenfold - Seize the Day [MIDIfind.com]",
+    "Avenged Sevenfold - Shepherd of Fire (2) [MIDIfind.com]",
     "Avenged Sevenfold - Sidewinder [MIDIfind.com]",
     "Avenged Sevenfold - The Wicked End   WWW.MIDISFREE.COM",
     "Avenged Sevenfold - Welcome to the Family",
