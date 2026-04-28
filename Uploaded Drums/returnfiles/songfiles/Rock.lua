@@ -3,6 +3,7 @@ return {
     "AllTheSmallThings",
     "AmericanIdiot",
     "Arctic Monkeys - Do I Wanna Know [MIDIfind.com]",
+    "Arctic Monkeys - R U Mine [MIDIfind.com]",
     "BoysDontCry",
     "BreakStuff",
     "Come as you are (3 beats)",
