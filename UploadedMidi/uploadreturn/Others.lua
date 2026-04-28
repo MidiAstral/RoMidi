@@ -50,6 +50,7 @@ return {
     "Gravity - Hazbin Hotel Season 2  Best remix",
     "Gravity (from Hazbin Hotel)",
     "Gravity (from Hazbin Hotel) maybe better",
+    "Gravity Falls Theme",
     "Guns N Roses - Sweet Child O' Mine",
     "hãy trao cho anh",
     "Hello- OMFG (WIP)(Copy)",
