@@ -26,6 +26,7 @@ return {
     "Avenged Sevenfold~Critical Acclaim",
     "BeQuickOrBeDead",
     "Bitchslap",
+    "Black-Hole-Sun",
     "Blind",
     "CaughtSomewhereInTime",
     "Clown",
