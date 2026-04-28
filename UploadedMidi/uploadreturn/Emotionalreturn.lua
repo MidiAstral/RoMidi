@@ -35,6 +35,7 @@ return {
     "Jowel: Por qué te vas",
     "Jowel: Your Love",
     "Justin-Bieber-Ghost-Anonymous-20220216213352-nonstop2k.com",
+    "Kalapastangan - Fitterkarma",
     "Katy Perry - The One That Got Away",
     "KISS — I Was Made For Loving You",
     "Laufey - Promise",
