@@ -2,6 +2,7 @@ return {
     " Until-Then-OST--Memories",
     "Animation Warrior Theme - Nighthawk22",
     "ASGORE - Toby Fox",
+    "Attack Of The Killer Queen - (Deltarune) - [MIDI]",
     "Back on Track",
     "Basics in behavior",
     "Battle Against a True Hero (Undyne the Undying) (wip)",
