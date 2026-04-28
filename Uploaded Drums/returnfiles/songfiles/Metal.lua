@@ -69,5 +69,6 @@ return {
     "Sugar",
     "The Stage - Avenged Sevenfold by Rgman",
     "ThunderStruck - ACDC",
+    "Toxicity by System of a Down -- Version 4.2",
     "Unholy Confessions"
 }
