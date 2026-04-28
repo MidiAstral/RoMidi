@@ -13,6 +13,7 @@ return {
     "Avenged Sevenfold - Chapter Four [MIDIfind.com]",
     "Avenged Sevenfold - Dear God.mid",
     "Avenged Sevenfold - Hail to the King [MIDIfind.com]",
+    "Avenged Sevenfold - Heretic [MIDIfind.com]",
     "Avenged Sevenfold - I Won't See You Tonight Part (1) [MIDIfind.com]",
     "Avenged Sevenfold - M.I.A (WIP)",
     "Avenged Sevenfold - Natural Born Killer [MIDIfind.com]",
