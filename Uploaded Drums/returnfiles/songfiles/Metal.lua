@@ -49,6 +49,7 @@ return {
     "Megadeth - Holy Wars",
     "Meshuggah- Bleed.mid",
     "Metallica - Battery (2) [MIDIfind.com]",
+    "Metallica-Enter-Sandman midi",
     "Not Ready To Die",
     "PhantomOfTheOpera",
     "Powerslave",
