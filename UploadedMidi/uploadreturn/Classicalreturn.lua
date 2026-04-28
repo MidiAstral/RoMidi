@@ -19,6 +19,7 @@ return {
     "JOPLIN.The entertainer",
     "liebestraum",
     "Merry-Go-Round of Life  Animenz",
+    "Michael Jackson Billie Jeann",
     "MIDI File - Bruno Mars - Risk It All (Easy)",
     "moonlight-sonata-i",
     "MỘT ĐỜI (14 Casper & Bon Nghiêm)",
