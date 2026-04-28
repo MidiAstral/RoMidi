@@ -23,6 +23,7 @@ return {
     "Avenged Sevenfold - Shepherd of Fire (2) [MIDIfind.com]",
     "Avenged Sevenfold - Sidewinder [MIDIfind.com]",
     "Avenged Sevenfold - The Wicked End   WWW.MIDISFREE.COM",
+    "Avenged Sevenfold - Warmness on the Soul [MIDIfind.com]",
     "Avenged Sevenfold - Welcome to the Family",
     "Avenged Sevenfold~Critical Acclaim",
     "BeQuickOrBeDead",
