@@ -40,6 +40,7 @@ return {
     "Clown",
     "Danger line (W.I.P)",
     "Disasterpiece",
+    "DOOM - Theme E1M1",
     "Drum - Heavy Metal Drums [MIDIfind.com]",
     "Duality",
     "Duality - Slipknot",
