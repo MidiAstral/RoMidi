@@ -14,6 +14,7 @@ return {
     "Flamewall",
     "Fur Elise (1)",
     "Gloria Gaynor Arr.  Elaine Kelkel - I Will Survive",
+    "GOZALO - Ariis",
     "Handel,Halvorsen Passacaglia",
     "in the pool  C",
     "JOPLIN.The entertainer",
