@@ -22,6 +22,7 @@ return {
     "Merry-Go-Round of Life  Animenz",
     "Michael Jackson Billie Jeann",
     "MIDI File - Bruno Mars - Risk It All (Easy)",
+    "MONTAGEM REBOLA",
     "moonlight-sonata-i",
     "MỘT ĐỜI (14 Casper & Bon Nghiêm)",
     "operas",
