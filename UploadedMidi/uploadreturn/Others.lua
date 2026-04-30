@@ -174,6 +174,7 @@ return {
     "sinkingtown",
     "Somewhere only we know mhxa",
     "Stalemate",
+    "System of a Down - B.Y.O.B",
     "Tally Hall - The Bidding",
     "Tally+Hall+-+Turn+The+Lights+Off",
     "tau the song playable",
