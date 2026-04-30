@@ -104,6 +104,7 @@ return {
     "Rush ANKHA Not impossible",
     "Rush Astronomia not impossible but hard",
     "RUSH B - ReBlacked",
+    "Rush B playable",
     "Rush Bad Apple impossible",
     "Rush Bad Apple not impossible",
     "RUSH BARBASHASSR",
