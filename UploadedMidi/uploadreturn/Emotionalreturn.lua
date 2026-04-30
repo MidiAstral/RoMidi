@@ -4,6 +4,7 @@ return {
     "81416 Take-Me-Back-Home",
     "After The Love Has Gone  David Foster Earth Wind  Fire 1775672109595",
     "Avenged Sevenfold - M I A [MIDIfind.com]",
+    "Avenged Sevenfold - M.i.a.   WWW.MIDISFREE.COM",
     "Avenged Sevenfold — Warmness on the Soul [MIDIfind.com]",
     "Baby Hotline",
     "babydoll - dominic fike",
