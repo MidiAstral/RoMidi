@@ -174,6 +174,7 @@ return {
     "Sheena Ringo -Crime & Punishment mhxa",
     "sinkingtown",
     "Smoke on the Water",
+    "Smoke on the Water (Drum)",
     "Somewhere only we know mhxa",
     "Stalemate",
     "System of a Down - B.Y.O.B",
