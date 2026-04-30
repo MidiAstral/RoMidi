@@ -172,6 +172,7 @@ return {
     "Sheena Ringo - A double suicide mhxa",
     "Sheena Ringo -Crime & Punishment mhxa",
     "sinkingtown",
+    "Smoke on the Water",
     "Somewhere only we know mhxa",
     "Stalemate",
     "System of a Down - B.Y.O.B",
