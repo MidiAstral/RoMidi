@@ -24,6 +24,7 @@ return {
     "Metal Crusher",
     "Mili - Compass",
     "Mili - Fly, My Wings",
+    "Mili - Gone Angels",
     "Mili - Hero",
     "Mili - Through Patches of Violet",
     "my light (我的光) - yung kai",
