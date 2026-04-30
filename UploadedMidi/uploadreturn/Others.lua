@@ -19,7 +19,6 @@ return {
     "Broken World mhxa",
     "Bruno Mars - When i was your man",
     "buông đôi tay nhau ra x nắng ấm xa dần",
-    "Cannibal Corpse - Hammer Smashed Face (Drum)",
     "cause i love you x gạt đi nc mắt",
     "Celestial Opus",
     "chắc ai đó sẽ về",
