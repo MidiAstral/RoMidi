@@ -38,6 +38,7 @@ return {
     "Blind",
     "CaughtSomewhereInTime",
     "Clown",
+    "Contempt of Cop",
     "Danger line (W.I.P)",
     "Disasterpiece",
     "DOOM - Theme E1M1",
