@@ -47,5 +47,6 @@ return {
     "Undertale - SAVE the World",
     "Undertale - Toby Fox",
     "Uwa!! So Temperate♫ (UNDERTALE)",
+    "Wet Hands (Minecraft)",
     "Your Reality",
 }
