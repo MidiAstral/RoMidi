@@ -96,6 +96,7 @@ return {
     "oi josuke",
     "One Direction Night Changes ADVANCED",
     "Open+Window+vGH",
+    "Outside",
     "Pi the Song",
     "Red Sun in the Sky (天上太阳红彤彤)",
     "Ricochet Love Amethyst Part Piano arr 1776788643947",
