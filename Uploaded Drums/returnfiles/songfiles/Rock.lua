@@ -13,6 +13,7 @@ return {
     "Faith",
     "Foo Fighters - Everlong",
     "Girlfriend",
+    "imagine-dragons-believer-drum-score",
     "Korn - Embrace",
     "Leech",
     "Linkin Park - No More Sorrow",
