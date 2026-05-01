@@ -23,6 +23,7 @@ return {
     "Legend Of Zelda - Saria's Song",
     "MEGALOVANIA - Toby Fox",
     "Metal Crusher",
+    "Mice on Venus (Minecraft)",
     "Mili - Compass",
     "Mili - Fly, My Wings",
     "Mili - Gone Angels",
