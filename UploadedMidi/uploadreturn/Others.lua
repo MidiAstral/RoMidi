@@ -12,6 +12,7 @@ return {
     "Alexander Rybak - Fairytale mhxa",
     "At the speed of light(Bloodbath)",
     "AUD NK0247",
+    "BadLiZ, The Great Strategy (v4) GS2",
     "Beethoven - Moonlight sonata 3rd Movement IN mhxa",
     "Beethoven - Moonlight sonata 3th movement mhxa",
     "Beta0404",
