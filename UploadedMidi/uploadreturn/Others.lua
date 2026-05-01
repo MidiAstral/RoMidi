@@ -183,6 +183,7 @@ return {
     "Tally Hall - The Bidding",
     "Tally+Hall+-+Turn+The+Lights+Off",
     "tau the song playable",
+    "tegrtstrgy",
     "tháng 4là lời nói dối của em",
     "Thang dien impossible lol",
     "the entertainer",
