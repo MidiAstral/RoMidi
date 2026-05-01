@@ -40,6 +40,7 @@ return {
     "Stereo madness",
     "Stereo Madness - ForeverBound",
     "Stronger Than You - Undertale",
+    "Sweden (Minecraft)",
     "tera-io-flamewall-camellia",
     "Tetris Theme, BLACK MIDI 50K NOTES",
     "Thick Of It [The one from IG reels]",
