@@ -212,6 +212,7 @@ return {
     "vicetone-nevada",
     "Want to be Crem#ted/Ab#se mhxa",
     "We're Going To Be Friends (WIP)",
+    "What Makes You Beautiful - One Direction (for Solo Piano)",
     "White Stripes (The) — We Re Going to Be Friends [MIDIfind.com]",
     "Wind Of Fjords - Soft Knees",
     "Yiruma - River Flows In you mhxa",
