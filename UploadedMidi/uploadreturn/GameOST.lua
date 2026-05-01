@@ -29,6 +29,7 @@ return {
     "Mili - Gone Angels",
     "Mili - Hero",
     "Mili - Through Patches of Violet",
+    "Minecraft OST Aria Math (Advanced)",
     "my light (我的光) - yung kai",
     "NieR - Song of the Ancients Devola",
     "Peaches - Jack Black (from the Super Mario Bros. Movie)",
