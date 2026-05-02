@@ -26,6 +26,7 @@ return {
     "Kevin Macleod - Carefree",
     "Kevin MacLeod - Merry Go (1)",
     "Kevin MacLeod - Who Likes To Party",
+    "Kevin MacLeod Heartbreaking Recreation (1)",
     "KEY AFTER KEY LMS",
     "Legend Of Zelda - Saria's Song",
     "MEGALOVANIA - Toby Fox",
