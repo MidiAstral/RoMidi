@@ -23,6 +23,7 @@ return {
     "Kevin Macleod - Amazing Plan (Duet).mid (1)",
     "Kevin MacLeod - Call to Adventure (1)",
     "Kevin Macleod - Carefree",
+    "Kevin MacLeod - Merry Go (1)",
     "Kevin MacLeod - Who Likes To Party",
     "KEY AFTER KEY LMS",
     "Legend Of Zelda - Saria's Song",
