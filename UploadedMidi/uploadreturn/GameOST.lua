@@ -41,6 +41,7 @@ return {
     "sans. - Toby Fox",
     "Shiawase Vip",
     "Snowy - Toby Fox",
+    "Spongebob Squarepants Theme (MIDI)",
     "Stereo madness",
     "Stereo Madness - ForeverBound",
     "Stronger Than You - Undertale",
