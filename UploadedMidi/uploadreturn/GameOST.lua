@@ -1,6 +1,7 @@
 return {
     " Until-Then-OST--Memories",
     "[Black MIDI] Bad Apple!! 1 Million Notes v3 (fixed piano)",
+    "After School Jamboree",
     "Animation Warrior Theme - Nighthawk22",
     "ASGORE - Toby Fox",
     "Attack Of The Killer Queen - (Deltarune) - [MIDI]",
