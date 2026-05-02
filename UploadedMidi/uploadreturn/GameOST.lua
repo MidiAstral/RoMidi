@@ -21,6 +21,7 @@ return {
     "finale-undertale",
     "Five nights at Freddy's Song",
     "Gaster's Theme - Toby Fox",
+    "Get Outside! (WIP)",
     "input 1777578189898 1",
     "Kevin Macleod -  Cipher  (1)",
     "Kevin Macleod - Amazing Plan (Duet).mid (1)",
