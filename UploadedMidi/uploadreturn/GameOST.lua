@@ -41,6 +41,7 @@ return {
     "Rush stereo madness",
     "sans. - Toby Fox",
     "Shiawase Vip",
+    "Silent Partner - Dog Park   Dog and Pony Show (from YouTube Audio Library)",
     "Snowy - Toby Fox",
     "Spongebob Squarepants Theme (MIDI)",
     "Stereo madness",
