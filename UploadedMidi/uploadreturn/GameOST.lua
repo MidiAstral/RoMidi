@@ -21,6 +21,7 @@ return {
     "Five nights at Freddy's Song",
     "Gaster's Theme - Toby Fox",
     "input 1777578189898 1",
+    "Kevin Macleod -  Cipher  (1)",
     "Kevin Macleod - Amazing Plan (Duet).mid (1)",
     "Kevin MacLeod - Call to Adventure (1)",
     "Kevin Macleod - Carefree",
