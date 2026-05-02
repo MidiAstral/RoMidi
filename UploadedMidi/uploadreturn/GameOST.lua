@@ -7,6 +7,7 @@ return {
     "Back on Track",
     "Basics in behavior",
     "Battle Against a True Hero (Undyne the Undying) (wip)",
+    "Blue Skies - Silent Partner (Guitar remix)",
     "C418 - Mice on Venus",
     "C418 - Subwoofer Lullaby",
     "Creo - Flow",
