@@ -39,6 +39,7 @@ return {
     "Rage of the Champions!",
     "Red Battle - Pokémon Gold Silver",
     "Revenge- Minecraft",
+    "Rigor Mormist (Fog) - Plants VS Zombies",
     "Rush stereo madness",
     "sans. - Toby Fox",
     "Shiawase Vip",
