@@ -35,6 +35,7 @@ return {
     "NieR - Song of the Ancients Devola",
     "Peaches - Jack Black (from the Super Mario Bros. Movie)",
     "PHOENIX LMS",
+    "Pixelland by Kevin Macleod",
     "Rage of the Champions!",
     "Red Battle - Pokémon Gold Silver",
     "Revenge- Minecraft",
