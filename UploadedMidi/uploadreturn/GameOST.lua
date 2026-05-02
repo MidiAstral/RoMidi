@@ -54,6 +54,7 @@ return {
     "Shiawase Vip",
     "Silent Partner - Dog Park   Dog and Pony Show (from YouTube Audio Library)",
     "Silent Partner - Sugar Zone (A1D3N93 Remix)",
+    "Sneaky Snitch - Kevin MacLeod",
     "Snowy - Toby Fox",
     "Spongebob Squarepants Theme (MIDI)",
     "Stereo madness",
