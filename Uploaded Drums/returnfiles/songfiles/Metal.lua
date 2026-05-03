@@ -53,6 +53,7 @@ return {
     "FreakOnALeash",
     "Gentley",
     "GoodGod",
+    "Guns N' Roses - Sweet Child O' Mine [MIDIfind.com]",
     "HereToStay",
     "I Won't See You Tonight - Avenged Sevenfold",
     "Korn - Daddy(1)   WWW.MIDISFREE.COM",
