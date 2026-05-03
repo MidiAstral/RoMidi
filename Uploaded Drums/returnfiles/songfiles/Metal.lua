@@ -83,6 +83,7 @@ return {
     "slipknot-sic",
     "Slipknot-Snuff-Anonymous-20210724225809-nonstop2k.com",
     "So-Far-Away",
+    "Styx - Heavy Metal Poisoning [MIDIfind.com]",
     "Sugar",
     "The Stage - Avenged Sevenfold by Rgman",
     "ThunderStruck - ACDC",
