@@ -88,5 +88,6 @@ return {
     "ThunderStruck - ACDC",
     "Toxicity by System of a Down -- Version 4.2",
     "Unholy Confessions",
-    "Valkyrie - Heavy Metal Brigade [MIDIfind.com]"
+    "Valkyrie - Heavy Metal Brigade [MIDIfind.com]",
+    "Vega - Heavy Metal Religija [MIDIfind.com]"
 }
