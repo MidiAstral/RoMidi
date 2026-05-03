@@ -24,6 +24,7 @@ return {
     "Gaster's Theme - Toby Fox",
     "Get Outside! (WIP)",
     "input 1777578189898 1",
+    "Jumper (Geometry Dash)",
     "Kevin Macleod -  Cipher  (1)",
     "Kevin Macleod - Amazing Plan (Duet).mid (1)",
     "Kevin MacLeod - Call to Adventure (1)",
