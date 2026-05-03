@@ -22,6 +22,7 @@ return {
     "finale-undertale",
     "Five nights at Freddy's Song",
     "Gaster's Theme - Toby Fox",
+    "Geometry Dash - Time Machine",
     "Get Outside! (WIP)",
     "input 1777578189898 1",
     "Jumper (Geometry Dash)",
