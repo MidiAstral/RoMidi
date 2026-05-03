@@ -15,6 +15,7 @@ return {
     "Deadlocked (Geometry Dash)",
     "DELTARUNE - It’s TV Time!",
     "Dialtone - MIDI",
+    "DJVI - Base After Base (Geometry Dash)",
     "Doki Doki Literature Club - Main Theme - ShinkoNetCavy",
     "Dry out Geometry Dash",
     "Fallen Down - Toby Fox",
