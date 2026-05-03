@@ -63,6 +63,7 @@ return {
     "Metallica - Battery (2) [MIDIfind.com]",
     "Metallica-Enter-Sandman midi",
     "Not Ready To Die",
+    "Pantera - Cemetery Gates [MIDIfind.com]",
     "PhantomOfTheOpera",
     "Powerslave",
     "PrisonSong",
