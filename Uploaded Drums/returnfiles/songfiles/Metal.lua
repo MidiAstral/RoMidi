@@ -86,5 +86,6 @@ return {
     "The Stage - Avenged Sevenfold by Rgman",
     "ThunderStruck - ACDC",
     "Toxicity by System of a Down -- Version 4.2",
-    "Unholy Confessions"
+    "Unholy Confessions",
+    "Valkyrie - Heavy Metal Brigade [MIDIfind.com]"
 }
