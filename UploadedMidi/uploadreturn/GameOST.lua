@@ -23,6 +23,7 @@ return {
     "Five nights at Freddy's Song",
     "Gaster's Theme - Toby Fox",
     "Geometry Dash - Time Machine",
+    "Geometry Dash Menu Theme",
     "Get Outside! (WIP)",
     "input 1777578189898 1",
     "Jumper (Geometry Dash)",
