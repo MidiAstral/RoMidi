@@ -36,6 +36,7 @@ return {
     "BeQuickOrBeDead",
     "Bitchslap",
     "Black-Hole-Sun",
+    "Blazed - Heavy Metal Balad [MIDIfind.com]",
     "Blind",
     "CaughtSomewhereInTime",
     "Clown",
