@@ -16,6 +16,7 @@ return {
     "DELTARUNE - It’s TV Time!",
     "Dialtone - MIDI",
     "Doki Doki Literature Club - Main Theme - ShinkoNetCavy",
+    "Dry out Geometry Dash",
     "Fallen Down - Toby Fox",
     "Fallen down (Reprise)",
     "Finale - Toby Fox",
