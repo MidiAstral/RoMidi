@@ -12,6 +12,7 @@ return {
     "C418 - Mice on Venus",
     "C418 - Subwoofer Lullaby",
     "Creo - Flow",
+    "Deadlocked (Geometry Dash)",
     "DELTARUNE - It’s TV Time!",
     "Dialtone - MIDI",
     "Doki Doki Literature Club - Main Theme - ShinkoNetCavy",
