@@ -7,6 +7,7 @@ return {
     "ASGORE - Toby Fox",
     "Attack Of The Killer Queen - (Deltarune) - [MIDI]",
     "Back on Track",
+    "Bad Piggies - Main Theme",
     "Basics in behavior",
     "Battle Against a True Hero (Undyne the Undying) (wip)",
     "Blue Skies - Silent Partner (Guitar remix)",
