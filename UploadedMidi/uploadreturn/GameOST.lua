@@ -66,6 +66,7 @@ return {
     "Silent Partner - Sugar Zone (A1D3N93 Remix)",
     "Sneaky Snitch - Kevin MacLeod",
     "Snowy - Toby Fox",
+    "Sonic the Hedgehog - Mystic Cave Zone",
     "Spongebob Squarepants Theme (MIDI)",
     "Stereo madness",
     "Stereo Madness - ForeverBound",
